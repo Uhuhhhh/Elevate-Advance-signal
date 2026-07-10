@@ -1450,7 +1450,7 @@ btn.addEventListener("click",()=>{
 
 async function generateSignal(){
    <!--Remove if free -->
-if(localStorage.getItem("premium") !== "true"){
+if(sessionStorage.getItem("premium") !== "true"){
 
         signalBox.className = "signal-box";
 
@@ -1535,7 +1535,7 @@ function saveSignal(signal){
 
 let history =
 JSON.parse(
-localStorage.getItem("signalHistory")
+sessionStorage.getItem("signalHistory")
 ) || [];
 
 history.unshift(signal);
@@ -1546,7 +1546,7 @@ history = history.slice(0,100);
 
 }
 
-localStorage.setItem(
+sessionStorage.setItem(
 "signalHistory",
 JSON.stringify(history)
 );
@@ -1676,7 +1676,7 @@ overlay.style.display="block";
 
 function updateDashboard(){
 
-const history=JSON.parse(localStorage.getItem("signalHistory"))||[];
+const history=JSON.parse(sessionStorage.getItem("signalHistory"))||[];
 
 document.getElementById("todaySignals").innerHTML=history.length;
 
