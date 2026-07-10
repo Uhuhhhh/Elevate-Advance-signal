@@ -1,1 +1,212 @@
-Admi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Elevate Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="logo">👑</div>
+
+<div>
+
+<h2>Elevate</h2>
+
+<p>Admin Panel</p>
+
+</div>
+
+</div>
+
+<div class="topRight">
+
+<div class="liveStatus">
+
+<div class="liveDot"></div>
+
+LIVE
+
+</div>
+
+<div class="menuBtn" onclick="toggleMenu()">
+
+☰
+
+</div>
+
+</div>
+
+</header>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<aside id="sidebar" class="sidebar">
+
+<div class="profile">
+
+<div class="avatar">👑</div>
+
+<h2>Elevate</h2>
+
+<p>Trading Dashboard</p>
+
+</div>
+
+<a href="../index.html">🏠 Home</a>
+
+<a href="../dashboard.html">📊 Dashboard</a>
+
+<a href="../strategy.html">🧠 Strategies</a>
+
+<a href="../signal-history.html">📜 Signal History</a>
+
+<a href="../settings.html">⚙ Settings</a>
+
+<a href="../rules.html">📋 Rules</a>
+
+<a href="../journal/trading-journal.html">📉 Journal</a>
+
+<a href="../Admin/admin.html" class="active">👑 Admin Panel</a>
+
+</aside>
+
+<!-- LOGIN -->
+
+<div id="loginPage">
+
+<div class="loginCard">
+
+<div class="logo">👑</div>
+
+<h1>Elevate Admin</h1>
+
+<p>Secure Administration</p>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Admin Password">
+
+<button id="loginBtn">
+
+LOGIN
+
+</button>
+
+<p id="loginError"></p>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPage" style="display:none;">
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboardSection">
+
+<div class="dashboardGrid">
+
+<div class="statCard">
+
+<h2 id="totalUsers">0</h2>
+
+<p>Total Users</p>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="premiumUsers">0</h2>
+
+<p>Premium</p>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="disabledUsers">0</h2>
+
+<p>Disabled</p>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="expiredUsers">0</h2>
+
+<p>Expired</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PAGE CONTENT -->
+
+<div id="pageContent"></div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottomNav">
+
+<button id="dashboardTab" class="active">
+
+<div class="navIcon">🏠</div>
+
+<span>Home</span>
+
+</button>
+
+<button id="addUserTab">
+
+<div class="navIcon">➕</div>
+
+<span>Add</span>
+
+</button>
+
+<button id="usersTab">
+
+<div class="navIcon">👥</div>
+
+<span>Users</span>
+
+</button>
+
+<button id="settingsTab">
+
+<div class="navIcon">⚙</div>
+
+<span>Settings</span>
+
+</button>
+
+</nav>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
