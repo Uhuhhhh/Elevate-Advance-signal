@@ -1943,6 +1943,8 @@ deviceId
 
 const data=await response.json();
 
+alert(data.token);
+
 if(data.success){
 
 sessionStorage.setItem("token", data.token);
