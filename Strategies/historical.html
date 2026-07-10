@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Historical Candle Analysis</title>
+
+<link rel="stylesheet" href="historical.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Historical Candle Analysis</h1>
+
+<div class="card">
+
+<label>Market</label>
+
+<select id="pair">
+
+<option value="EUR/USD">EUR/USD</option>
+
+<option value="GBP/USD">GBP/USD</option>
+
+<option value="USD/JPY">USD/JPY</option>
+
+<option value="AUD/USD">AUD/USD</option>
+
+</select>
+
+<label>Timeframe</label>
+
+<select id="timeframe">
+
+<option value="1min">M1</option>
+
+<option value="5min">M5</option>
+
+<option value="15min">M15</option>
+
+</select>
+
+<label>Analysis Days</label>
+
+<select id="days">
+
+<option value="3">3 Days</option>
+
+<option value="5">5 Days</option>
+
+<option value="7">7 Days</option>
+
+<option value="10">10 Days</option>
+
+</select>
+
+<label>Start Time</label>
+
+<input type="time" id="startTime">
+
+<label>End Time</label>
+
+<input type="time" id="endTime">
+
+<button id="analyzeBtn">
+
+Analyze Historical Candles
+
+</button>
+
+</div>
+
+<div id="loading">
+
+Ready
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pair</th>
+
+<th>TF</th>
+
+<th>Entry</th>
+
+<th>Signal</th>
+
+<th>Confidence</th>
+
+</tr>
+
+</thead>
+
+<tbody id="results">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="historical.js"></script>
+
+</body>
+
+</html>

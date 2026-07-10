@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Elevate Trading</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#090B13;
+
+color:#fff;
+
+overflow-x:hidden;
+
+}
+
+:root{
+
+--bg:#090B13;
+
+--card:#141824;
+
+--card2:#1B1F2D;
+
+--purple:#7C4DFF;
+
+--purple2:#C04DFF;
+
+--green:#00E676;
+
+--red:#FF5252;
+
+--yellow:#FFD54F;
+
+--text:#FFFFFF;
+
+--sub:#98A1B3;
+
+--border:#292E42;
+
+}
+
+.wrapper{
+
+width:100%;
+
+max-width:1400px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+@media(max-width:768px){
+
+.wrapper{
+
+padding:15px;
+
+}
+
+}
+
+.card{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:22px;
+
+padding:20px;
+
+margin-bottom:18px;
+
+}
+
+.sectionTitle{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:18px;
+
+font-size:20px;
+
+font-weight:700;
+
+color:white;
+
+}
+
+.sectionTitle i{
+
+color:var(--purple2);
+
+font-size:22px;
+
+}
+
+/*=========================
+HEADER
+=========================*/
+
+.topHeader{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:25px;
+
+}
+
+.menuButton{
+
+width:55px;
+
+height:55px;
+
+border-radius:18px;
+
+background:var(--card);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+cursor:pointer;
+
+border:1px solid var(--border);
+
+transition:.25s;
+
+}
+
+.menuButton:hover{
+
+transform:translateY(-3px);
+
+border-color:var(--purple);
+
+}
+
+.brand{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.brandLogo{
+
+width:60px;
+
+height:60px;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:28px;
+
+box-shadow:0 10px 30px rgba(124,77,255,.35);
+
+}
+
+.brand h1{
+
+font-size:28px;
+
+font-weight:800;
+
+line-height:1;
+
+}
+
+.brand p{
+
+font-size:12px;
+
+letter-spacing:4px;
+
+color:var(--purple2);
+
+margin-top:4px;
+
+}
+
+.profile{
+
+position:relative;
+
+width:55px;
+
+height:55px;
+
+}
+
+.profile img{
+
+width:100%;
+
+height:100%;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:2px solid var(--purple);
+
+}
+
+.onlineDot{
+
+position:absolute;
+
+bottom:3px;
+
+right:3px;
+
+width:13px;
+
+height:13px;
+
+background:var(--green);
+
+border-radius:50%;
+
+border:2px solid var(--bg);
+
+}
+
+@media(max-width:768px){
+
+.brand h1{
+
+font-size:22px;
+
+}
+
+.brand p{
+
+font-size:10px;
+
+letter-spacing:2px;
+
+}
+
+.brandLogo{
+
+width:50px;
+
+height:50px;
+
+font-size:22px;
+
+}
+
+.menuButton{
+
+width:48px;
+
+height:48px;
+
+}
+
+.profile{
+
+width:48px;
+
+height:48px;
+
+}
+
+}
+
+/*=========================
+TRADING CONTROL
+=========================*/
+
+.formGrid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:18px;
+
+}
+
+.inputBox{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.inputBox label{
+
+margin-bottom:8px;
+
+font-size:13px;
+
+color:var(--sub);
+
+font-weight:600;
+
+}
+
+.inputBox select{
+
+height:55px;
+
+background:var(--card2);
+
+border:1px solid var(--border);
+
+border-radius:16px;
+
+padding:0 16px;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+transition:.25s;
+
+}
+
+.inputBox select:focus{
+
+border-color:var(--purple);
+
+box-shadow:0 0 15px rgba(124,77,255,.25);
+
+}
+
+.generateBtn{
+
+grid-column:1/3;
+
+height:60px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+box-shadow:0 12px 35px rgba(124,77,255,.35);
+
+}
+
+.generateBtn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 20px 40px rgba(124,77,255,.45);
+
+}
+
+@media(max-width:768px){
+
+.formGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.generateBtn{
+
+grid-column:1;
+
+}
+
+}
+
+/*=========================
+MARKET OVERVIEW
+=========================*/
+
+.marketGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:18px;
+
+}
+
+.marketCard{
+
+background:var(--card2);
+
+border:1px solid var(--border);
+
+border-radius:20px;
+
+padding:22px;
+
+text-align:center;
+
+transition:.25s;
+
+}
+
+.marketCard:hover{
+
+transform:translateY(-4px);
+
+border-color:var(--purple);
+
+box-shadow:0 18px 35px rgba(124,77,255,.25);
+
+}
+
+.marketIcon{
+
+width:55px;
+
+height:55px;
+
+margin:auto;
+
+margin-bottom:15px;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:22px;
+
+}
+
+.marketCard h4{
+
+font-size:13px;
+
+color:var(--sub);
+
+margin-bottom:8px;
+
+}
+
+.marketCard h2{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+@media(max-width:1100px){
+
+.marketGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.marketGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/*=========================
+AI ANALYSIS
+=========================*/
+
+.aiGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.circleCard{
+
+background:var(--card2);
+
+border:1px solid var(--border);
+
+border-radius:22px;
+
+padding:25px;
+
+text-align:center;
+
+transition:.25s;
+
+}
+
+.circleCard:hover{
+
+transform:translateY(-4px);
+
+border-color:var(--purple);
+
+box-shadow:0 18px 35px rgba(124,77,255,.25);
+
+}
+
+.circle{
+
+width:130px;
+
+height:130px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:
+
+conic-gradient(
+
+#7C4DFF calc(var(--percent)*1%),
+
+#2B3144 0
+
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+transition:.5s;
+
+}
+
+.circleInner{
+
+width:92px;
+
+height:92px;
+
+border-radius:50%;
+
+background:var(--card);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.circleInner h2{
+
+font-size:24px;
+
+font-weight:800;
+
+}
+
+.circleCard h4{
+
+margin-top:18px;
+
+font-size:15px;
+
+color:var(--sub);
+
+}
+
+@media(max-width:1100px){
+
+.aiGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.aiGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/*=========================
+CURRENT SIGNAL
+=========================*/
+
+.heroSignal{
+
+text-align:center;
+
+position:relative;
+
+padding:20px;
+
+}
+
+.signalGlow{
+
+width:170px;
+
+height:170px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:radial-gradient(
+
+rgba(124,77,255,.45),
+
+transparent 70%
+
+);
+
+animation:pulse 2s infinite;
+
+}
+
+.signalBadge{
+
+width:130px;
+
+height:130px;
+
+border-radius:50%;
+
+background:linear-gradient(
+
+135deg,
+
+#7C4DFF,
+
+#C04DFF
+
+);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
+font-weight:800;
+
+margin:-150px auto 20px;
+
+position:relative;
+
+z-index:2;
+
+box-shadow:0 15px 40px rgba(124,77,255,.45);
+
+}
+
+.heroSignal h2{
+
+font-size:28px;
+
+margin-top:15px;
+
+}
+
+.heroSignal p{
+
+color:var(--sub);
+
+margin:12px 0 25px;
+
+line-height:24px;
+
+}
+
+.signalInfo{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:15px;
+
+margin-bottom:25px;
+
+}
+
+.signalInfo div{
+
+background:var(--card2);
+
+padding:18px;
+
+border-radius:16px;
+
+}
+
+.signalInfo span{
+
+display:block;
+
+font-size:12px;
+
+color:var(--sub);
+
+margin-bottom:6px;
+
+}
+
+.signalInfo h3{
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+.heroButton{
+
+width:100%;
+
+height:60px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(
+
+135deg,
+
+#7C4DFF,
+
+#C04DFF
+
+);
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+transition:.3s;
+
+}
+
+.heroButton:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 20px 40px rgba(124,77,255,.45);
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.95);
+
+opacity:.6;
+
+}
+
+50%{
+
+transform:scale(1.05);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.95);
+
+opacity:.6;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.signalInfo{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/*=========================
+TODAY'S STATISTICS
+=========================*/
+
+.statsGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.statCard{
+
+background:var(--card2);
+
+border:1px solid var(--border);
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.statCard:hover{
+
+transform:translateY(-5px);
+
+border-color:var(--purple);
+
+box-shadow:0 20px 40px rgba(124,77,255,.25);
+
+}
+
+.statIcon{
+
+width:60px;
+
+height:60px;
+
+margin:auto;
+
+margin-bottom:18px;
+
+border-radius:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+}
+
+.win{
+
+background:linear-gradient(135deg,#00C853,#00E676);
+
+}
+
+.loss{
+
+background:linear-gradient(135deg,#FF5252,#D50000);
+
+}
+
+.rate{
+
+background:linear-gradient(135deg,#FF9800,#FFC107);
+
+}
+
+.statCard h2{
+
+font-size:30px;
+
+margin-bottom:10px;
+
+font-weight:800;
+
+}
+
+.statCard p{
+
+font-size:13px;
+
+color:var(--sub);
+
+}
+
+@media(max-width:1100px){
+
+.statsGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.statsGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/*=========================
+BOTTOM NAVIGATION
+=========================*/
+
+.bottomNav{
+
+position:fixed;
+
+left:50%;
+
+transform:translateX(-50%);
+
+bottom:18px;
+
+width:min(96%,900px);
+
+height:82px;
+
+background:rgba(20,24,36,.92);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+z-index:9999;
+
+box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+}
+
+.navItem{
+
+background:none;
+
+border:none;
+
+color:#98A1B3;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:6px;
+
+cursor:pointer;
+
+transition:.25s;
+
+font-size:12px;
+
+}
+
+.navItem i{
+
+font-size:22px;
+
+}
+
+.navItem.active{
+
+color:#C04DFF;
+
+}
+
+.navItem:hover{
+
+color:white;
+
+transform:translateY(-3px);
+
+}
+
+.fabButton{
+
+width:68px;
+
+height:68px;
+
+border-radius:50%;
+
+border:none;
+
+background:linear-gradient(
+
+135deg,
+
+#7C4DFF,
+
+#C04DFF
+
+);
+
+color:white;
+
+font-size:28px;
+
+cursor:pointer;
+
+margin-top:-38px;
+
+box-shadow:0 18px 35px rgba(124,77,255,.45);
+
+transition:.3s;
+
+}
+
+.fabButton:hover{
+
+transform:scale(1.08);
+
+}
+
+body{
+
+padding-bottom:130px;
+
+}
+
+@media(max-width:768px){
+
+.bottomNav{
+
+width:96%;
+
+height:75px;
+
+}
+
+.fabButton{
+
+width:62px;
+
+height:62px;
+
+font-size:24px;
+
+}
+
+.navItem i{
+
+font-size:20px;
+
+}
+
+}
+
+/*=========================
+SIDEBAR
+=========================*/
+
+.sidebarOverlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.55);
+
+backdrop-filter:blur(3px);
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.3s;
+
+z-index:9998;
+
+}
+
+.sidebarOverlay.show{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+.sidebar{
+
+position:fixed;
+
+left:-310px;
+
+top:0;
+
+width:300px;
+
+height:100vh;
+
+background:#111522;
+
+border-right:1px solid rgba(255,255,255,.08);
+
+transition:.35s;
+
+z-index:9999;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.sidebar.show{
+
+left:0;
+
+}
+
+.sidebarTop{
+
+padding:35px 25px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.sidebarLogo{
+
+width:80px;
+
+height:80px;
+
+margin:auto;
+
+border-radius:24px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+margin-bottom:18px;
+
+}
+
+.sidebarTop h2{
+
+font-size:28px;
+
+}
+
+.sidebarTop p{
+
+color:#98A1B3;
+
+margin-top:5px;
+
+}
+
+.sidebarMenu{
+
+padding:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+flex:1;
+
+}
+
+.sideBtn{
+
+height:56px;
+
+background:#1B1F2D;
+
+border:1px solid rgba(255,255,255,.05);
+
+border-radius:16px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:0 18px;
+
+font-size:15px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.sideBtn i{
+
+color:#C04DFF;
+
+font-size:18px;
+
+}
+
+.sideBtn:hover{
+
+background:#23283A;
+
+transform:translateX(5px);
+
+}
+
+.sideBtn.active{
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+}
+
+.sideBtn.active i{
+
+color:white;
+
+}
+
+.sidebarBottom{
+
+padding:20px;
+
+}
+
+.logoutBtn{
+
+width:100%;
+
+height:55px;
+
+border:none;
+
+border-radius:16px;
+
+background:#FF5252;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+/*=========================
+LOADER
+=========================*/
+
+.loader{
+
+position:fixed;
+
+inset:0;
+
+background:#090B13;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
+
+transition:.5s;
+
+}
+
+.loaderLogo{
+
+width:95px;
+
+height:95px;
+
+border-radius:28px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:42px;
+
+animation:loaderSpin 2s linear infinite;
+
+}
+
+.loader h2{
+
+margin-top:25px;
+
+font-size:30px;
+
+}
+
+.loader p{
+
+margin-top:10px;
+
+color:#98A1B3;
+
+}
+
+@keyframes loaderSpin{
+
+0%{
+
+transform:rotateY(0deg);
+
+}
+
+100%{
+
+transform:rotateY(360deg);
+
+}
+
+}
+
+.card{
+
+animation:fadeUp .5s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.bgGlow{
+
+position:fixed;
+
+width:350px;
+
+height:350px;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+opacity:.18;
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+.glow1{
+
+background:#7C4DFF;
+
+top:-80px;
+
+left:-80px;
+
+}
+
+.glow2{
+
+background:#C04DFF;
+
+right:-100px;
+
+bottom:-100px;
+
+}
+
+.toast{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+background:#00C853;
+
+padding:14px 20px;
+
+border-radius:14px;
+
+opacity:0;
+
+transition:.3s;
+
+z-index:999999;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loader" class="loader">
+
+<div class="loaderLogo">
+
+<i class="fas fa-chart-line"></i>
+
+</div>
+
+<h2>ELEVATE AI</h2>
+
+<p>Loading Trading Engine...</p>
+
+</div>
+
+<div id="sidebarOverlay" class="sidebarOverlay"></div>
+
+<aside id="sidebar" class="sidebar">
+
+<div class="sidebarTop">
+
+<div class="sidebarLogo">
+
+<i class="fas fa-chart-line"></i>
+
+</div>
+
+<h2>Elevate</h2>
+
+<p>Trading AI</p>
+
+</div>
+
+<div class="sidebarMenu">
+
+<button class="sideBtn active">
+
+<i class="fas fa-house"></i>
+
+<span>Dashboard</span>
+
+</button>
+
+<button class="sideBtn">
+
+<i class="fas fa-chart-line"></i>
+
+<span>Signals</span>
+
+</button>
+
+<button class="sideBtn">
+
+<i class="fas fa-clock-rotate-left"></i>
+
+<span>History</span>
+
+</button>
+
+<button class="sideBtn">
+
+<i class="fas fa-star"></i>
+
+<span>Premium</span>
+
+</button>
+
+<button class="sideBtn">
+
+<i class="fas fa-gear"></i>
+
+<span>Settings</span>
+
+</button>
+
+<button class="sideBtn">
+
+<i class="fas fa-circle-info"></i>
+
+<span>About</span>
+
+</button>
+
+</div>
+
+<div class="sidebarBottom">
+
+<button id="logoutBtn" class="logoutBtn">
+
+<i class="fas fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</div>
+
+</aside>
+
+<div class="wrapper">
+
+<!-- ===========================
+HEADER
+=========================== -->
+
+<header class="topHeader">
+
+<div class="menuButton">
+
+<i class="fas fa-bars"></i>
+
+</div>
+
+<div class="brand">
+
+<div class="brandLogo">
+
+<i class="fas fa-chart-line"></i>
+
+</div>
+
+<div>
+
+<h1>Elevate</h1>
+
+<p>TRADING AI</p>
+
+</div>
+
+</div>
+
+<div class="profile">
+
+<img
+src="https://ui-avatars.com/api/?name=Trader&background=7C4DFF&color=fff"
+alt="User">
+
+<div class="onlineDot"></div>
+
+</div>
+
+</header>
+
+<!-- ===========================
+STATUS CARDS
+=========================== -->
+
+<section class="statusGrid">
+
+<div class="statusCard">
+
+<div class="statusIcon server">
+
+<i class="fas fa-server"></i>
+
+</div>
+
+<div class="statusContent">
+
+<p>LIVE SERVER</p>
+
+<h2 id="serverStatus">CONNECTED</h2>
+
+</div>
+
+</div>
+
+<div class="statusCard">
+
+<div class="statusIcon clock">
+
+<i class="fas fa-clock"></i>
+
+</div>
+
+<div class="statusContent">
+
+<p>MARKET TIME</p>
+
+<h2 id="marketClock">00:00:00</h2>
+
+</div>
+
+</div>
+
+<div class="statusCard">
+
+<div class="statusIcon market">
+
+<i class="fas fa-signal"></i>
+
+</div>
+
+<div class="statusContent">
+
+<p>MARKET STATUS</p>
+
+<h2 id="marketStatus">OPEN</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+TRADING CONTROL
+=========================== -->
+
+<section class="card">
+
+<div class="sectionTitle">
+
+<i class="fas fa-sliders-h"></i>
+
+<span>Trading Control</span>
+
+</div>
+
+<div class="formGrid">
+
+<div class="inputBox">
+
+<label>Broker</label>
+
+<select id="broker">
+
+<option value="quotex">Quotex</option>
+
+<option value="binomo">Binomo</option>
+
+<option value="pocketoption">Pocket Option</option>
+
+</select>
+
+</div>
+
+<div class="inputBox">
+
+<label>Market</label>
+
+<select id="market">
+            <option>AUDCAD</option>
+<option>AUDCHF</option>
+<option>AUDJPY</option>
+<option>AUDUSD</option>
+
+<option>CADCHF</option>
+<option>CADJPY</option>
+
+<option>CHFJPY</option>
+
+<option>EURAUD</option>
+<option>EURCAD</option>
+<option>EURCHF</option>
+<option>EURGBP</option>
+<option>EURJPY</option>
+<option>EURUSD</option>
+
+<option>GBPAUD</option>
+<option>GBPCAD</option>
+<option>GBPCHF</option>
+<option>GBPJPY</option>
+<option>GBPUSD</option>
+
+<option>USDCAD</option>
+<option>USDCHF</option>
+<option>USDJPY</option>
+
+        </select>
+
+</div>
+
+<div class="inputBox">
+
+<label>Timeframe</label>
+
+<select id="timeframe">
+
+<option value="1">1 Minute</option>
+
+<option value="2">2 Minutes</option>
+
+<option value="5">5 Minutes</option>
+
+<option value="15">15 Minutes</option>
+
+</select>
+
+</div>
+
+<button id="generateBtn" class="generateBtn">
+
+<i class="fas fa-bolt"></i>
+
+Generate Signal
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===========================
+MARKET OVERVIEW
+=========================== -->
+
+<section class="card">
+
+<div class="sectionTitle">
+
+<i class="fas fa-chart-area"></i>
+
+<span>Market Overview</span>
+
+</div>
+
+<div class="marketGrid">
+
+<div class="marketCard">
+
+<div class="marketIcon">
+
+<i class="fas fa-dollar-sign"></i>
+
+</div>
+
+<h4>Current Price</h4>
+
+<h2 id="livePrice">0.00000</h2>
+
+</div>
+
+<div class="marketCard">
+
+<div class="marketIcon">
+
+<i class="fas fa-arrow-trend-up"></i>
+
+</div>
+
+<h4>Trend</h4>
+
+<h2 id="marketTrend">WAIT</h2>
+
+</div>
+
+<div class="marketCard">
+
+<div class="marketIcon">
+
+<i class="fas fa-wave-square"></i>
+
+</div>
+
+<h4>Volatility</h4>
+
+<h2 id="marketVolatility">LOW</h2>
+
+</div>
+
+<div class="marketCard">
+
+<div class="marketIcon">
+
+<i class="fas fa-brain"></i>
+
+</div>
+
+<h4>Historical Match</h4>
+
+<h2 id="historyRate">0%</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+AI ANALYSIS
+=========================== -->
+
+<section class="card">
+
+<div class="sectionTitle">
+
+<i class="fas fa-brain"></i>
+
+<span>AI Analysis</span>
+
+</div>
+
+<div class="aiGrid">
+
+<div class="circleCard">
+
+<div class="circle"
+
+style="--percent:0"
+
+id="confidenceCircle">
+
+<div class="circleInner">
+
+<h2 id="confidenceText">0%</h2>
+
+</div>
+
+</div>
+
+<h4>Confidence</h4>
+
+</div>
+
+<div class="circleCard">
+
+<div class="circle"
+
+style="--percent:0"
+
+id="historyCircle">
+
+<div class="circleInner">
+
+<h2 id="historyMatch">0%</h2>
+
+</div>
+
+</div>
+
+<h4>Historical Match</h4>
+
+</div>
+
+<div class="circleCard">
+
+<div class="circle"
+
+style="--percent:0"
+
+id="trendCircle">
+
+<div class="circleInner">
+
+<h2 id="trendStrength">0%</h2>
+
+</div>
+
+</div>
+
+<h4>Trend Strength</h4>
+
+</div>
+
+<div class="circleCard">
+
+<div class="circle"
+
+style="--percent:0"
+
+id="liquidityCircle">
+
+<div class="circleInner">
+
+<h2 id="liquidityText">0%</h2>
+
+</div>
+
+</div>
+
+<h4>Liquidity</h4>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+CURRENT SIGNAL
+=========================== -->
+
+<section class="card">
+
+<div class="sectionTitle">
+
+<i class="fas fa-crosshairs"></i>
+
+<span>Current Signal</span>
+
+</div>
+
+<div class="heroSignal">
+
+<div class="signalGlow"></div>
+
+<div id="signalBadge" class="signalBadge">
+
+WAIT
+
+</div>
+
+<h2 id="pairText">
+
+EUR/USD
+
+</h2>
+
+<p id="analysisText">
+
+Waiting for AI analysis...
+
+</p>
+
+<div class="signalInfo">
+
+<div>
+
+<span>Entry</span>
+
+<h3 id="entryText">--</h3>
+
+</div>
+
+<div>
+
+<span>Expiry</span>
+
+<h3 id="expiryText">--</h3>
+
+</div>
+
+<div>
+
+<span>Confidence</span>
+
+<h3 id="confidenceSignal">0%</h3>
+
+</div>
+
+</div>
+
+<button id="heroGenerateBtn"
+
+class="heroButton">
+
+<i class="fas fa-bolt"></i>
+
+GENERATE SIGNAL
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===========================
+TODAY'S STATISTICS
+=========================== -->
+
+<section class="card">
+
+<div class="sectionTitle">
+
+<i class="fas fa-chart-pie"></i>
+
+<span>Today's Statistics</span>
+
+</div>
+
+<div class="statsGrid">
+
+<div class="statCard">
+
+<div class="statIcon">
+
+<i class="fas fa-signal"></i>
+
+</div>
+
+<h2 id="todaySignals">
+
+0
+
+</h2>
+
+<p>Total Signals</p>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon win">
+
+<i class="fas fa-arrow-trend-up"></i>
+
+</div>
+
+<h2 id="todayWins">
+
+0
+
+</h2>
+
+<p>Wins</p>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon loss">
+
+<i class="fas fa-arrow-trend-down"></i>
+
+</div>
+
+<h2 id="todayLosses">
+
+0
+
+</h2>
+
+<p>Losses</p>
+
+</div>
+
+<div class="statCard">
+
+<div class="statIcon rate">
+
+<i class="fas fa-percent"></i>
+
+</div>
+
+<h2 id="todayWinRate">
+
+0%
+
+</h2>
+
+<p>Win Rate</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+BOTTOM NAVIGATION
+=========================== -->
+
+<nav class="bottomNav">
+
+<button class="navItem active">
+
+<i class="fas fa-house"></i>
+
+<span>Home</span>
+
+</button>
+
+<button class="navItem">
+
+<i class="fas fa-chart-line"></i>
+
+<span>Signals</span>
+
+</button>
+
+<button id="fabSignal"
+
+class="fabButton">
+
+<i class="fas fa-bolt"></i>
+
+</button>
+
+<button class="navItem">
+
+<i class="fas fa-clock-rotate-left"></i>
+
+<span>History</span>
+
+</button>
+
+<button class="navItem">
+
+<i class="fas fa-gear"></i>
+
+<span>Settings</span>
+
+</button>
+
+</nav>
+
+</div>
+
+<script>
+
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("sidebarOverlay");
+const menuButton = document.querySelector(".menuButton");
+const logoutBtn = document.getElementById("logoutBtn");
+
+if(menuButton){
+
+    menuButton.addEventListener("click",()=>{
+
+        sidebar.classList.add("show");
+        overlay.classList.add("show");
+
+    });
+
+}
+
+if(overlay){
+
+    overlay.addEventListener("click",()=>{
+
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+
+    });
+
+}
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener("click",()=>{
+
+        localStorage.removeItem("token");
+        window.location.href="index.html";
+
+    });
+
+}
+
+
+const generateBtn = document.getElementById("generateBtn");
+const fabBtn = document.getElementById("fabSignal");
+
+const heroBtn = document.getElementById("heroGenerateBtn");
+
+if(heroBtn){
+
+    heroBtn.addEventListener("click", generateSignal);
+
+}
+
+if(generateBtn){
+    generateBtn.addEventListener("click", generateSignal);
+}
+
+if(fabBtn){
+    fabBtn.addEventListener("click", generateSignal);
+}
+
+async function generateSignal(){
+
+    generateBtn.disabled = true;
+
+if(heroBtn){
+    heroBtn.disabled = true;
+}
+
+generateBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> ANALYZING';
+
+if(heroBtn){
+    heroBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> ANALYZING';
+}
+
+const token = localStorage.getItem("token");
+
+    try{
+
+        const response=await fetch("/api/signal",{
+
+            method:"POST",
+
+            headers:{
+
+            "Content-Type":"application/json",
+
+            "Authorization":"Bearer " + token
+
+        },
+
+            body:JSON.stringify({
+
+                broker:document.getElementById("broker").value,
+
+                market:document.getElementById("market").value,
+
+                timeframe:Number(document.getElementById("timeframe").value)
+
+            })
+
+        });
+
+        const data=await response.json();
+
+        displaySignal(data);
+
+    }catch(e){
+
+        alert("Server Error");
+
+    }
+
+    generateBtn.disabled = false;
+
+if(heroBtn){
+    heroBtn.disabled = false;
+}
+
+generateBtn.innerHTML='<i class="fas fa-bolt"></i> GENERATE SIGNAL';
+
+if(heroBtn){
+    heroBtn.innerHTML='<i class="fas fa-bolt"></i> GENERATE SIGNAL';
+}
+
+}
+
+function displaySignal(data){
+
+    if(!data.success){
+
+        document.getElementById("analysisText").innerHTML=data.message;
+
+        return;
+
+    }
+
+    document.getElementById("pairText").textContent=data.pair;
+
+    document.getElementById("entryText").textContent=data.entry;
+
+    document.getElementById("expiryText").textContent=data.expiry;
+
+    document.getElementById("confidenceSignal").textContent=data.confidence+"%";
+
+    document.getElementById("livePrice").textContent=data.entryPrice;
+
+    document.getElementById("marketTrend").textContent=data.trend;
+
+    document.getElementById("marketVolatility").textContent=data.volatility;
+
+    document.getElementById("historyRate").textContent=data.historicalWinRate+"%";
+
+    document.getElementById("confidenceText").textContent=data.confidence+"%";
+
+    document.getElementById("historyMatch").textContent=data.historicalWinRate+"%";
+
+    document.getElementById("trendStrength").textContent=data.trendStrength+"%";
+
+    document.getElementById("liquidityText").textContent=
+    data.liquiditySweep?.bullish ? "BULL" :
+    data.liquiditySweep?.bearish ? "BEAR" : "NONE";
+
+    document.getElementById("confidenceCircle")
+    ?.style.setProperty("--percent",data.confidence);
+
+    document.getElementById("historyCircle")
+    ?.style.setProperty("--percent",data.historicalWinRate);
+
+    document.getElementById("trendCircle")
+    ?.style.setProperty("--percent",data.trendStrength||0);
+
+    document.getElementById("liquidityCircle")
+    ?.style.setProperty("--percent",
+        data.liquiditySweep?.bullish || data.liquiditySweep?.bearish ? 100 : 20
+    );
+
+    const badge=document.getElementById("signalBadge");
+
+    badge.textContent=data.signal;
+
+    badge.style.background=
+        data.signal==="CALL"
+        ?"linear-gradient(135deg,#00C853,#00E676)"
+        :"linear-gradient(135deg,#FF5252,#D50000)";
+
+    document.getElementById("analysisText").innerHTML=
+
+        "<b>Trend:</b> "+data.trend+
+
+        "<br><b>Historical Matches:</b> "+data.matches+
+
+        "<br><b>Win Rate:</b> "+data.historicalWinRate+"%"+
+
+        "<br><b>Confidence:</b> "+data.confidenceLabel;
+        const toast=document.getElementById("toast");
+
+if(toast){
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+}
+
+setTimeout(()=>{
+    document.getElementById("loader").style.display = "none";
+},1000);
+
+</script>
+
+<div id="toast" class="toast">
+Signal Generated
+</div>
+
+</body>
+</html>
