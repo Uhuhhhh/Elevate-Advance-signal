@@ -17,18 +17,20 @@ module.exports = async (req, res) => {
 
         const authHeader = req.headers.authorization;
 
-        if(!authHeader){
+console.log("Authorization:", authHeader);
 
-            return res.status(401).json({
-                success:false,
-                message:"Login Required"
-            });
+if (!authHeader) {
+    return res.status(401).json({
+        success: false,
+        message: "Login Required"
+    });
+}
 
-        }
+const token = authHeader.replace("Bearer ", "");
 
-        const token = authHeader.replace("Bearer ","");
+console.log("Token:", token);
 
-        const user = verifyToken(token);
+const user = verifyToken(token);
 
 const userDoc = await db
     .collection("users")
