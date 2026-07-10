@@ -4,106 +4,631 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Elevate Trading</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+.contactText{
+    text-align:center;
+    color:#999;
+    font-size:14px;
+    margin-top:10px;
 }
 
-html{
-scroll-behavior:smooth;
+.contactText a{
+    color:#FFC857;   /* Light orange */
+    text-decoration:none;
+    font-weight:700;
+}
+
+.contactText a:hover{
+    color:#FFD97A;
+    text-decoration:underline;
+}
+
+.topRight{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.liveStatus{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:10px 18px;
+
+background:#111;
+
+border-radius:30px;
+
+color:#00d66b;
+
+font-weight:bold;
+
+}
+
+.liveDot{
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#00ff66;
+
+animation:pulse 1s infinite;
+
+}
+
+.profileMini{
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+background:#FFD700;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+.sidebar a.active{
+
+background:#FFD700;
+
+color:black;
+
+font-weight:bold;
+
+border-radius:12px;
+
+margin:8px;
+
+}
+
+.sidebar hr{
+
+margin:20px;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+50%{
+
+transform:scale(1.2);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+}
+
+#lockScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+}
+
+.lockBox{
+
+    width:90%;
+
+    max-width:350px;
+
+    background:#0d0d0d;
+
+    border:1px solid rgba(255,215,0,.25);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+.lockBox h1{
+
+    color:gold;
+
+    margin-bottom:15px;
+}
+
+.lockBox p{
+
+    color:#ccc;
+
+    margin-bottom:15px;
+}
+
+.lockBox input{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#111;
+
+    color:white;
+
+    padding:0 15px;
+}
+
+.lockBox button{
+
+    width:100%;
+
+    height:55px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(135deg,#FFD700,#FFF4AA);
+
+    color:black;
+
+    font-weight:900;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:transform .12s ease, box-shadow .2s ease;
+
+    box-shadow:0 8px 20px rgba(255,215,0,.25);
+
+}
+
+.lockBox button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px rgba(255,215,0,.35);
+
+}
+
+.lockBox button:active{
+
+    transform:scale(.94);
+
+    box-shadow:0 4px 10px rgba(255,215,0,.25);
+
+}
+
+#errorMsg{
+
+    color:#ff4444;
+
+    margin-top:10px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-
-background:#090B13;
-
-color:#fff;
-
-overflow-x:hidden;
-
-}
-
-:root{
-
---bg:#090B13;
-
---card:#141824;
-
---card2:#1B1F2D;
-
---purple:#7C4DFF;
-
---purple2:#C04DFF;
-
---green:#00E676;
-
---red:#FF5252;
-
---yellow:#FFD54F;
-
---text:#FFFFFF;
-
---sub:#98A1B3;
-
---border:#292E42;
-
+    background:#000;
+    min-height:100vh;
+    color:white;
 }
 
 .wrapper{
+    max-width:450px;
+    margin:auto;
+    padding:15px;
+}
+
+.hero{
+
+    margin-top:20px;
+
+    background:linear-gradient(
+    135deg,
+    rgba(255,215,0,.15),
+    rgba(255,255,255,.03)
+    );
+
+    border-radius:30px;
+
+    padding:30px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,215,0,.2);
+}
+
+.logo{
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:linear-gradient(
+    135deg,
+    gold,
+    #fff2a8
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:40px;
+}
+
+.title{
+
+    margin-top:15px;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:gold;
+}
+
+.subtitle{
+
+    margin-top:8px;
+
+    color:#aaa;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+}
+.panel{
+
+    margin-top:20px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,215,0,.15);
+
+    border-radius:30px;
+
+    padding:20px;
+}
+
+.panel h2{
+
+    color:gold;
+
+    margin-bottom:20px;
+
+    text-align:center;
+}
+
+.generate-btn{
+
+    width:100%;
+
+    height:65px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #FFD700,
+    #FFF2A8
+    );
+
+    color:#000;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.3);
+}
+
+.signal-card{
+
+    margin-top:20px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,215,0,.15);
+
+    border-radius:30px;
+
+    padding:20px;
+
+    text-align:center;
+}
+
+.signal-title{
+
+    color:gold;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.signal-box{
+
+    height:110px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    background:#111;
+}
+
+.call{
+
+    background:
+    linear-gradient(
+    135deg,
+    #00ff88,
+    #00bb66
+    );
+
+    color:#fff;
+}
+
+.put{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff4444,
+    #bb2222
+    );
+
+    color:#fff;
+}
+
+.signal-info{
+
+    margin-top:15px;
+
+    color:#ccc;
+
+    line-height:28px;
+}
+
+.field{
+
+    margin-bottom:15px;
+}
+
+.field label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#ccc;
+}
+
+.field select{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    outline:none;
+
+    background:#111;
+
+    color:white;
+
+    border-radius:15px;
+
+    padding:0 15px;
+}
+
+.clock{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    color:gold;
+
+    background:#111;
+
+    padding:15px;
+
+    border-radius:15px;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar{
 
 width:100%;
 
-max-width:1400px;
+height:70px;
 
-margin:auto;
+background:#111;
 
-padding:20px;
+display:flex;
 
-}
+justify-content:space-between;
 
-@media(max-width:768px){
+align-items:center;
 
-.wrapper{
+padding:0 25px;
 
-padding:15px;
-
-}
+border-bottom:1px solid rgba(255,215,0,.2);
 
 }
 
-.card{
+.brand{
 
-background:var(--card);
+font-size:24px;
 
-border:1px solid var(--border);
+font-weight:800;
 
-border-radius:22px;
-
-padding:20px;
-
-margin-bottom:18px;
+color:gold;
 
 }
 
-.sectionTitle{
+.menu{
+
+display:flex;
+
+gap:15px;
+
+}
+
+.menu a{
+
+text-decoration:none;
+
+color:white;
+
+font-weight:600;
+
+padding:10px 18px;
+
+border-radius:10px;
+
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+background:gold;
+
+color:black;
+
+}
+
+.page{
+
+display:none;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+.topbar{
+
+position:sticky;
+
+top:0;
+
+height:75px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 20px;
+
+background:rgba(15,15,15,.9);
+
+backdrop-filter:blur(20px);
+
+border-bottom:1px solid rgba(255,215,0,.2);
+
+z-index:999;
+
+}
+
+.logoBox{
 
 display:flex;
 
@@ -111,71 +636,385 @@ align-items:center;
 
 gap:12px;
 
-margin-bottom:18px;
-
-font-size:20px;
-
-font-weight:700;
-
-color:white;
-
 }
 
-.sectionTitle i{
+.logoCircle{
 
-color:var(--purple2);
+width:50px;
 
-font-size:22px;
+height:50px;
 
-}
+border-radius:50%;
 
-/*=========================
-HEADER
-=========================*/
-
-.topHeader{
+background:linear-gradient(135deg,gold,#fff7b0);
 
 display:flex;
 
+justify-content:center;
+
 align-items:center;
 
-justify-content:space-between;
+font-size:24px;
 
-margin-bottom:25px;
+box-shadow:0 0 25px rgba(255,215,0,.5);
+
+}
+
+.logoBox h2{
+
+font-size:20px;
+
+color:gold;
+
+margin:0;
+
+}
+
+.logoBox p{
+
+font-size:12px;
+
+color:#aaa;
 
 }
 
 .menuButton{
 
-width:55px;
+width:45px;
 
-height:55px;
+height:45px;
 
-border-radius:18px;
+display:flex;
 
-background:var(--card);
+flex-direction:column;
+
+justify-content:center;
+
+gap:6px;
+
+cursor:pointer;
+
+}
+
+.menuButton span{
+
+height:4px;
+
+background:gold;
+
+border-radius:5px;
+
+transition:.4s;
+
+}
+
+.overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+display:none;
+
+z-index:998;
+
+}
+
+.sideMenu{
+
+position:fixed;
+
+top:0;
+
+right:-320px;
+
+width:300px;
+
+height:100%;
+
+background:#101010;
+
+transition:.4s;
+
+z-index:999;
+
+border-left:1px solid rgba(255,215,0,.2);
+
+box-shadow:-10px 0 30px rgba(0,0,0,.5);
+
+overflow:auto;
+
+}
+
+.sideHeader{
+
+padding:30px;
+
+background:linear-gradient(135deg,#2a2a2a,#111);
+
+}
+
+.profile{
+
+text-align:center;
+
+}
+
+.avatar{
+
+width:80px;
+
+height:80px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,gold,#fff4a0);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:38px;
+
+margin-bottom:15px;
+
+}
+
+.profile h3{
+
+color:gold;
+
+}
+
+.profile p{
+
+color:#aaa;
+
+font-size:13px;
+
+}
+
+.sideMenu a{
+
+display:block;
+
+padding:18px 25px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:16px;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+transition:.3s;
+
+}
+
+.sideMenu a:hover{
+
+background:rgba(255,215,0,.12);
+
+padding-left:35px;
+
+color:gold;
+
+}
+
+/* HERO */
+
+.heroPremium{
+
+margin-top:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+/* WELCOME */
+
+.welcomeCard{
+
+padding:25px;
+
+border-radius:30px;
+
+background:linear-gradient(135deg,#171717,#0b0b0b);
+
+border:1px solid rgba(255,215,0,.25);
+
+box-shadow:0 0 30px rgba(255,215,0,.08);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.welcomeCard h1{
+
+font-size:28px;
+
+color:gold;
+
+margin-bottom:8px;
+
+}
+
+.welcomeCard p{
+
+color:#bbb;
+
+}
+
+.status{
 
 display:flex;
 
 align-items:center;
 
-justify-content:center;
+gap:10px;
 
-font-size:22px;
+font-weight:bold;
 
-cursor:pointer;
-
-border:1px solid var(--border);
-
-transition:.25s;
+color:#00ff99;
 
 }
 
-.menuButton:hover{
+.liveDot{
 
-transform:translateY(-3px);
+width:12px;
 
-border-color:var(--purple);
+height:12px;
+
+border-radius:50%;
+
+background:#00ff99;
+
+animation:pulse 1s infinite;
+
+}
+
+/* GRID */
+
+.statsGrid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+}
+
+/* CARD */
+
+.statCard{
+
+background:#111;
+
+padding:25px;
+
+border-radius:22px;
+
+text-align:center;
+
+border:1px solid rgba(255,215,0,.18);
+
+transition:.35s;
+
+}
+
+.statCard:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 25px rgba(255,215,0,.25);
+
+}
+
+.statCard h2{
+
+font-size:30px;
+
+color:gold;
+
+margin-bottom:10px;
+
+}
+
+.statCard p{
+
+color:#aaa;
+
+font-size:14px;
+
+}
+
+/* PULSE */
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.9);
+
+opacity:.5;
+
+}
+
+50%{
+
+transform:scale(1.3);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.9);
+
+opacity:.5;
+
+}
+
+}
+
+.topbar{
+
+height:70px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 20px;
+
+background:#101010;
+
+border-bottom:1px solid rgba(255,215,0,.2);
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
 
 }
 
@@ -185,39 +1024,35 @@ display:flex;
 
 align-items:center;
 
-gap:15px;
+gap:12px;
 
 }
 
-.brandLogo{
+.logo{
 
-width:60px;
+width:45px;
 
-height:60px;
+height:45px;
 
-border-radius:18px;
+border-radius:50%;
 
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+background:linear-gradient(135deg,#FFD700,#FFF4AA);
 
 display:flex;
 
-align-items:center;
-
 justify-content:center;
 
-font-size:28px;
+align-items:center;
 
-box-shadow:0 10px 30px rgba(124,77,255,.35);
+font-size:22px;
 
 }
 
-.brand h1{
+.brand h2{
 
-font-size:28px;
+color:gold;
 
-font-weight:800;
-
-line-height:1;
+font-size:20px;
 
 }
 
@@ -225,979 +1060,31 @@ line-height:1;
 
 font-size:12px;
 
-letter-spacing:4px;
+color:#999;
 
-color:var(--purple2);
-
-margin-top:4px;
-
-}
-
-.profile{
-
-position:relative;
-
-width:55px;
-
-height:55px;
-
-}
-
-.profile img{
-
-width:100%;
-
-height:100%;
-
-border-radius:50%;
-
-object-fit:cover;
-
-border:2px solid var(--purple);
-
-}
-
-.onlineDot{
-
-position:absolute;
-
-bottom:3px;
-
-right:3px;
-
-width:13px;
-
-height:13px;
-
-background:var(--green);
-
-border-radius:50%;
-
-border:2px solid var(--bg);
-
-}
-
-@media(max-width:768px){
-
-.brand h1{
-
-font-size:22px;
-
-}
-
-.brand p{
-
-font-size:10px;
-
-letter-spacing:2px;
-
-}
-
-.brandLogo{
-
-width:50px;
-
-height:50px;
-
-font-size:22px;
-
-}
-
-.menuButton{
-
-width:48px;
-
-height:48px;
-
-}
-
-.profile{
-
-width:48px;
-
-height:48px;
-
-}
-
-}
-
-/*=========================
-TRADING CONTROL
-=========================*/
-
-.formGrid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:18px;
-
-}
-
-.inputBox{
-
-display:flex;
-
-flex-direction:column;
-
-}
-
-.inputBox label{
-
-margin-bottom:8px;
-
-font-size:13px;
-
-color:var(--sub);
-
-font-weight:600;
-
-}
-
-.inputBox select{
-
-height:55px;
-
-background:var(--card2);
-
-border:1px solid var(--border);
-
-border-radius:16px;
-
-padding:0 16px;
-
-color:white;
-
-font-size:15px;
-
-outline:none;
-
-transition:.25s;
-
-}
-
-.inputBox select:focus{
-
-border-color:var(--purple);
-
-box-shadow:0 0 15px rgba(124,77,255,.25);
-
-}
-
-.generateBtn{
-
-grid-column:1/3;
-
-height:60px;
-
-border:none;
-
-border-radius:18px;
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-color:white;
-
-font-size:18px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.25s;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:10px;
-
-box-shadow:0 12px 35px rgba(124,77,255,.35);
-
-}
-
-.generateBtn:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 20px 40px rgba(124,77,255,.45);
-
-}
-
-@media(max-width:768px){
-
-.formGrid{
-
-grid-template-columns:1fr;
-
-}
-
-.generateBtn{
-
-grid-column:1;
-
-}
-
-}
-
-/*=========================
-MARKET OVERVIEW
-=========================*/
-
-.marketGrid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:18px;
-
-}
-
-.marketCard{
-
-background:var(--card2);
-
-border:1px solid var(--border);
-
-border-radius:20px;
-
-padding:22px;
-
-text-align:center;
-
-transition:.25s;
-
-}
-
-.marketCard:hover{
-
-transform:translateY(-4px);
-
-border-color:var(--purple);
-
-box-shadow:0 18px 35px rgba(124,77,255,.25);
-
-}
-
-.marketIcon{
-
-width:55px;
-
-height:55px;
-
-margin:auto;
-
-margin-bottom:15px;
-
-border-radius:18px;
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:22px;
-
-}
-
-.marketCard h4{
-
-font-size:13px;
-
-color:var(--sub);
-
-margin-bottom:8px;
-
-}
-
-.marketCard h2{
-
-font-size:22px;
-
-font-weight:700;
-
-}
-
-@media(max-width:1100px){
-
-.marketGrid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:650px){
-
-.marketGrid{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-/*=========================
-AI ANALYSIS
-=========================*/
-
-.aiGrid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-.circleCard{
-
-background:var(--card2);
-
-border:1px solid var(--border);
-
-border-radius:22px;
-
-padding:25px;
-
-text-align:center;
-
-transition:.25s;
-
-}
-
-.circleCard:hover{
-
-transform:translateY(-4px);
-
-border-color:var(--purple);
-
-box-shadow:0 18px 35px rgba(124,77,255,.25);
-
-}
-
-.circle{
-
-width:130px;
-
-height:130px;
-
-margin:auto;
-
-border-radius:50%;
-
-background:
-
-conic-gradient(
-
-#7C4DFF calc(var(--percent)*1%),
-
-#2B3144 0
-
-);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-transition:.5s;
-
-}
-
-.circleInner{
-
-width:92px;
-
-height:92px;
-
-border-radius:50%;
-
-background:var(--card);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-.circleInner h2{
-
-font-size:24px;
-
-font-weight:800;
-
-}
-
-.circleCard h4{
-
-margin-top:18px;
-
-font-size:15px;
-
-color:var(--sub);
-
-}
-
-@media(max-width:1100px){
-
-.aiGrid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:650px){
-
-.aiGrid{
-
-grid-template-columns:1fr;
-
 }
-
-}
-
-/*=========================
-CURRENT SIGNAL
-=========================*/
-
-.heroSignal{
-
-text-align:center;
-
-position:relative;
-
-padding:20px;
-
-}
-
-.signalGlow{
-
-width:170px;
-
-height:170px;
-
-margin:auto;
-
-border-radius:50%;
-
-background:radial-gradient(
-
-rgba(124,77,255,.45),
-
-transparent 70%
-
-);
-
-animation:pulse 2s infinite;
-
-}
-
-.signalBadge{
-
-width:130px;
-
-height:130px;
-
-border-radius:50%;
-
-background:linear-gradient(
-
-135deg,
-
-#7C4DFF,
-
-#C04DFF
-
-);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:34px;
-
-font-weight:800;
-
-margin:-150px auto 20px;
-
-position:relative;
-
-z-index:2;
-
-box-shadow:0 15px 40px rgba(124,77,255,.45);
-
-}
-
-.heroSignal h2{
-
-font-size:28px;
-
-margin-top:15px;
-
-}
-
-.heroSignal p{
-
-color:var(--sub);
-
-margin:12px 0 25px;
-
-line-height:24px;
-
-}
-
-.signalInfo{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:15px;
-
-margin-bottom:25px;
-
-}
-
-.signalInfo div{
-
-background:var(--card2);
-
-padding:18px;
-
-border-radius:16px;
-
-}
-
-.signalInfo span{
-
-display:block;
-
-font-size:12px;
-
-color:var(--sub);
-
-margin-bottom:6px;
-
-}
-
-.signalInfo h3{
-
-font-size:20px;
-
-font-weight:700;
-
-}
-
-.heroButton{
-
-width:100%;
-
-height:60px;
-
-border:none;
-
-border-radius:18px;
-
-background:linear-gradient(
-
-135deg,
-
-#7C4DFF,
-
-#C04DFF
-
-);
-
-color:white;
-
-font-size:18px;
-
-font-weight:700;
-
-cursor:pointer;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-gap:10px;
-
-transition:.3s;
-
-}
-
-.heroButton:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 20px 40px rgba(124,77,255,.45);
-
-}
-
-@keyframes pulse{
-
-0%{
-
-transform:scale(.95);
-
-opacity:.6;
-
-}
-
-50%{
-
-transform:scale(1.05);
-
-opacity:1;
-
-}
-
-100%{
-
-transform:scale(.95);
-
-opacity:.6;
-
-}
-
-}
-
-@media(max-width:700px){
-
-.signalInfo{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-/*=========================
-TODAY'S STATISTICS
-=========================*/
-
-.statsGrid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-.statCard{
-
-background:var(--card2);
-
-border:1px solid var(--border);
-
-border-radius:20px;
-
-padding:25px;
-
-text-align:center;
-
-transition:.3s;
-
-}
-
-.statCard:hover{
-
-transform:translateY(-5px);
-
-border-color:var(--purple);
-
-box-shadow:0 20px 40px rgba(124,77,255,.25);
-
-}
-
-.statIcon{
-
-width:60px;
-
-height:60px;
-
-margin:auto;
-
-margin-bottom:18px;
-
-border-radius:18px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:22px;
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-}
-
-.win{
-
-background:linear-gradient(135deg,#00C853,#00E676);
-
-}
-
-.loss{
-
-background:linear-gradient(135deg,#FF5252,#D50000);
-
-}
-
-.rate{
-
-background:linear-gradient(135deg,#FF9800,#FFC107);
-
-}
-
-.statCard h2{
-
-font-size:30px;
-
-margin-bottom:10px;
-
-font-weight:800;
-
-}
-
-.statCard p{
-
-font-size:13px;
-
-color:var(--sub);
-
-}
-
-@media(max-width:1100px){
-
-.statsGrid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:650px){
-
-.statsGrid{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-/*=========================
-BOTTOM NAVIGATION
-=========================*/
-
-.bottomNav{
-
-position:fixed;
-
-left:50%;
-
-transform:translateX(-50%);
-
-bottom:18px;
-
-width:min(96%,900px);
-
-height:82px;
-
-background:rgba(20,24,36,.92);
-
-backdrop-filter:blur(18px);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:24px;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-z-index:9999;
-
-box-shadow:0 20px 45px rgba(0,0,0,.45);
-
-}
-
-.navItem{
-
-background:none;
-
-border:none;
-
-color:#98A1B3;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-gap:6px;
-
-cursor:pointer;
-
-transition:.25s;
-
-font-size:12px;
-
-}
-
-.navItem i{
-
-font-size:22px;
-
-}
-
-.navItem.active{
-
-color:#C04DFF;
-
-}
-
-.navItem:hover{
-
-color:white;
-
-transform:translateY(-3px);
-
-}
-
-.fabButton{
-
-width:68px;
-
-height:68px;
-
-border-radius:50%;
-
-border:none;
-
-background:linear-gradient(
-
-135deg,
-
-#7C4DFF,
-
-#C04DFF
-
-);
 
-color:white;
+.menuBtn{
 
 font-size:28px;
 
 cursor:pointer;
 
-margin-top:-38px;
-
-box-shadow:0 18px 35px rgba(124,77,255,.45);
-
-transition:.3s;
+color:gold;
 
 }
 
-.fabButton:hover{
+.overlay{
 
-transform:scale(1.08);
-
-}
-
-body{
-
-padding-bottom:130px;
-
-}
-
-@media(max-width:768px){
-
-.bottomNav{
-
-width:96%;
-
-height:75px;
-
-}
-
-.fabButton{
-
-width:62px;
-
-height:62px;
-
-font-size:24px;
-
-}
-
-.navItem i{
-
-font-size:20px;
-
-}
-
-}
-
-/*=========================
-SIDEBAR
-=========================*/
-
-.sidebarOverlay{
+display:none;
 
 position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,.55);
+background:rgba(0,0,0,.5);
 
-backdrop-filter:blur(3px);
-
-opacity:0;
-
-visibility:hidden;
-
-transition:.3s;
-
-z-index:9998;
-
-}
-
-.sidebarOverlay.show{
-
-opacity:1;
-
-visibility:visible;
+z-index:999;
 
 }
 
@@ -1205,37 +1092,29 @@ visibility:visible;
 
 position:fixed;
 
-left:-310px;
-
 top:0;
 
-width:300px;
+left:-280px;
 
-height:100vh;
+width:270px;
 
-background:#111522;
+height:100%;
 
-border-right:1px solid rgba(255,255,255,.08);
+background:#0d0d0d;
 
 transition:.35s;
 
-z-index:9999;
+z-index:1000;
 
-display:flex;
+border-right:1px solid rgba(255,215,0,.2);
 
-flex-direction:column;
-
-}
-
-.sidebar.show{
-
-left:0;
+overflow:auto;
 
 }
 
-.sidebarTop{
+.profile{
 
-padding:35px 25px;
+padding:35px 20px;
 
 text-align:center;
 
@@ -1243,7 +1122,7 @@ border-bottom:1px solid rgba(255,255,255,.08);
 
 }
 
-.sidebarLogo{
+.avatar{
 
 width:80px;
 
@@ -1251,303 +1130,59 @@ height:80px;
 
 margin:auto;
 
-border-radius:24px;
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:34px;
-
-margin-bottom:18px;
-
-}
-
-.sidebarTop h2{
-
-font-size:28px;
-
-}
-
-.sidebarTop p{
-
-color:#98A1B3;
-
-margin-top:5px;
-
-}
-
-.sidebarMenu{
-
-padding:20px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-flex:1;
-
-}
-
-.sideBtn{
-
-height:56px;
-
-background:#1B1F2D;
-
-border:1px solid rgba(255,255,255,.05);
-
-border-radius:16px;
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-padding:0 18px;
-
-font-size:15px;
-
-color:white;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.sideBtn i{
-
-color:#C04DFF;
-
-font-size:18px;
-
-}
-
-.sideBtn:hover{
-
-background:#23283A;
-
-transform:translateX(5px);
-
-}
-
-.sideBtn.active{
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-}
-
-.sideBtn.active i{
-
-color:white;
-
-}
-
-.sidebarBottom{
-
-padding:20px;
-
-}
-
-.logoutBtn{
-
-width:100%;
-
-height:55px;
-
-border:none;
-
-border-radius:16px;
-
-background:#FF5252;
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-}
-
-/*=========================
-LOADER
-=========================*/
-
-.loader{
-
-position:fixed;
-
-inset:0;
-
-background:#090B13;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:999999;
-
-transition:.5s;
-
-}
-
-.loaderLogo{
-
-width:95px;
-
-height:95px;
-
-border-radius:28px;
-
-background:linear-gradient(135deg,#7C4DFF,#C04DFF);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:42px;
-
-animation:loaderSpin 2s linear infinite;
-
-}
-
-.loader h2{
-
-margin-top:25px;
-
-font-size:30px;
-
-}
-
-.loader p{
-
-margin-top:10px;
-
-color:#98A1B3;
-
-}
-
-@keyframes loaderSpin{
-
-0%{
-
-transform:rotateY(0deg);
-
-}
-
-100%{
-
-transform:rotateY(360deg);
-
-}
-
-}
-
-.card{
-
-animation:fadeUp .5s ease;
-
-}
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-.bgGlow{
-
-position:fixed;
-
-width:350px;
-
-height:350px;
-
 border-radius:50%;
 
-filter:blur(120px);
+background:linear-gradient(135deg,#FFD700,#FFF4AA);
 
-opacity:.18;
+display:flex;
 
-pointer-events:none;
+justify-content:center;
 
-z-index:-1;
+align-items:center;
 
-}
+font-size:36px;
 
-.glow1{
-
-background:#7C4DFF;
-
-top:-80px;
-
-left:-80px;
+margin-bottom:15px;
 
 }
 
-.glow2{
+.profile h2{
 
-background:#C04DFF;
-
-right:-100px;
-
-bottom:-100px;
+color:gold;
 
 }
 
-.toast{
+.profile p{
 
-position:fixed;
+color:#999;
 
-top:20px;
+font-size:13px;
 
-right:20px;
+}
 
-background:#00C853;
+.sidebar a{
 
-padding:14px 20px;
+display:block;
 
-border-radius:14px;
+padding:18px 25px;
 
-opacity:0;
+text-decoration:none;
+
+color:white;
+
+border-bottom:1px solid rgba(255,255,255,.05);
 
 transition:.3s;
 
-z-index:999999;
-
 }
 
-.toast.show{
+.sidebar a:hover{
 
-opacity:1;
+background:rgba(255,215,0,.15);
+
+padding-left:35px;
+
+color:gold;
 
 }
 
@@ -1555,249 +1190,139 @@ opacity:1;
 
 </head>
 
-<body>
+<p class="contactText">
+    Don't have access?
+    <a href="https://t.me/YOUR_USERNAME" target="_blank">
+        Contact Admin
+    </a>
+</p>
 
-<div id="loader" class="loader">
+<div id="errorMsg"></div>
 
-<div class="loaderLogo">
-
-<i class="fas fa-chart-line"></i>
-
-</div>
-
-<h2>ELEVATE AI</h2>
-
-<p>Loading Trading Engine...</p>
+    </div>
 
 </div>
 
-<div id="sidebarOverlay" class="sidebarOverlay"></div>
+<div id="mainApp">
 
-<aside id="sidebar" class="sidebar">
+<!-- Premium Header -->
 
-<div class="sidebarTop">
-
-<div class="sidebarLogo">
-
-<i class="fas fa-chart-line"></i>
-
-</div>
-
-<h2>Elevate</h2>
-
-<p>Trading AI</p>
-
-</div>
-
-<div class="sidebarMenu">
-
-<button class="sideBtn active">
-
-<i class="fas fa-house"></i>
-
-<span>Dashboard</span>
-
-</button>
-
-<button class="sideBtn">
-
-<i class="fas fa-chart-line"></i>
-
-<span>Signals</span>
-
-</button>
-
-<button class="sideBtn">
-
-<i class="fas fa-clock-rotate-left"></i>
-
-<span>History</span>
-
-</button>
-
-<button class="sideBtn">
-
-<i class="fas fa-star"></i>
-
-<span>Premium</span>
-
-</button>
-
-<button class="sideBtn">
-
-<i class="fas fa-gear"></i>
-
-<span>Settings</span>
-
-</button>
-
-<button class="sideBtn">
-
-<i class="fas fa-circle-info"></i>
-
-<span>About</span>
-
-</button>
-
-</div>
-
-<div class="sidebarBottom">
-
-<button id="logoutBtn" class="logoutBtn">
-
-<i class="fas fa-right-from-bracket"></i>
-
-Logout
-
-</button>
-
-</div>
-
-</aside>
-
-<div class="wrapper">
-
-<!-- ===========================
-HEADER
-=========================== -->
-
-<header class="topHeader">
-
-<div class="menuButton">
-
-<i class="fas fa-bars"></i>
-
-</div>
+<header class="topbar">
 
 <div class="brand">
 
-<div class="brandLogo">
-
-<i class="fas fa-chart-line"></i>
-
-</div>
+<div class="logo">👑</div>
 
 <div>
 
-<h1>Elevate</h1>
+<h2>Elevate</h2>
 
-<p>TRADING AI</p>
-
-</div>
+<p>Premium Dashboard</p>
 
 </div>
 
-<div class="profile">
+</div>
 
-<img
-src="https://ui-avatars.com/api/?name=Trader&background=7C4DFF&color=fff"
-alt="User">
+<div class="topRight">
 
-<div class="onlineDot"></div>
+<div class="liveStatus">
+
+<div class="liveDot"></div>
+
+LIVE
+
+</div>
+
+<div class="statusText">
+
+ELEVATE
+
+</div>
+
+<div class="menuBtn" onclick="toggleMenu()">
+☰
+</div>
 
 </div>
 
 </header>
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
-<!-- ===========================
-STATUS CARDS
-=========================== -->
+<aside id="sidebar" class="sidebar">
 
-<section class="statusGrid">
+<div class="profile">
 
-<div class="statusCard">
+<div class="avatar">👑</div>
 
-<div class="statusIcon server">
+<h2>Elevate</h2>
 
-<i class="fas fa-server"></i>
-
-</div>
-
-<div class="statusContent">
-
-<p>LIVE SERVER</p>
-
-<h2 id="serverStatus">CONNECTED</h2>
+<p>Trading Dashboard</p>
 
 </div>
 
-</div>
+<a href="../index.html">🏠 Home</a>
 
-<div class="statusCard">
+<a href="../dashboard.html">📊 Dashboard</a>
 
-<div class="statusIcon clock">
+<a href="../strategy.html">🧠 Strategies</a>
 
-<i class="fas fa-clock"></i>
+<a href="../signal-history.html">📜 Signal History</a>
 
-</div>
+<a href="../settings.html">⚙ Settings</a>
 
-<div class="statusContent">
+<a href="../rules.html">⚙ Rules</a>
 
-<p>MARKET TIME</p>
+<a href="../journal/trading-journal.html">📉 Journal</a>
 
-<h2 id="marketClock">00:00:00</h2>
+<a href="../Admin/admin.html">👑 Admin Panel</a>
 
-</div>
-
-</div>
-
-<div class="statusCard">
-
-<div class="statusIcon market">
-
-<i class="fas fa-signal"></i>
+</aside>
 
 </div>
 
-<div class="statusContent">
+<body>
 
-<p>MARKET STATUS</p>
+<script src="../js/styles.js"></script>
 
-<h2 id="marketStatus">OPEN</h2>
+<div id="dashboardPage" class="page active">
 
-</div>
+<div class="wrapper">
 
-</div>
+<h2>
 
-</section>
+Welcome Back 👋, Trader
 
-<!-- ===========================
-TRADING CONTROL
-=========================== -->
+</h2>
 
-<section class="card">
+<p style="text-align:center;color:#aaa;">
 
-<div class="sectionTitle">
+Elevate Your Trading System
 
-<i class="fas fa-sliders-h"></i>
-
-<span>Trading Control</span>
+</p>
 
 </div>
 
-<div class="formGrid">
+<div class="panel">
 
-<div class="inputBox">
+    <h2>Trading Control</h2>
 
-<label>Broker</label>
+    <div class="field">
 
-<select id="broker">
+        <label>Broker</label>
 
-<option value="quotex">Quotex</option>
+        <select id="broker">
+            <option>Quotex</option>
+            <option>Binomo</option>
+            <option>Pocket Option</option>
+        </select>
 
-<option value="binomo">Binomo</option>
+    </div>
 
-<option value="pocketoption">Pocket Option</option>
+    <div class="field">
 
-</select>
+        <label>Market</label>
 
-</div>
-
-<div class="inputBox">
-
-<label>Market</label>
-
-<select id="market">
+        <select id="market">
             <option>AUDCAD</option>
 <option>AUDCHF</option>
 <option>AUDJPY</option>
@@ -1827,517 +1352,135 @@ TRADING CONTROL
 
         </select>
 
-</div>
+    </div>
 
-<div class="inputBox">
+    <div class="field">
 
-<label>Timeframe</label>
+        <label>Timeframe</label>
 
-<select id="timeframe">
+        <select id="timeframe">
+            <option value="1">1 Minute</option>
+            <option value="2">2 Minute</option>
+            <option value="5">5 Minute</option>
+            <option value="15">15 Minute</option>
+        </select>
 
-<option value="1">1 Minute</option>
+    </div>
 
-<option value="2">2 Minutes</option>
-
-<option value="5">5 Minutes</option>
-
-<option value="15">15 Minutes</option>
-
-</select>
-
-</div>
-
-<button id="generateBtn" class="generateBtn">
-
-<i class="fas fa-bolt"></i>
-
-Generate Signal
-
+    <div id="clock" class="clock">
+        00:00:00
+    </div>
+    
+    <button id="generateBtn" class="generate-btn">
+    GENERATE SIGNAL
 </button>
 
 </div>
 
-</section>
+<div class="signal-card">
 
-<!-- ===========================
-MARKET OVERVIEW
-=========================== -->
+    <div class="signal-title">
+        CURRENT SIGNAL
+    </div>
 
-<section class="card">
+    <div id="signalBox" class="signal-box">
+        WAIT
+    </div>
 
-<div class="sectionTitle">
+    <div id="signalInfo" class="signal-info">
 
-<i class="fas fa-chart-area"></i>
+           Status : SAFE
 
-<span>Market Overview</span>
-
-</div>
-
-<div class="marketGrid">
-
-<div class="marketCard">
-
-<div class="marketIcon">
-
-<i class="fas fa-dollar-sign"></i>
-
-</div>
-
-<h4>Current Price</h4>
-
-<h2 id="livePrice">0.00000</h2>
-
-</div>
-
-<div class="marketCard">
-
-<div class="marketIcon">
-
-<i class="fas fa-arrow-trend-up"></i>
-
-</div>
-
-<h4>Trend</h4>
-
-<h2 id="marketTrend">WAIT</h2>
-
-</div>
-
-<div class="marketCard">
-
-<div class="marketIcon">
-
-<i class="fas fa-wave-square"></i>
-
-</div>
-
-<h4>Volatility</h4>
-
-<h2 id="marketVolatility">LOW</h2>
-
-</div>
-
-<div class="marketCard">
-
-<div class="marketIcon">
-
-<i class="fas fa-brain"></i>
-
-</div>
-
-<h4>Historical Match</h4>
-
-<h2 id="historyRate">0%</h2>
+    </div>
 
 </div>
 
 </div>
-
-</section>
-
-<!-- ===========================
-AI ANALYSIS
-=========================== -->
-
-<section class="card">
-
-<div class="sectionTitle">
-
-<i class="fas fa-brain"></i>
-
-<span>AI Analysis</span>
-
-</div>
-
-<div class="aiGrid">
-
-<div class="circleCard">
-
-<div class="circle"
-
-style="--percent:0"
-
-id="confidenceCircle">
-
-<div class="circleInner">
-
-<h2 id="confidenceText">0%</h2>
-
-</div>
-
-</div>
-
-<h4>Confidence</h4>
-
-</div>
-
-<div class="circleCard">
-
-<div class="circle"
-
-style="--percent:0"
-
-id="historyCircle">
-
-<div class="circleInner">
-
-<h2 id="historyMatch">0%</h2>
-
-</div>
-
-</div>
-
-<h4>Historical Match</h4>
-
-</div>
-
-<div class="circleCard">
-
-<div class="circle"
-
-style="--percent:0"
-
-id="trendCircle">
-
-<div class="circleInner">
-
-<h2 id="trendStrength">0%</h2>
-
-</div>
-
-</div>
-
-<h4>Trend Strength</h4>
-
-</div>
-
-<div class="circleCard">
-
-<div class="circle"
-
-style="--percent:0"
-
-id="liquidityCircle">
-
-<div class="circleInner">
-
-<h2 id="liquidityText">0%</h2>
-
-</div>
-
-</div>
-
-<h4>Liquidity</h4>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-CURRENT SIGNAL
-=========================== -->
-
-<section class="card">
-
-<div class="sectionTitle">
-
-<i class="fas fa-crosshairs"></i>
-
-<span>Current Signal</span>
-
-</div>
-
-<div class="heroSignal">
-
-<div class="signalGlow"></div>
-
-<div id="signalBadge" class="signalBadge">
-
-WAIT
-
-</div>
-
-<h2 id="pairText">
-
-EUR/USD
-
-</h2>
-
-<p id="analysisText">
-
-Waiting for AI analysis...
-
-</p>
-
-<div class="signalInfo">
-
-<div>
-
-<span>Entry</span>
-
-<h3 id="entryText">--</h3>
-
-</div>
-
-<div>
-
-<span>Expiry</span>
-
-<h3 id="expiryText">--</h3>
-
-</div>
-
-<div>
-
-<span>Confidence</span>
-
-<h3 id="confidenceSignal">0%</h3>
-
-</div>
-
-</div>
-
-<button id="heroGenerateBtn"
-
-class="heroButton">
-
-<i class="fas fa-bolt"></i>
-
-GENERATE SIGNAL
-
-</button>
-
-</div>
-
-</section>
-
-<!-- ===========================
-TODAY'S STATISTICS
-=========================== -->
-
-<section class="card">
-
-<div class="sectionTitle">
-
-<i class="fas fa-chart-pie"></i>
-
-<span>Today's Statistics</span>
-
-</div>
-
-<div class="statsGrid">
-
-<div class="statCard">
-
-<div class="statIcon">
-
-<i class="fas fa-signal"></i>
-
-</div>
-
-<h2 id="todaySignals">
-
-0
-
-</h2>
-
-<p>Total Signals</p>
-
-</div>
-
-<div class="statCard">
-
-<div class="statIcon win">
-
-<i class="fas fa-arrow-trend-up"></i>
-
-</div>
-
-<h2 id="todayWins">
-
-0
-
-</h2>
-
-<p>Wins</p>
-
-</div>
-
-<div class="statCard">
-
-<div class="statIcon loss">
-
-<i class="fas fa-arrow-trend-down"></i>
-
-</div>
-
-<h2 id="todayLosses">
-
-0
-
-</h2>
-
-<p>Losses</p>
-
-</div>
-
-<div class="statCard">
-
-<div class="statIcon rate">
-
-<i class="fas fa-percent"></i>
-
-</div>
-
-<h2 id="todayWinRate">
-
-0%
-
-</h2>
-
-<p>Win Rate</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-BOTTOM NAVIGATION
-=========================== -->
-
-<nav class="bottomNav">
-
-<button class="navItem active">
-
-<i class="fas fa-house"></i>
-
-<span>Home</span>
-
-</button>
-
-<button class="navItem">
-
-<i class="fas fa-chart-line"></i>
-
-<span>Signals</span>
-
-</button>
-
-<button id="fabSignal"
-
-class="fabButton">
-
-<i class="fas fa-bolt"></i>
-
-</button>
-
-<button class="navItem">
-
-<i class="fas fa-clock-rotate-left"></i>
-
-<span>History</span>
-
-</button>
-
-<button class="navItem">
-
-<i class="fas fa-gear"></i>
-
-<span>Settings</span>
-
-</button>
-
-</nav>
-
 </div>
 
 <script>
 
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("sidebarOverlay");
-const menuButton = document.querySelector(".menuButton");
-const logoutBtn = document.getElementById("logoutBtn");
 
-if(menuButton){
+function updateClock(){
 
-    menuButton.addEventListener("click",()=>{
+    const now = new Date();
 
-        sidebar.classList.add("show");
-        overlay.classList.add("show");
-
-    });
+    document.getElementById("clock").innerHTML =
+    now.toLocaleTimeString();
 
 }
 
-if(overlay){
+setInterval(updateClock,1000);
 
-    overlay.addEventListener("click",()=>{
+updateClock();
+const btn =
+document.getElementById("generateBtn");
 
-        sidebar.classList.remove("show");
-        overlay.classList.remove("show");
+const signalBox =
+document.getElementById("signalBox");
 
-    });
+const signalInfo =
+document.getElementById("signalInfo");
 
-}
+let signalRunning = false;
 
-if(logoutBtn){
+btn.addEventListener("click",()=>{
 
-    logoutBtn.addEventListener("click",()=>{
+    if(signalRunning) return;
 
-        sessionStorage.removeItem("token");
-        window.location.href="index.html";
+    signalRunning = true;
 
-    });
+    btn.disabled = true;
 
-}
+    btn.innerHTML = "ANALYZING...";
 
+    signalBox.className =
+    "signal-box";
 
-const generateBtn = document.getElementById("generateBtn");
-const fabBtn = document.getElementById("fabSignal");
+    signalBox.innerHTML =
+    "SCAN";
 
-const heroBtn = document.getElementById("heroGenerateBtn");
+    setTimeout(()=>{
 
-if(heroBtn){
+        generateSignal();
 
-    heroBtn.addEventListener("click", generateSignal);
+    },2000);
 
-}
-
-if(generateBtn){
-    generateBtn.addEventListener("click", generateSignal);
-}
-
-if(fabBtn){
-    fabBtn.addEventListener("click", generateSignal);
-}
+});
 
 async function generateSignal(){
+   <!--Remove if free -->
+if(localStorage.getItem("premium") !== "true"){
 
-    generateBtn.disabled = true;
+        signalBox.className = "signal-box";
 
-if(heroBtn){
-    heroBtn.disabled = true;
-}
+        signalBox.innerHTML = "NO SIGNAL";
 
-generateBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> ANALYZING';
+        signalInfo.innerHTML = "⭐ Premium Required";
 
-if(heroBtn){
-    heroBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> ANALYZING';
-}
+        btn.disabled = false;
 
-const token = sessionStorage.getItem("token");
+        btn.innerHTML = "GENERATE SIGNAL";
 
-    try{
+        signalRunning = false;
 
-        const response=await fetch("/api/signal",{
+        return;
 
-            method:"POST",
+    }
 
-            headers:{
+    const market =
+document.getElementById("market").value;
+
+
+    const token = sessionStorage.getItem("token");
+
+try{
+
+    const response = await fetch("/api/signal",{
+
+        method:"POST",
+
+        headers:{
 
             "Content-Type":"application/json",
 
@@ -2345,135 +1488,225 @@ const token = sessionStorage.getItem("token");
 
         },
 
-            body:JSON.stringify({
+        body:JSON.stringify({
 
-                broker:document.getElementById("broker").value,
+            market,
 
-                market:document.getElementById("market").value,
+            timeframe:parseInt(
+                document.getElementById("timeframe").value
+            )
 
-                timeframe:Number(document.getElementById("timeframe").value)
+        })
 
-            })
+    });
 
-        });
+    const result = await response.json();
 
-        const data=await response.json();
+    displaySignal(result);
 
-        displaySignal(data);
+}catch(err){
 
-    }catch(e){
+    signalBox.innerHTML = "ERROR";
 
-        alert("Server Error");
+    signalInfo.innerHTML = err.message;
 
-    }
+    btn.disabled = false;
 
-    generateBtn.disabled = false;
+    btn.innerHTML = "GENERATE SIGNAL";
 
-if(heroBtn){
-    heroBtn.disabled = false;
-}
+    signalRunning = false;
 
-generateBtn.innerHTML='<i class="fas fa-bolt"></i> GENERATE SIGNAL';
-
-if(heroBtn){
-    heroBtn.innerHTML='<i class="fas fa-bolt"></i> GENERATE SIGNAL';
-}
+    console.log(err);
 
 }
+}
 
+// ===============================
+// ELEVATE AI V3 - INDICATOR ENGINE
+// PART 1
+// ===============================
+
+
+// ===============================
+// SAVE SIGNAL HISTORY
+// ===============================
+
+function saveSignal(signal){
+
+let history =
+JSON.parse(
+localStorage.getItem("signalHistory")
+) || [];
+
+history.unshift(signal);
+
+if(history.length > 100){
+
+history = history.slice(0,100);
+
+}
+
+localStorage.setItem(
+"signalHistory",
+JSON.stringify(history)
+);
+
+}
+
+
+
+    
 function displaySignal(data){
 
     if(!data.success){
 
-        document.getElementById("analysisText").innerHTML=data.message;
+        signalBox.className="signal-box";
+        signalBox.innerHTML="NO SIGNAL";
+        signalInfo.innerHTML=data.message;
+
+        btn.disabled=false;
+        btn.innerHTML="GENERATE SIGNAL";
+        signalRunning=false;
 
         return;
-
     }
 
-    document.getElementById("pairText").textContent=data.pair;
+    signalBox.className="signal-box";
 
-    document.getElementById("entryText").textContent=data.entry;
+    if(data.signal==="CALL"){
+        signalBox.classList.add("call");
+    }else{
+        signalBox.classList.add("put");
+    }
 
-    document.getElementById("expiryText").textContent=data.expiry;
+    signalBox.innerHTML=data.signal;
 
-    document.getElementById("confidenceSignal").textContent=data.confidence+"%";
+    signalInfo.innerHTML=`
 
-    document.getElementById("livePrice").textContent=data.entryPrice;
+<b>Pair :</b> ${data.pair}<br>
 
-    document.getElementById("marketTrend").textContent=data.trend;
+<b>Confidence :</b> ${data.confidence}% (${data.confidenceLabel})<br>
 
-    document.getElementById("marketVolatility").textContent=data.volatility;
+<b>Trend :</b> ${data.trend}<br>
 
-    document.getElementById("historyRate").textContent=data.historicalWinRate+"%";
+<b>Historical Matches :</b> ${data.matches}<br>
 
-    document.getElementById("confidenceText").textContent=data.confidence+"%";
+<b>Historical Win Rate :</b> ${data.historicalWinRate}%<br>
 
-    document.getElementById("historyMatch").textContent=data.historicalWinRate+"%";
+<b>Entry :</b> ${data.entry}<br>
 
-    document.getElementById("trendStrength").textContent=data.trendStrength+"%";
+<b>Expiry :</b> ${data.expiry}<br>
 
-    document.getElementById("liquidityText").textContent=
-    data.liquiditySweep?.bullish ? "BULL" :
-    data.liquiditySweep?.bearish ? "BEAR" : "NONE";
+<b>HH :</b> ${data.marketStructure.hh}
+&nbsp;&nbsp;
+<b>HL :</b> ${data.marketStructure.hl}<br>
 
-    document.getElementById("confidenceCircle")
-    ?.style.setProperty("--percent",data.confidence);
+<b>LH :</b> ${data.marketStructure.lh}
+&nbsp;&nbsp;
+<b>LL :</b> ${data.marketStructure.ll}<br>
 
-    document.getElementById("historyCircle")
-    ?.style.setProperty("--percent",data.historicalWinRate);
+<b>BOS :</b>
+${data.bos.bullish ? "Bullish" : data.bos.bearish ? "Bearish" : "None"}<br>
 
-    document.getElementById("trendCircle")
-    ?.style.setProperty("--percent",data.trendStrength||0);
+<b>CHoCH :</b>
+${data.choch.direction}<br>
 
-    document.getElementById("liquidityCircle")
-    ?.style.setProperty("--percent",
-        data.liquiditySweep?.bullish || data.liquiditySweep?.bearish ? 100 : 20
-    );
+<b>Liquidity Sweep :</b>
+${data.liquiditySweep.bullish ? "Bullish" :
+data.liquiditySweep.bearish ? "Bearish" : "None"}<br>
 
-    const badge=document.getElementById("signalBadge");
+<b>Support :</b> ${data.supportResistance.support ? "YES" : "NO"}<br>
 
-    badge.textContent=data.signal;
+<b>Resistance :</b> ${data.supportResistance.resistance ? "YES" : "NO"}<br>
 
-    badge.style.background=
-        data.signal==="CALL"
-        ?"linear-gradient(135deg,#00C853,#00E676)"
-        :"linear-gradient(135deg,#FF5252,#D50000)";
+<b>Trend Continuation :</b> ${data.trendContinuation}<br>
 
-    document.getElementById("analysisText").innerHTML=
+<b>Candle Cluster :</b> ${data.clusterDirection}<br>
 
-        "<b>Trend:</b> "+data.trend+
+<b>Tick Pressure :</b> ${data.tickPressure}<br>
 
-        "<br><b>Historical Matches:</b> "+data.matches+
+<b>Volatility :</b> ${data.volatility}<br>
 
-        "<br><b>Win Rate:</b> "+data.historicalWinRate+"%"+
+<b>Analysis Hour :</b> ${data.analysisTime}:00
 
-        "<br><b>Confidence:</b> "+data.confidenceLabel;
-        const toast=document.getElementById("toast");
+`;
 
-if(toast){
+    saveSignal({
 
-    toast.classList.add("show");
+        pair:data.pair,
+        signal:data.signal,
+        confidence:data.confidence,
+        entry:data.entry,
+        expiry:data.expiry,
+        entryPrice:data.entryPrice,
+        result:"PENDING",
+        time:new Date().toLocaleString()
 
-    setTimeout(()=>{
+    });
 
-        toast.classList.remove("show");
+    btn.disabled=false;
+    btn.innerHTML="GENERATE SIGNAL";
+    signalRunning=false;
 
-    },2500);
+}
+
+function toggleMenu(){
+
+const sidebar=document.getElementById("sidebar");
+
+const overlay=document.getElementById("overlay");
+
+if(sidebar.style.left==="0px"){
+
+sidebar.style.left="-280px";
+
+overlay.style.display="none";
+
+}else{
+
+sidebar.style.left="0px";
+
+overlay.style.display="block";
 
 }
 
 }
 
-setTimeout(()=>{
-    document.getElementById("loader").style.display = "none";
-},1000);
+
+
+function updateDashboard(){
+
+const history=JSON.parse(localStorage.getItem("signalHistory"))||[];
+
+document.getElementById("todaySignals").innerHTML=history.length;
+
+if(history.length){
+
+let total=0;
+
+history.forEach(h=>{
+
+total+=Number(h.confidence);
+
+});
+
+document.getElementById("confidenceCard").innerHTML=
+
+(total/history.length).toFixed(1)+"%";
+
+}else{
+
+document.getElementById("confidenceCard").innerHTML="--";
+
+}
+
+document.getElementById("winRateCard").innerHTML="--%";
+
+}
+
+updateDashboard();
 
 </script>
-
-<div id="toast" class="toast">
-Signal Generated
 </div>
-
 </body>
 </html>
