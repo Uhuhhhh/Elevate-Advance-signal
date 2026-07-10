@@ -2288,7 +2288,7 @@ if(logoutBtn){
 
     logoutBtn.addEventListener("click",()=>{
 
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         window.location.href="index.html";
 
     });
@@ -2329,7 +2329,7 @@ if(heroBtn){
     heroBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> ANALYZING';
 }
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 
     try{
 
