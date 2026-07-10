@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Trading Journal</title>
+
+<link rel="stylesheet" href="trading-journal.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="logo">👑</div>
+
+<div>
+
+<h2>Elevate</h2>
+
+<p>Trading Journal</p>
+
+</div>
+
+</div>
+
+<div class="topRight">
+
+<div class="liveStatus">
+
+<div class="liveDot"></div>
+
+LIVE
+
+</div>
+
+<div class="menuBtn" onclick="toggleMenu()">
+
+☰
+
+</div>
+
+</div>
+
+</header>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<aside id="sidebar" class="sidebar">
+
+<div class="profile">
+
+<div class="avatar">👑</div>
+
+<h2>Elevate</h2>
+
+<p>Trading Dashboard</p>
+
+</div>
+
+<a href="../index.html">🏠 Home</a>
+
+<a href="../dashboard.html">📊 Dashboard</a>
+
+<a href="../strategy.html">🧠 Strategies</a>
+
+<a href="../signal-history.html">📜 Signal History</a>
+
+<a href="../settings.html">⚙ Settings</a>
+
+<a href="../rules.html">📋 Rules</a>
+
+<a href="../journal/trading-journal.html" class="active">📉 Journal</a>
+
+<a href="../Admin/admin.html">👑 Admin Panel</a>
+
+</aside>
+
+<div id="lockScreen">
+
+<div class="lockBox">
+
+<h1>📒 Trading Journal</h1>
+
+<p>Enter your password</p>
+
+<input
+type="password"
+id="passwordInput"
+placeholder="Password">
+
+<button id="unlockBtn">
+
+LOGIN
+
+</button>
+
+<div id="errorMsg"></div>
+
+</div>
+
+</div>
+
+<div id="mainApp" style="display:none;">
+
+<div class="container">
+
+<h1>📒 Trading Journal</h1>
+
+<form class="journalForm" onsubmit="return false;">
+
+<div class="row">
+
+<div>
+
+<label>Select Date</label>
+
+<input
+type="date"
+id="tradeDate">
+
+</div>
+
+<div>
+
+<label>Pair</label>
+
+<select id="pair">
+
+<option>EURUSD</option>
+<option>GBPUSD</option>
+<option>USDJPY</option>
+<option>GBPJPY</option>
+<option>AUDUSD</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+
+<label>Signal</label>
+
+<select id="signal">
+
+<option>CALL</option>
+<option>PUT</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Result</label>
+
+<select id="result">
+
+<option>WIN</option>
+<option>LOSS</option>
+<option>DRAW</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+
+<label>Amount</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Amount">
+
+</div>
+
+<div>
+
+<label>Profit / Loss</label>
+
+<input
+type="number"
+id="profit"
+placeholder="Profit / Loss">
+
+</div>
+
+</div>
+
+<textarea
+id="notes"
+placeholder="Notes"></textarea>
+
+<button type="button" onclick="saveTrade()">
+SAVE TRADE
+</button>
+
+</form>
+
+<hr>
+
+<div class="summary">
+
+<div class="card">
+
+<h2 id="totalTrades">0</h2>
+
+<p>Total Trades</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="winRate">0%</h2>
+
+<p>Win Rate</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="netProfit">₹0</h2>
+
+<p>Net Profit</p>
+
+</div>
+
+</div>
+
+<div class="analytics">
+
+<div class="card">
+<h2 id="todayTrades">0</h2>
+<p>Today's Trades</p>
+</div>
+
+<div class="card">
+<h2 id="bestStreak">0</h2>
+<p>Best Win Streak</p>
+</div>
+
+<div class="card">
+<h2 id="currentStreak">0</h2>
+<p>Current Streak</p>
+</div>
+
+<div class="card">
+<h2 id="bestPair">--</h2>
+<p>Best Pair</p>
+</div>
+
+</div>
+
+<div class="chartCard">
+
+<h2>📈 Profit Trend</h2>
+
+<canvas id="profitChart"></canvas>
+
+<hr>
+
+<h2>📅 Trading Calendar</h2>
+
+<div class="calendarHeader">
+
+<button onclick="changeMonth(-1)">◀</button>
+
+<h3 id="calendarTitle"></h3>
+
+<button onclick="changeMonth(1)">▶</button>
+
+</div>
+
+<div class="weekNames">
+
+<div>Sun</div>
+
+<div>Mon</div>
+
+<div>Tue</div>
+
+<div>Wed</div>
+
+<div>Thu</div>
+
+<div>Fri</div>
+
+<div>Sat</div>
+
+</div>
+
+<div id="calendarGrid" class="calendarGrid"></div>
+
+</div>
+
+<input
+type="text"
+id="searchTrade"
+placeholder="🔍 Search Pair..."
+onkeyup="loadTrades()">
+
+<div class="filterBar">
+
+<select id="monthFilter" onchange="loadTrades()">
+
+<option value="all">All Months</option>
+
+<option value="0">January</option>
+<option value="1">February</option>
+<option value="2">March</option>
+<option value="3">April</option>
+<option value="4">May</option>
+<option value="5">June</option>
+<option value="6">July</option>
+<option value="7">August</option>
+<option value="8">September</option>
+<option value="9">October</option>
+<option value="10">November</option>
+<option value="11">December</option>
+
+</select>
+
+</div>
+
+<h2 style="color:#FFD700;margin:20px 0 15px;">
+
+📜 Trade History
+
+</h2>
+
+<div class="tableWrap">
+
+<table class="tradeTable">
+
+<thead>
+
+<tr>
+
+<th>Pair</th>
+
+<th>Sig</th>
+
+<th>Result</th>
+
+<th>P/L</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody id="tradeList">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div id="dayPopup" class="dayPopup">
+
+<div class="popupCard">
+
+<h2 id="popupDate">
+
+📅 07 July 2026
+
+</h2>
+
+<div class="popupStats">
+
+<p>📊 Trades : <span id="popupTrades">0</span></p>
+
+<p>🟢 Wins : <span id="popupWins">0</span></p>
+
+<p>🔴 Losses : <span id="popupLosses">0</span></p>
+
+<p>🟡 Draws : <span id="popupDraws">0</span></p>
+
+</div>
+
+<div class="popupProfit">
+
+<h3 id="popupProfitTitle">
+
+💰 Net Profit
+
+</h3>
+
+<h1 id="popupProfit">
+
+₹0
+
+</h1>
+
+</div>
+
+<button onclick="closePopup()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="trading-journal.js"></script>
+
+</div>
+
+</body>
+
+</html>
