@@ -1865,13 +1865,14 @@ overlay.style.display="block";
 
 <script>
 
-const SESSION_TIME = 1 * 60 * 1000;
+const SESSION_TIME = 5 * 60 * 1000; // 5 minutes
 
-const loginTime = Number(localStorage.getItem("loginTime"));
+const loginTime = Number(sessionStorage.getItem("loginTime"));
 
 if (loginTime && (Date.now() - loginTime) > SESSION_TIME) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loginTime");
+
+    sessionStorage.clear();
+
 }
 
 let redirectPage="dashboard.html";
@@ -1944,9 +1945,19 @@ const data=await response.json();
 
 if(data.success){
 
-localStorage.setItem("token", data.token);
-localStorage.setItem("loginTime", Date.now());
+sessionStorage.setItem("token", data.token);
+sessionStorage.setItem("loginTime", Date.now());
 
+// Auto logout after 2 minutes
+setTimeout(() => {
+
+    sessionStorage.clear();
+
+    alert("Session expired. Please login again.");
+
+    window.location.href = "index.html";
+
+}, 2 * 60 * 1000);
 
 document.getElementById("loginOverlay").style.display="none";
 
@@ -2012,109 +2023,12 @@ document.getElementById("copyDeviceBtn").addEventListener("click", async () => {
 
 });
 
-async function autoLogin(){
-
-    const token = localStorage.getItem("token");
-    const loginTime = Number(localStorage.getItem("loginTime"));
-
-    if(!token || !loginTime){
-
-        document.getElementById("loginOverlay").style.display="flex";
-        document.getElementById("mainContent").style.display="none";
-        return;
-
-    }
-
-    const SESSION_TIME = 1 * 60 * 1000;
-
-    if(Date.now() - loginTime > SESSION_TIME){
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginTime");
-
-        document.getElementById("loginOverlay").style.display="flex";
-        document.getElementById("mainContent").style.display="none";
-
-        return;
-
-    }
-
-    try{
-
-        const response = await fetch("/api/verify",{
-
-            headers:{
-                Authorization:"Bearer " + token
-            }
-
-        });
-
-        const data = await response.json();
-
-        if(!response.ok || !data.success){
-
-            throw new Error();
-
-        }
-
-        document.getElementById("loginOverlay").style.display="none";
-        document.getElementById("mainContent").style.display="block";
-        
-        // Check every 30 seconds whether the account is still valid
-setInterval(async () => {
-
-    try {
-
-        const token = localStorage.getItem("token");
-
-        const response = await fetch("/api/verify", {
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-
-            localStorage.removeItem("token");
-            localStorage.removeItem("loginTime");
-
-            location.reload();
-
-        }
-
-    } catch {
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginTime");
-
-        location.reload();
-
-    }
-
-}, 30000);
-
-    }catch(e){
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginTime");
-
-        document.getElementById("loginOverlay").style.display="flex";
-        document.getElementById("mainContent").style.display="none";
-
-    }
-
-}
-
-autoLogin();
-
 function goPage(page){
 
-    const token = localStorage.getItem("token");
-const loginTime = Number(localStorage.getItem("loginTime"));
+    const token = sessionStorage.getItem("token");
+    const loginTime = Number(sessionStorage.getItem("loginTime"));
 
-const SESSION_TIME = 1 * 60 * 1000;
+    const SESSION_TIME = 2 * 60 * 1000;
 
     if(!token || !loginTime){
 
@@ -2125,8 +2039,7 @@ const SESSION_TIME = 1 * 60 * 1000;
 
     if(Date.now() - loginTime > SESSION_TIME){
 
-        localStorage.removeItem("token");
-localStorage.removeItem("loginTime");
+        sessionStorage.clear();
 
         openLogin(page);
 
