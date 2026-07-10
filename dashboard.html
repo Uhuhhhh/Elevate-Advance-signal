@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Money Management</title>
+
+<link rel="stylesheet" href="money-management.css">
+
+</head>
+
+<body>
+
+<script>
+
+const token = sessionStorage.getItem("token");
+
+if(!token){
+
+    window.location.replace("index.html");
+
+    throw new Error("Not logged in");
+
+}
+
+</script>
+
+<script>
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+location.replace("index.html");
+
+return;
+
+}
+
+(async()=>{
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+try{
+
+const response=await fetch("/api/verify",{
+
+headers:{
+
+Authorization:"Bearer "+token
+
+}
+
+});
+
+const data=await response.json();
+
+if(!data.success){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+}catch(e){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+})();
+
+</script>
+
+<header class="topbar">
+
+<div class="logo">
+
+💰 Money Management
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>5 Step Martingale Planner</h1>
+
+<p>
+
+Enter your balance to generate a money management plan.
+
+</p>
+
+<label>
+
+Balance
+
+</label>
+
+<input
+
+type="number"
+
+id="balance"
+
+placeholder="Enter Balance">
+
+<label>
+
+Risk Level
+
+</label>
+
+<div class="riskButtons">
+
+<button class="riskBtn active"
+
+data-risk="0.5">
+
+🟢 Safe
+
+</button>
+
+<button class="riskBtn"
+
+data-risk="1">
+
+🟡 Medium
+
+</button>
+
+<button class="riskBtn"
+
+data-risk="2">
+
+🔴 Aggressive
+
+</button>
+
+</div>
+
+<input
+
+type="hidden"
+
+id="risk"
+
+value="0.5">
+<label>
+
+Broker Payout %
+
+</label>
+
+<select id="payout">
+
+<option>80</option>
+
+<option>82</option>
+
+<option>85</option>
+
+<option selected>90</option>
+
+<option>92</option>
+
+<option>95</option>
+
+</select>
+
+<button id="generate">
+
+Generate Plan
+
+</button>
+
+</div>
+
+<div class="resultCard">
+
+<h2>
+
+5 Step Plan
+
+</h2>
+
+<table>
+
+<tr>
+
+<th>Step</th>
+
+<th>Trade</th>
+
+</tr>
+
+<tr>
+
+<td>1</td>
+
+<td id="step1">-</td>
+
+</tr>
+
+<tr>
+
+<td>2</td>
+
+<td id="step2">-</td>
+
+</tr>
+
+<tr>
+
+<td>3</td>
+
+<td id="step3">-</td>
+
+</tr>
+
+<tr>
+
+<td>4</td>
+
+<td id="step4">-</td>
+
+</tr>
+
+<tr>
+
+<td>5</td>
+
+<td id="step5">-</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="summary">
+
+<div class="box">
+
+<h3 id="target">
+
+-
+
+</h3>
+
+<p>
+
+Daily Target
+
+</p>
+
+</div>
+
+<div class="box">
+
+<h3 id="stop">
+
+-
+
+</h3>
+
+<p>
+
+Stop Loss
+
+</p>
+
+</div>
+
+<div class="box">
+
+<h3 id="riskAmount">
+
+-
+
+</h3>
+
+<p>
+
+Total Risk
+
+</p>
+
+</div>
+
+<div class="box">
+
+<h3 id="remaining">
+
+-
+
+</h3>
+
+<p>
+
+Remaining Balance
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="money-management.js"></script>
+
+<div class="progressCard">
+
+<h2>
+
+Account Risk
+
+</h2>
+
+<div class="progress">
+
+<div id="progressFill"
+
+class="progressFill">
+
+</div>
+
+</div>
+
+<p id="progressText">
+
+0%
+
+p>
+
+</div>
+
+</body>
+
+</html>

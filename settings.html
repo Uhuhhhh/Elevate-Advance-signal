@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings - Elevate Trading</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   SETTINGS THEME
+========================= */
+
+body{
+    margin:0;
+    background:#0b0f1a;
+    color:#fff;
+    font-family:Poppins,sans-serif;
+}
+
+.settingsContainer{
+    max-width:1100px;
+    margin:25px auto 100px;
+    padding:20px;
+}
+
+.settingsCard{
+    background:#141b2d;
+    border:1px solid rgba(123,97,255,.18);
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:22px;
+    transition:.3s;
+}
+
+.settingsCard:hover{
+    transform:translateY(-4px);
+    border-color:#7b61ff;
+    box-shadow:0 0 25px rgba(123,97,255,.25);
+}
+
+.cardTitle{
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:25px;
+}
+
+/* Account */
+
+.accountGrid,
+.deviceGrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.accountItem label,
+.deviceGrid label{
+    display:block;
+    color:#aab3c5;
+    margin-bottom:8px;
+}
+
+.accountItem input,
+.deviceGrid input,
+select{
+    width:100%;
+    height:52px;
+    border:none;
+    outline:none;
+    background:#1b2338;
+    color:#fff;
+    border-radius:14px;
+    padding:0 15px;
+    font-size:15px;
+}
+
+/* Premium Badge */
+
+.premiumBadge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px 18px;
+    background:linear-gradient(90deg,#6f3cff,#8d5cff);
+    border-radius:30px;
+    font-weight:700;
+}
+
+.successBadge{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    height:52px;
+    padding:0 20px;
+    border-radius:14px;
+    background:#00d26a;
+    color:#fff;
+    font-weight:bold;
+}
+
+/* Buttons */
+
+.buttonRow{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.buttonColumn{
+    display:grid;
+    gap:15px;
+}
+
+.buttonRow button,
+.buttonColumn button,
+.membershipCard button{
+
+    height:52px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#6f3cff,#8f5cff);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+.buttonRow button:hover,
+.buttonColumn button:hover,
+.membershipCard button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* Switch */
+
+.settingRow{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 0;
+border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.settingRow:last-child{
+
+border:none;
+
+}
+
+.settingRow span{
+
+font-size:16px;
+
+}
+
+.switch{
+
+position:relative;
+display:inline-block;
+width:60px;
+height:32px;
+
+}
+
+.switch input{
+
+display:none;
+
+}
+
+.slider{
+
+position:absolute;
+cursor:pointer;
+inset:0;
+background:#2d3653;
+transition:.3s;
+border-radius:50px;
+
+}
+
+.slider:before{
+
+content:"";
+position:absolute;
+width:24px;
+height:24px;
+left:4px;
+top:4px;
+background:white;
+border-radius:50%;
+transition:.3s;
+
+}
+
+input:checked+.slider{
+
+background:#7b61ff;
+
+}
+
+input:checked+.slider:before{
+
+transform:translateX(28px);
+
+}
+
+/* Membership */
+
+.membershipCard{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(135deg,#6f3cff,#8f5cff);
+padding:25px;
+border-radius:20px;
+
+}
+
+.membershipCard h2{
+
+margin:0;
+font-size:28px;
+
+}
+
+.membershipCard p{
+
+margin-top:8px;
+color:#ece8ff;
+
+}
+
+/* About */
+
+.aboutGrid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+
+}
+
+.aboutGrid div{
+
+background:#1b2338;
+padding:18px;
+border-radius:14px;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.membershipCard{
+
+flex-direction:column;
+text-align:center;
+gap:20px;
+
+}
+
+.aboutGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.buttonRow{
+
+flex-direction:column;
+
+}
+
+}
+
+/* ========= TOP BAR ========= */
+
+.topbar{
+
+height:70px;
+
+background:#101010;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 20px;
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
+
+border-bottom:1px solid rgba(123,97,255,.18);
+
+}
+
+.topRight{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.brand{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.logo{
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#6f3cff,#9348ff);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+box-shadow:0 0 18px rgba(123,97,255,.45);
+
+}
+
+.logo img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+border-radius:50%;
+
+}
+
+.brand h2{
+
+margin:0;
+
+font-size:20px;
+
+font-weight:700;
+
+color:#fff;
+
+}
+
+.brand p{
+
+margin:0;
+
+font-size:12px;
+
+color:#9ca3af;
+
+}
+
+.liveStatus{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:10px 18px;
+
+background:#161b29;
+
+border-radius:30px;
+
+color:#00ff99;
+
+font-weight:700;
+
+}
+
+.liveDot{
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#00ff99;
+
+animation:pulse 1s infinite;
+
+}
+
+.menuBtn{
+
+font-size:28px;
+
+cursor:pointer;
+
+color:#7b61ff;
+
+transition:.3s;
+
+user-select:none;
+
+}
+
+.menuBtn:hover{
+
+transform:scale(1.08);
+
+}
+
+/* ========= SIDEBAR ========= */
+
+.overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.6);
+
+display:none;
+
+z-index:999;
+
+}
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+
+left:-280px;
+
+width:270px;
+
+height:100%;
+
+background:#141b2d;
+
+border-right:1px solid rgba(123,97,255,.18);
+
+transition:.35s;
+
+z-index:1001;
+
+overflow-y:auto;
+
+box-shadow:10px 0 30px rgba(0,0,0,.45);
+
+}
+
+.profile{
+
+padding:30px 20px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.avatar{
+
+width:80px;
+
+height:80px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#6f3cff,#9348ff);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+margin-bottom:15px;
+
+box-shadow:0 0 20px rgba(123,97,255,.4);
+
+}
+
+.profile h2{
+
+color:#fff;
+
+margin-bottom:6px;
+
+}
+
+.profile p{
+
+color:#9ca3af;
+
+font-size:13px;
+
+}
+
+.sidebar a{
+
+display:block;
+
+padding:18px 24px;
+
+color:#fff;
+
+text-decoration:none;
+
+transition:.3s;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.sidebar a:hover{
+
+background:rgba(123,97,255,.15);
+
+padding-left:34px;
+
+}
+
+.sidebar a.active{
+
+background:#6f3cff;
+
+margin:8px;
+
+border-radius:12px;
+
+font-weight:700;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+50%{
+
+transform:scale(1.2);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(.8);
+
+opacity:.5;
+
+}
+
+}
+
+/* ========= BOTTOM NAV ========= */
+
+.bottomNav{
+
+position:fixed;
+
+left:0;
+
+right:0;
+
+bottom:0;
+
+height:75px;
+
+background:#0f1117;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+border-top:1px solid rgba(123,97,255,.18);
+
+z-index:9999;
+
+}
+
+.bottomNav a{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+flex:1;
+
+text-decoration:none;
+
+color:#b8b8b8;
+
+font-size:24px;
+
+transition:.3s;
+
+}
+
+.bottomNav span{
+
+font-size:12px;
+
+margin-top:4px;
+
+}
+
+.bottomNav a.active{
+
+color:#7b61ff;
+
+}
+
+.bottomNav a:hover{
+
+color:#7b61ff;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<script src="../js/styles.js"></script>
+
+<!-- ================= SETTINGS PAGE ================= -->
+<header class="topbar">
+
+    <div class="brand">
+        <div class="logo">
+            <img src="logo.png" style="width:42px;height:42px;border-radius:50%;">
+        </div>
+
+        <div>
+            <h2>Elevate</h2>
+            <p>Premium Trading</p>
+        </div>
+    </div>
+
+    <div class="topRight">
+
+        <div class="liveStatus">
+            <div class="liveDot"></div>
+            LIVE
+        </div>
+
+        <div class="menuBtn" onclick="toggleMenu()">
+            ☰
+        </div>
+
+    </div>
+
+</header>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<aside id="sidebar" class="sidebar">
+
+<div class="profile">
+
+<div class="avatar">👑</div>
+
+<h2>Elevate</h2>
+
+<p>Premium Dashboard</p>
+
+</div>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="dashboard.html">📊 Dashboard</a>
+
+<a href="strategy.html">🧠 Strategies</a>
+
+<a href="signal-history.html">📜 Signal History</a>
+
+<a href="rules.html">📖 Trading Rules</a>
+
+<a href="journal/trading-journal.html">📒 Journal</a>
+
+<a href="settings.html" class="active">⚙ Settings</a>
+
+<a href="Admin/admin.html">👑 Admin</a>
+
+</aside>
+</header>
+
+<div class="settingsContainer">
+
+<!-- ACCOUNT -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+👤 Account Information
+
+</div>
+
+<div class="accountGrid">
+
+<div class="accountItem">
+
+<label>License Key</label>
+
+<input
+id="licenseKey"
+readonly
+value="Loading...">
+
+</div>
+
+<div class="accountItem">
+
+<label>Membership</label>
+
+<div id="premiumBadge" class="premiumBadge">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="accountItem">
+
+<label>Expiry Date</label>
+
+<div id="expiryDate">
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DEVICE -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+📱 Device Information
+
+</div>
+
+<div class="deviceGrid">
+
+<div>
+
+<label>Device ID</label>
+
+<input
+id="deviceId"
+readonly>
+
+</div>
+
+<div>
+
+<label>Device Status</label>
+
+<div class="successBadge">
+
+REGISTERED
+
+</div>
+
+</div>
+
+</div>
+
+<div class="buttonRow">
+
+<button id="copyDeviceBtn">
+
+Copy Device ID
+
+</button>
+
+<button id="resetDeviceBtn">
+
+Request Device Reset
+
+</button>
+
+</div>
+
+</section>
+
+<!-- NOTIFICATIONS -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+🔔 Notifications
+
+</div>
+
+<div class="settingRow">
+
+<span>Signal Notifications</span>
+
+<label class="switch">
+
+<input id="signalNotify" type="checkbox">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="settingRow">
+
+<span>Sound Alerts</span>
+
+<label class="switch">
+
+<input id="soundNotify" type="checkbox">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="settingRow">
+
+<span>Telegram Alerts</span>
+
+<label class="switch">
+
+<input id="telegramNotify" type="checkbox">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="settingRow">
+
+<span>Browser Notifications</span>
+
+<label class="switch">
+
+<input id="browserNotify" type="checkbox">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- TRADING -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+📈 Trading Preferences
+
+</div>
+
+<div class="settingRow">
+
+<span>Default Pair</span>
+
+<select id="defaultPair">
+
+<option>EUR/USD</option>
+
+<option>GBP/USD</option>
+
+<option>XAU/USD</option>
+
+<option>USD/JPY</option>
+
+</select>
+
+</div>
+
+<div class="settingRow">
+
+<span>Timeframe</span>
+
+<select id="defaultTf">
+
+<option>1 Minute</option>
+
+<option>5 Minutes</option>
+
+<option>15 Minutes</option>
+
+</select>
+
+</div>
+
+<div class="settingRow">
+
+<span>Auto Refresh</span>
+
+<select id="refreshRate">
+
+<option>5 Seconds</option>
+
+<option>15 Seconds</option>
+
+<option>30 Seconds</option>
+
+</select>
+
+</div>
+
+</section>
+
+<!-- APPEARANCE -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+🎨 Appearance
+
+</div>
+
+<div class="settingRow">
+
+<span>Animations</span>
+
+<label class="switch">
+
+<input id="animationSwitch" type="checkbox" checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="settingRow">
+
+<span>Compact Mode</span>
+
+<label class="switch">
+
+<input id="compactSwitch" type="checkbox">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- MEMBERSHIP -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+👑 Membership
+
+</div>
+
+<div class="membershipCard">
+
+<div>
+
+<h2 id="planName">
+
+Premium
+
+</h2>
+
+<p id="planExpiry">
+
+Loading...
+
+</p>
+
+</div>
+
+<button>
+
+Manage Plan
+
+</button>
+
+</div>
+
+</section>
+
+<!-- SECURITY -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+🔒 Security
+
+</div>
+
+<div class="buttonColumn">
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+<button id="clearCacheBtn">
+
+Clear Cache
+
+</button>
+
+<button id="clearStorageBtn">
+
+Clear Local Data
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="settingsCard">
+
+<div class="cardTitle">
+
+ℹ About
+
+</div>
+
+<div class="aboutGrid">
+
+<div>Version 2.6.0</div>
+
+<div>Privacy Policy</div>
+
+<div>Terms & Conditions</div>
+
+<div>Contact Support</div>
+
+</div>
+
+</section>
+
+<nav class="bottomNav">
+
+<a href="index.html">🏠<span>Home</span></a>
+
+<a href="dashboard.html">📊<span>Signal</span></a>
+
+<a href="strategy.html">🧠<span>AI</span></a>
+
+<a href="signal-history.html">📜<span>History</span></a>
+
+<a href="settings.html" class="active">⚙<span>Settings</span></a>
+
+</nav>
+
+</div>
+
+<script>
+
+/* ===========================
+   SETTINGS
+=========================== */
+
+const SETTINGS = {
+
+signalNotify:true,
+
+soundNotify:true,
+
+telegramNotify:false,
+
+browserNotify:false,
+
+defaultPair:"EUR/USD",
+
+defaultTf:"1 Minute",
+
+refreshRate:"15 Seconds",
+
+animation:true,
+
+compact:false
+
+};
+
+function loadSettings(){
+
+const saved=JSON.parse(localStorage.getItem("userSettings")||"null");
+
+const data=saved||SETTINGS;
+
+signalNotify.checked=data.signalNotify;
+
+soundNotify.checked=data.soundNotify;
+
+telegramNotify.checked=data.telegramNotify;
+
+browserNotify.checked=data.browserNotify;
+
+defaultPair.value=data.defaultPair;
+
+defaultTf.value=data.defaultTf;
+
+refreshRate.value=data.refreshRate;
+
+animationSwitch.checked=data.animation;
+
+compactSwitch.checked=data.compact;
+
+}
+
+function saveSettings(){
+
+const data={
+
+signalNotify:signalNotify.checked,
+
+soundNotify:soundNotify.checked,
+
+telegramNotify:telegramNotify.checked,
+
+browserNotify:browserNotify.checked,
+
+defaultPair:defaultPair.value,
+
+defaultTf:defaultTf.value,
+
+refreshRate:refreshRate.value,
+
+animation:animationSwitch.checked,
+
+compact:compactSwitch.checked
+
+};
+
+localStorage.setItem(
+
+"userSettings",
+
+JSON.stringify(data)
+
+);
+
+}
+
+document.querySelectorAll("input,select").forEach(el=>{
+
+    el.addEventListener("change",()=>{
+
+        saveSettings();
+        saveUserSettings();
+
+    });
+
+});
+
+loadSettings();
+
+/* ===========================
+   DEVICE
+=========================== */
+
+const deviceId=
+
+localStorage.getItem("deviceId")||
+
+"UNKNOWN";
+
+document.getElementById(
+
+"deviceId"
+
+).value=deviceId;
+
+copyDeviceBtn.onclick=()=>{
+
+navigator.clipboard.writeText(deviceId);
+
+copyDeviceBtn.innerHTML="Copied ✓";
+
+setTimeout(()=>{
+
+copyDeviceBtn.innerHTML="Copy Device ID";
+
+},2000);
+
+};
+
+/* ===========================
+   LOAD USER DATA
+=========================== */
+
+async function loadAccount() {
+
+    try {
+
+        const token = sessionStorage.getItem("token");
+
+        if (!token) {
+
+            location.href = "index.html";
+            return;
+
+        }
+
+        const response = await fetch("/api/verify", {
+
+            headers: {
+                Authorization: "Bearer " + token
+            }
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            alert("Session Expired");
+
+            sessionStorage.clear();
+
+            location.href = "index.html";
+
+            return;
+
+        }
+
+        document.getElementById("licenseKey").value =
+            data.key || "Unknown";
+
+        document.getElementById("expiryDate").innerHTML =
+            data.expiry || "Unlimited";
+
+        document.getElementById("planExpiry").innerHTML =
+            data.expiry || "Unlimited";
+
+        const badge = document.getElementById("premiumBadge");
+        const plan = document.getElementById("planName");
+
+        const user = data.user || data;
+
+if (user.premium === true) {
+    badge.innerHTML = "🟣 Premium";
+    plan.innerHTML = "Premium";
+} else {
+    badge.innerHTML = "⚪ Free";
+    plan.innerHTML = "Free";
+}
+
+document.getElementById("licenseKey").value = user.key || "Unknown";
+document.getElementById("expiryDate").innerHTML = user.expiry || "Unlimited";
+document.getElementById("planExpiry").innerHTML = user.expiry || "Unlimited";
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+loadAccount();
+
+async function loadServerSettings(){
+
+    try{
+
+        const token=sessionStorage.getItem("token");
+
+        const response=await fetch("/api/settings",{
+
+            headers:{
+                Authorization:"Bearer "+token
+            }
+
+        });
+
+        const data=await response.json();
+
+        signalNotify.checked=data.signalNotify;
+        soundNotify.checked=data.soundNotify;
+        telegramNotify.checked=data.telegramNotify;
+        browserNotify.checked=data.browserNotify;
+
+        defaultPair.value=data.defaultPair;
+        defaultTf.value=data.defaultTf;
+        refreshRate.value=data.refreshRate;
+
+        animationSwitch.checked=data.animation;
+        compactSwitch.checked=data.compact;
+
+    }catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+loadServerSettings();
+
+async function saveUserSettings(){
+
+    try{
+
+        const token = sessionStorage.getItem("token");
+
+        const settings = {
+
+            signalNotify: signalNotify.checked,
+            soundNotify: soundNotify.checked,
+            telegramNotify: telegramNotify.checked,
+            browserNotify: browserNotify.checked,
+
+            defaultPair: defaultPair.value,
+            defaultTf: defaultTf.value,
+            refreshRate: refreshRate.value,
+
+            animation: animationSwitch.checked,
+            compact: compactSwitch.checked
+
+        };
+
+        await fetch("/api/settings",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+token
+            },
+
+            body:JSON.stringify(settings)
+
+        });
+
+    }catch(err){
+
+        console.error(err);
+
+    }
+
+}
+
+/* ===========================
+   LOGOUT
+=========================== */
+
+logoutBtn.onclick=()=>{
+
+sessionStorage.clear();
+
+window.location.href="index.html";
+
+};
+
+/* ===========================
+   CLEAR CACHE
+=========================== */
+
+clearCacheBtn.onclick=()=>{
+
+if("caches" in window){
+
+caches.keys().then(keys=>{
+
+keys.forEach(k=>caches.delete(k));
+
+});
+
+}
+
+alert("Cache Cleared");
+
+};
+
+/* ===========================
+   CLEAR STORAGE
+=========================== */
+
+clearStorageBtn.onclick=()=>{
+
+if(confirm(
+
+"Delete all saved settings?"
+
+)){
+
+localStorage.clear();
+
+sessionStorage.clear();
+
+location.reload();
+
+}
+
+};
+
+/* ===========================
+   DEVICE RESET
+=========================== */
+
+resetDeviceBtn.onclick=()=>{
+
+alert(
+
+"Device reset request sent to Admin."
+
+);
+
+};
+function toggleMenu(){
+
+    const sidebar=document.getElementById("sidebar");
+    const overlay=document.getElementById("overlay");
+
+    if(sidebar.style.left==="0px"){
+
+        sidebar.style.left="-280px";
+        overlay.style.display="none";
+
+    }else{
+
+        sidebar.style.left="0px";
+        overlay.style.display="block";
+
+    }
+
+}
+</script>
+</body>
+</html>

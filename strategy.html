@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Strategy Selection</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="strategy.css">
+
+</head>
+
+<body>
+
+<script>
+
+const token = sessionStorage.getItem("token");
+
+if(!token){
+
+    window.location.replace("index.html");
+
+    throw new Error("Not logged in");
+
+}
+
+</script>
+
+<script>
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+location.replace("index.html");
+
+return;
+
+}
+
+(async()=>{
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+try{
+
+const response=await fetch("/api/verify",{
+
+headers:{
+
+Authorization:"Bearer "+token
+
+}
+
+});
+
+const data=await response.json();
+
+if(!data.success){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+}catch(e){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+})();
+
+</script>
+
+<!-- ========= TOP BAR ========= -->
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="logo">👑</div>
+
+<div>
+
+<h2>Elevate Trading</h2>
+
+<p>Strategy Selection</p>
+
+</div>
+
+</div>
+
+<div class="menuBtn" onclick="toggleMenu()">
+☰
+</div>
+
+</header>
+
+<!-- ========= OVERLAY ========= -->
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<!-- ========= SIDEBAR ========= -->
+
+<aside id="sidebar" class="sidebar">
+
+<div class="profile">
+
+<div class="avatar">👑</div>
+
+<h2>Elevate</h2>
+
+<p>Trading Dashboard</p>
+
+</div>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="dashboard.html">📊 Dashboard</a>
+
+<a href="strategy.html" class="active">🧠 Strategies</a>
+
+<a href="signal-history.html">📜 Signal History</a>
+
+<a href="settings.html">⚙ Settings</a>
+
+<a href="rules.html">⚙ Rules</a>
+
+<a href="journal/trading-journal.html">📉 Journal</a>
+
+<a href="Admin/admin.html">👑 Admin Panel</a>
+
+</aside>
+
+<!-- ========= MAIN ========= -->
+
+<div class="container">
+
+<div class="welcome">
+
+<h1>🧠 Strategy Selection</h1>
+
+<p>
+Choose your preferred trading strategy before generating signals.
+</p>
+
+</div>
+
+<div class="grid">
+
+<!-- Historical + Technical -->
+
+<div class="card">
+
+<div class="icon">🤖</div>
+
+<h3>Historical + Technical</h3>
+
+<p>
+Combined AI analysis engine. [𝐏𝐀𝐈𝐃]
+</p>
+
+<button onclick="location.href='Strategies/HISTORICAL COMBINER.html'">
+
+SELECT
+
+</button>
+
+</div>
+
+<!-- Historical -->
+
+<div class="card">
+
+<div class="icon">📊</div>
+
+<h3>Historical Analysis</h3>
+
+<p>
+Candle pattern [𝐅𝐑𝐄𝐄]
+</p>
+
+<button onclick="location.href='Strategies/historical.html'">
+
+SELECT
+
+</button>
+
+</div>
+
+<!-- Technical -->
+
+<div class="card">
+
+<div class="icon">📈</div>
+
+<h3>Technical Analysis</h3>
+
+<p>
+EMA • RSI • ATR • Trend
+</p>
+
+<button onclick="location.href='Strategies/BEAST-COMBINER (1).html'">
+
+SELECT
+
+</button>
+
+</div>
+
+<!-- Price Action -->
+
+<div class="card">
+
+<div class="icon">⚡</div>
+
+<h3>Price Action</h3>
+
+<p>
+Candle + Price Action [𝐅𝐑𝐄𝐄]
+</p>
+
+<button onclick="location.href='Strategies/HISTORICA1L.html'">
+
+COMING SOON
+
+</button>
+
+</div>
+
+<!-- AI Strategy -->
+
+<div class="card">
+
+<div class="icon">🚀</div>
+
+<h3>AI Strategy</h3>
+
+<p>
+Next Generation AI Engine
+</p>
+
+<button onclick="location.href='../ai-analysis/ai-signal.html'">
+
+SELECT
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="strategy.js"></script>
+
+</body>
+</html>

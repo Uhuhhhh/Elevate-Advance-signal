@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Signal History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== TOP BAR ===== */
+
+.topbar{
+height:70px;
+background:#101010;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+border-bottom:1px solid rgba(255,215,0,.2);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo{
+width:45px;
+height:45px;
+border-radius:50%;
+background:linear-gradient(135deg,#FFD700,#FFF2A8);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+box-shadow:0 0 15px rgba(255,215,0,.4);
+}
+
+.brand h2{
+font-size:20px;
+color:gold;
+margin:0;
+}
+
+.brand p{
+font-size:12px;
+color:#999;
+margin:0;
+}
+
+/* ===== RIGHT SIDE ===== */
+
+.topRight{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.liveStatus{
+display:flex;
+align-items:center;
+gap:8px;
+padding:10px 18px;
+background:#111;
+border-radius:30px;
+color:#00d66b;
+font-weight:bold;
+}
+
+.liveDot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#00ff66;
+animation:pulse 1s infinite;
+}
+
+/* ===== MENU BUTTON ===== */
+
+.menuBtn{
+font-size:28px;
+cursor:pointer;
+color:gold;
+user-select:none;
+transition:.3s;
+}
+
+.menuBtn:hover{
+transform:scale(1.1);
+}
+
+/* ===== OVERLAY ===== */
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+display:none;
+z-index:999;
+}
+
+/* ===== SIDEBAR ===== */
+
+.sidebar{
+position:fixed;
+top:0;
+left:-280px;
+width:270px;
+height:100%;
+background:#111;
+transition:.35s;
+z-index:1001;
+border-right:1px solid rgba(255,215,0,.2);
+overflow-y:auto;
+box-shadow:10px 0 30px rgba(0,0,0,.4);
+}
+
+/* ===== PROFILE ===== */
+
+.profile{
+padding:30px 20px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.avatar{
+width:80px;
+height:80px;
+margin:auto;
+border-radius:50%;
+background:linear-gradient(135deg,#FFD700,#FFF2A8);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:36px;
+margin-bottom:15px;
+box-shadow:0 0 20px rgba(255,215,0,.4);
+}
+
+.profile h2{
+color:gold;
+margin-bottom:5px;
+}
+
+.profile p{
+color:#999;
+font-size:13px;
+}
+
+/* ===== SIDEBAR LINKS ===== */
+
+.sidebar a{
+display:block;
+padding:18px 25px;
+color:#fff;
+text-decoration:none;
+font-size:16px;
+transition:.3s;
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.sidebar a:hover{
+background:rgba(255,215,0,.12);
+color:gold;
+padding-left:35px;
+}
+
+.sidebar a.active{
+background:#FFD700;
+color:#000;
+font-weight:bold;
+border-radius:12px;
+margin:8px;
+}
+
+.sidebar hr{
+margin:20px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+/* ===== LIVE DOT ===== */
+
+@keyframes pulse{
+0%{
+transform:scale(.8);
+opacity:.5;
+}
+50%{
+transform:scale(1.2);
+opacity:1;
+}
+100%{
+transform:scale(.8);
+opacity:.5;
+}
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#000;
+color:#fff;
+}
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+.box{
+
+background:#111;
+
+border:1px solid rgba(255,215,0,.2);
+
+border-radius:15px;
+
+padding:20px;
+
+text-align:center;
+
+}
+
+.box h3{
+
+color:gold;
+
+font-size:28px;
+
+margin-bottom:8px;
+
+}
+
+.navbar{
+
+height:70px;
+
+background:#111;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 25px;
+
+border-bottom:1px solid rgba(255,215,0,.2);
+
+}
+
+.brand{
+
+font-size:24px;
+
+font-weight:800;
+
+color:gold;
+
+}
+
+.menu{
+
+display:flex;
+
+gap:15px;
+
+}
+
+.menu a{
+
+text-decoration:none;
+
+color:#fff;
+
+font-weight:600;
+
+padding:10px 18px;
+
+border-radius:10px;
+
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+background:gold;
+
+color:#000;
+
+}
+
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:30px;
+
+}
+
+.card{
+
+background:#111;
+
+border:1px solid rgba(255,215,0,.2);
+
+border-radius:20px;
+
+padding:25px;
+
+}
+
+h2{
+
+text-align:center;
+
+color:gold;
+
+margin-bottom:20px;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+th{
+
+background:gold;
+
+color:black;
+
+padding:12px;
+
+}
+
+td{
+
+padding:12px;
+
+text-align:center;
+
+border-bottom:1px solid #333;
+
+}
+
+.call{
+
+color:#00ff88;
+
+font-weight:bold;
+
+}
+
+.put{
+
+color:#ff4444;
+
+font-weight:bold;
+
+}
+
+.buttons{
+
+margin-top:25px;
+
+display:flex;
+
+gap:15px;
+
+justify-content:center;
+
+}
+
+button{
+
+height:50px;
+
+padding:0 25px;
+
+border:none;
+
+border-radius:12px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.clear{
+
+background:#ff4444;
+
+color:white;
+
+}
+
+.export{
+
+background:gold;
+
+color:black;
+
+}
+
+.empty{
+
+text-align:center;
+
+padding:30px;
+
+color:#999;
+
+}
+
+.historyTop{
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:20px;
+
+flex-wrap:wrap;
+
+}
+
+.historyTop input,
+
+.historyTop select{
+
+flex:1;
+
+height:50px;
+
+border:none;
+
+outline:none;
+
+background:#111;
+
+color:#fff;
+
+padding:0 15px;
+
+border-radius:15px;
+
+border:1px solid rgba(255,215,0,.15);
+
+}
+
+#historyCards{
+
+display:grid;
+
+gap:18px;
+
+}
+
+.historyCard{
+
+background:#111;
+
+border-radius:20px;
+
+padding:20px;
+
+border:1px solid rgba(255,215,0,.15);
+
+transition:.3s;
+
+}
+
+.historyCard:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 20px rgba(255,215,0,.2);
+
+}
+
+.historyHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:15px;
+
+}
+
+.historyPair{
+
+font-size:22px;
+
+font-weight:700;
+
+color:gold;
+
+}
+
+.badge{
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:bold;
+
+}
+
+.callBadge{
+
+background:#00aa66;
+
+}
+
+.putBadge{
+
+background:#cc3333;
+
+}
+
+.infoRow{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:8px 0;
+
+color:#bbb;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<script>
+
+const token = sessionStorage.getItem("token");
+
+if(!token){
+
+    window.location.replace("index.html");
+
+    throw new Error("Not logged in");
+
+}
+
+</script>
+
+<script>
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+location.replace("index.html");
+
+return;
+
+}
+
+(async()=>{
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+try{
+
+const response=await fetch("/api/verify",{
+
+headers:{
+
+Authorization:"Bearer "+token
+
+}
+
+});
+
+const data=await response.json();
+
+if(!data.success){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+}catch(e){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+})();
+
+</script>
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="logo">👑</div>
+
+<div>
+
+<h2>Elevate</h2>
+
+<p>Premium Dashboard</p>
+
+</div>
+
+</div>
+
+<div class="topRight">
+
+<div class="liveStatus">
+
+<div class="liveDot"></div>
+
+LIVE
+
+</div>
+
+<div id="clock">
+
+ELEVATE
+
+</div>
+
+<div class="menuBtn" onclick="toggleMenu()">
+
+☰
+
+</div>
+
+</div>
+
+</header>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<aside id="sidebar" class="sidebar">
+
+<div class="profile">
+
+<div class="avatar">👑</div>
+
+<h2>Elevate</h2>
+
+<p>Trading Dashboard</p>
+
+</div>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="dashboard.html">📊 Dashboard</a>
+
+<a href="strategy.html">🧠 Strategies</a>
+
+<a href="signal-history.html" class="active">📜 Signal History</a>
+
+<a href="settings.html">⚙ Settings</a>
+
+<a href="rules.html">⚙ Rules</a>
+
+<a href="journal/trading-journal.html">📉 Journal</a>
+
+<a href="Admin/admin.html">👑 Admin Panel</a>
+
+</aside>
+<div class="container">
+
+<div class="card">
+
+<h2>Signal History</h2>
+
+<div class="stats">
+
+<div class="box">
+<h3 id="totalSignals">0</h3>
+<p>Total Signals</p>
+</div>
+
+<div class="box">
+<h3 id="callSignals">0</h3>
+<p>CALL</p>
+</div>
+
+<div class="box">
+<h3 id="putSignals">0</h3>
+<p>PUT</p>
+</div>
+
+<div class="box">
+<h3 id="avgConfidence">0%</h3>
+<p>Average Confidence</p>
+</div>
+
+</div>
+
+<div class="historyTop">
+
+<input
+id="searchBox"
+type="text"
+placeholder="🔍 Search Pair...">
+
+<select id="filterSignal">
+
+<option value="ALL">All Signals</option>
+
+<option value="CALL">CALL</option>
+
+<option value="PUT">PUT</option>
+
+</select>
+
+</div>
+
+<div id="historyCards"></div>
+
+<div id="empty" class="empty">
+
+No Signal History
+
+</div>
+
+<div id="empty" class="empty">
+
+No Signal History
+
+</div>
+
+<div class="buttons">
+
+<button class="clear" onclick="clearHistory()">
+
+Clear History
+
+</button>
+
+<button class="export" onclick="exportCSV()">
+
+Export CSV
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const history = JSON.parse(localStorage.getItem("signalHistory")) || [];
+
+let totalCall = 0;
+
+let totalPut = 0;
+
+let confidence = 0;
+
+history.forEach(item=>{
+
+confidence += item.confidence;
+
+if(item.signal=="CALL")
+totalCall++;
+
+if(item.signal=="PUT")
+totalPut++;
+
+});
+
+document.getElementById("totalSignals").innerHTML =
+history.length;
+
+document.getElementById("callSignals").innerHTML =
+totalCall;
+
+document.getElementById("putSignals").innerHTML =
+totalPut;
+
+document.getElementById("avgConfidence").innerHTML =
+history.length ?
+(confidence/history.length).toFixed(1)+"%" :
+"0%";
+
+const container=document.getElementById("historyCards");
+
+const empty=document.getElementById("empty");
+
+function renderHistory(list){
+
+container.innerHTML="";
+
+if(!list.length){
+
+empty.style.display="block";
+
+return;
+
+}
+
+empty.style.display="none";
+
+list.forEach(item=>{
+
+container.innerHTML+=`
+
+<div class="historyCard">
+
+<div class="historyHeader">
+
+<div class="historyPair">
+
+${item.pair}
+
+</div>
+
+<div class="badge ${item.signal=="CALL"?"callBadge":"putBadge"}">
+
+${item.signal}
+
+</div>
+
+</div>
+
+<div class="infoRow">
+
+<span>Confidence</span>
+
+<span>${item.confidence}%</span>
+
+</div>
+
+<div class="infoRow">
+
+<span>Entry</span>
+
+<span>${item.entry}</span>
+
+</div>
+
+<div class="infoRow">
+
+<span>Expiry</span>
+
+<span>${item.expiry}</span>
+
+</div>
+
+<div class="infoRow">
+
+<span>Result</span>
+
+<span style="
+font-weight:bold;
+color:${
+item.result=="WIN" ? "#00ff88" :
+item.result=="LOSS" ? "#ff4444" :
+"#FFD700"
+};
+">
+
+${item.result || "Pending"}
+
+</span>
+
+</div>
+
+<div class="infoRow">
+
+<span>Time</span>
+
+<span>${item.time}</span>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+renderHistory(history);
+
+document.getElementById("searchBox").oninput=function(){
+
+const q=this.value.toUpperCase();
+
+const f=document.getElementById("filterSignal").value;
+
+renderHistory(
+
+history.filter(i=>
+
+i.pair.includes(q)&&
+
+(f=="ALL"||i.signal==f)
+
+)
+
+);
+
+};
+
+document.getElementById("filterSignal").onchange=function(){
+
+document.getElementById("searchBox").dispatchEvent(new Event("input"));
+
+};
+
+function clearHistory(){
+
+if(confirm("Delete all history?")){
+
+localStorage.removeItem("signalHistory");
+
+location.reload();
+
+}
+
+}
+
+function exportCSV(){
+
+let csv="Time,Pair,Signal,Confidence,Entry,Expiry\n";
+
+history.forEach(i=>{
+
+csv+=`${i.time},${i.pair},${i.signal},${i.confidence}%,${i.entry},${i.expiry}\n`;
+
+});
+
+const blob=new Blob([csv],{type:"text/csv"});
+
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="Signal_History.csv";
+
+a.click();
+
+}
+
+</script>
+
+<script>
+function toggleMenu(){
+
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("overlay");
+
+if(sidebar.style.left==="0px"){
+
+sidebar.style.left="-280px";
+overlay.style.display="none";
+
+}else{
+
+sidebar.style.left="0px";
+overlay.style.display="block";
+
+}
+
+}
+</script>
+
+</body>
+
+</html>

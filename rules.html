@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rules - Elevate Trading</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#000;
+color:#fff;
+}
+
+.topbar{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+background:#111;
+border-bottom:1px solid rgba(255,215,0,.2);
+}
+
+.title{
+font-size:22px;
+font-weight:700;
+color:gold;
+}
+
+.container{
+max-width:500px;
+margin:30px auto;
+padding:20px;
+}
+
+.card{
+background:#111;
+border:1px solid rgba(255,215,0,.2);
+border-radius:20px;
+padding:25px;
+}
+
+.card h2{
+color:gold;
+margin-bottom:20px;
+}
+
+.label{
+color:#aaa;
+margin-bottom:8px;
+}
+
+.deviceBox{
+background:#000;
+border:1px solid rgba(255,215,0,.25);
+border-radius:12px;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+word-break:break-all;
+margin-bottom:20px;
+}
+
+button{
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+background:gold;
+color:#000;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+color:gold;
+text-decoration:none;
+}
+
+.rulesBox{
+    margin-top:20px;
+    padding:20px;
+    background:#111;
+    border:1px solid rgba(255,215,0,.2);
+    border-radius:20px;
+}
+
+.rulesBox h2{
+    color:gold;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.rule{
+    padding:12px 0;
+    color:#ddd;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:14px;
+}
+
+.rule:last-child{
+    border-bottom:none;
+    color:#ffb347;
+    font-weight:600;
+}
+
+</style>
+
+</head>
+<body>
+
+<script>
+
+const token = sessionStorage.getItem("token");
+
+if(!token){
+
+    window.location.replace("index.html");
+
+    throw new Error("Not logged in");
+
+}
+
+</script>
+
+<script>
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+location.replace("index.html");
+
+return;
+
+}
+
+(async()=>{
+
+const token=sessionStorage.getItem("token");
+
+if(!token){
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+try{
+
+const response=await fetch("/api/verify",{
+
+headers:{
+
+Authorization:"Bearer "+token
+
+}
+
+});
+
+const data=await response.json();
+
+if(!data.success){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+}catch(e){
+
+sessionStorage.clear();
+
+window.location.replace("index.html");
+
+return;
+
+}
+
+})();
+
+</script>
+
+<div class="topbar">
+<div class="title">⚙ RULES</div>
+</div>
+
+<div class="rulesBox">
+
+<div class="card">
+    <h2>📜 Trading Rules</h2>
+
+    <div class="rule">✅ Trade only high-confidence signals.</div>
+<div class="rule">⚠ Avoid trading during multiple Doji candles.</div>
+<div class="rule">⚠ Avoid trading during high volatility.</div>
+<div class="rule">⚠ Avoid trading immediately after a Marubozu candle.</div>
+<div class="rule">⚠ Avoid trading after sudden strong price moves.</div>
+<div class="rule">✅ Use proper money management.</div>
+<div class="rule">✅ If a trade loses, switch to a better market.</div>
+<div class="rule">✅ Stop trading after reaching your daily target.</div>
+<div class="rule">✅ Never revenge trade after a loss.</div>
+<div class="rule">✅ Trade only with a clear market trend.</div>
+</div>
+
+</div>
+
+<script>
+
+let deviceId = localStorage.getItem("deviceId");
+
+if(!deviceId){
+
+deviceId = "DEV-" +
+Math.random().toString(36)
+.substring(2,10)
+.toUpperCase();
+
+localStorage.setItem(
+"deviceId",
+deviceId
+);
+
+}
+
+document.getElementById("deviceId").textContent = deviceId;
+
+function copyDeviceId(){
+
+navigator.clipboard.writeText(deviceId);
+
+alert("Device ID copied!");
+
+}
+
+</script>
+
+</body>
+</html>
