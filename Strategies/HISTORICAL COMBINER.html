@@ -1449,24 +1449,7 @@ btn.addEventListener("click",()=>{
 });
 
 async function generateSignal(){
-   <!--Remove if free -->
-if(sessionStorage.getItem("premium") !== "true"){
 
-        signalBox.className = "signal-box";
-
-        signalBox.innerHTML = "NO SIGNAL";
-
-        signalInfo.innerHTML = "⭐ Premium Required";
-
-        btn.disabled = false;
-
-        btn.innerHTML = "GENERATE SIGNAL";
-
-        signalRunning = false;
-
-        return;
-
-    }
 
     const market =
 document.getElementById("market").value;
