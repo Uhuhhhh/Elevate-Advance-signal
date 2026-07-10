@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>AI Signal Generator</title>
+
+<link rel="stylesheet" href="ai-signal.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+<div class="logo">
+
+    <h1>ELEVATE</h1>
+
+    <span>TRADING</span>
+
+</div>
+
+<hr>
+
+<div class="menu">
+
+    <a href="dashboard.html" class="menu-item">
+        🏠 Dashboard
+    </a>
+
+    <a href="strategy.html" class="menu-item">
+        📊 Strategy
+    </a>
+
+    <a href="ai-signal.html" class="menu-item active">
+        🤖 AI Signal Generator
+        <span class="new-tag">NEW</span>
+    </a>
+
+    <a href="signal-history.html" class="menu-item">
+        📜 Signal History
+    </a>
+
+    <a href="rules.html" class="menu-item">
+        📖 Rules
+    </a>
+
+    <a href="journal.html" class="menu-item">
+        📒 Journal
+    </a>
+
+    <a href="settings.html" class="menu-item">
+        ⚙ Settings
+    </a>
+
+    <a
+        href="admin.html"
+        id="adminMenu"
+        class="menu-item"
+        style="display:none;">
+        👑 Admin Panel
+    </a>
+
+    <a href="logout.html" class="menu-item">
+        🚪 Logout
+    </a>
+
+</div>
+
+<div id="upgradeCard" class="card premium-card">
+
+    <h3>👑 PREMIUM PLAN</h3>
+
+    <p>Status:
+        <span id="premiumStatus">
+            Active
+        </span>
+    </p>
+
+    <p>
+        Expires:
+        <span id="premiumExpiry">
+            -
+        </span>
+    </p>
+
+    <button id="upgradeBtn" class="gold-btn">
+
+Upgrade To Premium
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>⚡ HOW IT WORKS</h3>
+
+<br>
+
+<p>1️⃣ Upload chart image</p>
+
+<br>
+
+<p>⬇</p>
+
+<br>
+
+<p>2️⃣ Gemini AI analyzes chart</p>
+
+<br>
+
+<p>⬇</p>
+
+<br>
+
+<p>3️⃣ AI returns CALL / PUT / WAIT</p>
+
+<br>
+
+<p>⬇</p>
+
+<br>
+
+<p>4️⃣ Trade with your own risk management</p>
+
+</div>
+
+</aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+       <div class="card">
+
+    <h2 class="title">AI SIGNAL GENERATOR</h2>
+
+    <p class="subtitle">
+        Upload chart image and let Gemini AI analyze it.
+    </p>
+
+</div>
+
+<!-- Upload -->
+
+<div class="card">
+
+    <h3>1. Upload Chart Image</h3>
+
+    <br>
+
+    <input
+        type="file"
+        id="chartImage"
+        accept="image/*"
+        hidden>
+
+    <div
+        class="upload-box"
+        id="uploadBox">
+
+        <h1>☁️</h1>
+
+        <br>
+
+        <h3>Drag & Drop Chart</h3>
+
+        <br>
+
+        <button
+            type="button"
+            id="uploadBtn"
+            class="gold-btn"
+            style="max-width:250px;margin:auto;">
+
+            Choose Image
+
+        </button>
+
+        <br><br>
+
+        <small>
+
+            JPG • PNG • WEBP
+
+        </small>
+
+    </div>
+
+</div>
+
+<!-- Preview -->
+
+<div class="card">
+
+    <h3>2. Preview</h3>
+
+    <br>
+
+    <div class="preview">
+
+        <img id="previewImage">
+
+    </div>
+
+</div>
+
+<!-- Market -->
+
+<div class="card">
+
+    <h3>3. Select Market</h3>
+
+    <br>
+
+    <select id="market">
+
+        <option value="EUR/USD">🇪🇺 EUR/USD</option>
+
+        <option value="GBP/USD">🇬🇧 GBP/USD</option>
+
+        <option value="USD/JPY">🇯🇵 USD/JPY</option>
+
+        <option value="AUD/USD">🇦🇺 AUD/USD</option>
+
+        <option value="USD/CAD">🇨🇦 USD/CAD</option>
+
+        <option value="USD/CHF">🇨🇭 USD/CHF</option>
+
+    </select>
+
+</div>
+
+<!-- Timeframe -->
+
+<div class="card">
+
+    <h3>4. Select Timeframe</h3>
+
+    <br>
+
+    <div class="timeframes">
+
+        <div class="tf active">1M</div>
+
+        <div class="tf">2M</div>
+
+        <div class="tf">3M</div>
+
+        <div class="tf">5M</div>
+
+        <div class="tf">15M</div>
+
+        <div class="tf">30M</div>
+
+    </div>
+
+</div>
+
+<!-- Analyze -->
+
+<div class="card">
+
+    <button
+        id="analyzeBtn"
+        class="gold-btn"
+        disabled>
+
+        ✨ Analyze Chart
+
+    </button>
+
+    <br><br>
+
+    <center>
+
+        <small>
+
+            AI analyzes the uploaded chart and returns
+            the highest probability CALL / PUT / WAIT signal.
+
+        </small>
+
+    </center>
+
+</div>
+
+<div class="card">
+
+    <h2 class="title">
+
+        Recent AI Analysis
+
+    </h2>
+
+    <br>
+
+    <table id="historyTable">
+
+        <thead>
+
+            <tr>
+
+                <th>Time</th>
+
+                <th>Market</th>
+
+                <th>Signal</th>
+
+                <th>Confidence</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="historyBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+    </main>
+
+    <!-- Right Panel -->
+
+    <aside class="right-panel">
+
+<div class="card">
+
+<h2 class="title">
+
+🤖 AI RESULT
+
+</h2>
+
+<div id="loading" style="display:none;">
+
+<div class="loader"></div>
+
+<br>
+
+Analyzing Chart...
+
+</div>
+
+<div id="resultCard" style="display:none;">
+
+<h1 id="signalText" class="result-wait">
+
+WAIT
+
+</h1>
+
+<div class="confidence-box">
+
+<h2>
+
+Confidence
+
+</h2>
+
+<div id="confidence">
+
+0%
+
+</div>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info">
+
+<label>Trend</label>
+
+<span id="trend">-</span>
+
+</div>
+
+<div class="info">
+
+<label>Entry</label>
+
+<span id="entry">-</span>
+
+</div>
+
+<div class="info">
+
+<label>Expiry</label>
+
+<span id="expiry">-</span>
+
+</div>
+
+<div class="info">
+
+<label>Risk</label>
+
+<span id="risk">-</span>
+
+</div>
+
+</div>
+
+<h3>
+
+AI Reasons
+
+</h3>
+
+<ul id="reasonList"></ul>
+
+</div>
+
+</div>
+
+<!-- Premium Analysis -->
+
+<div
+id="premiumAnalysis"
+class="card premium-card">
+
+<h2>
+
+👑 Premium AI Analysis
+
+</h2>
+
+<div class="lock-item">
+
+<span>Liquidity Analysis</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Smart Money Concepts</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Order Blocks</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Fair Value Gap</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Break Of Structure</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Institutional Bias</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Entry Quality</span>
+
+<span>🔒</span>
+
+</div>
+
+<div class="lock-item">
+
+<span>Best Expiry</span>
+
+<span>🔒</span>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+⚠ Disclaimer
+
+</h3>
+
+<br>
+
+<p>
+
+AI analysis is for educational purposes only.
+
+Always verify the setup yourself before entering any trade.
+
+</p>
+
+</div>
+
+</aside>
+
+</div>
+
+<script src="ai-signal.js"></script>
+
+</body>
+
+</html>
