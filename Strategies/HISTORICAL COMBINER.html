@@ -2480,6 +2480,30 @@ if(fabBtn){
 async function generateSignal(){
 
     generateBtn.disabled = true;
+    
+    // Reset Current Signal UI
+document.getElementById("signalBadge").textContent = "WAIT";
+document.getElementById("signalBadge").style.background = "#2B3044";
+
+document.getElementById("pairText").textContent = "Analyzing...";
+document.getElementById("entryText").textContent = "--";
+document.getElementById("expiryText").textContent = "--";
+document.getElementById("confidenceSignal").textContent = "0%";
+
+document.getElementById("analysisText").innerHTML =
+"<i class='fas fa-spinner fa-spin'></i> AI is analyzing the market...";
+
+// Reset AI Analysis
+document.getElementById("confidenceText").textContent = "0%";
+document.getElementById("historyMatch").textContent = "0%";
+document.getElementById("trendStrength").textContent = "0%";
+document.getElementById("liquidityText").textContent = "NONE";
+
+// Reset Market Overview
+document.getElementById("livePrice").textContent = "--";
+document.getElementById("marketTrend").textContent = "WAIT";
+document.getElementById("marketVolatility").textContent = "--";
+document.getElementById("historyRate").textContent = "0%";
 
 if(heroBtn){
     heroBtn.disabled = true;
@@ -2547,24 +2571,7 @@ function displaySignal(data){
 
     if(!data.success){
 
-        if(data.signal !== "WAIT" && data.confidence >= 40){
-
-    document.getElementById("analysisText").innerHTML =
-
-    "<b>Trend:</b> " + data.trend +
-
-    "<br><b>Historical Matches:</b> " + data.matches +
-
-    "<br><b>Win Rate:</b> " + data.historicalWinRate + "%" +
-
-    "<br><b>Confidence:</b> " + data.confidenceLabel;
-
-}else{
-
-    document.getElementById("analysisText").innerHTML =
-    data.message || "AI confidence too low. Waiting for a better opportunity.";
-
-}
+        document.getElementById("analysisText").innerHTML=data.message;
 
         return;
 
@@ -2611,36 +2618,16 @@ function displaySignal(data){
         data.liquiditySweep?.bullish || data.liquiditySweep?.bearish ? 100 : 20
     );
 
-    const badge = document.getElementById("signalBadge");
+    const badge=document.getElementById("signalBadge");
 
-if (
-    !data.signal ||
-    data.signal === "WAIT" ||
-    data.confidence < 40
-) {
+    badge.textContent=data.signal;
 
-    badge.textContent = "WAIT";
+    badge.style.background=
+        data.signal==="CALL"
+        ?"linear-gradient(135deg,#00C853,#00E676)"
+        :"linear-gradient(135deg,#FF5252,#D50000)";
 
-    badge.style.background = "#2B3044";
-
-    document.getElementById("analysisText").innerHTML =
-        "AI confidence too low. Waiting for a better opportunity.";
-
-} else if (data.signal === "CALL") {
-
-    badge.textContent = "CALL";
-
-    badge.style.background =
-        "linear-gradient(135deg,#00C853,#00E676)";
-
-} else if (data.signal === "PUT") {
-
-    badge.textContent = "PUT";
-
-    badge.style.background =
-        "linear-gradient(135deg,#FF5252,#D50000)";
-
-}
+    document.getElementById("analysisText").innerHTML=
 
         "<b>Trend:</b> "+data.trend+
 
