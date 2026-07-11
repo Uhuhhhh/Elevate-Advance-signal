@@ -2616,7 +2616,7 @@ function displaySignal(data){
 if (
     !data.signal ||
     data.signal === "WAIT" ||
-    data.confidence < 60
+    data.confidence < 40
 ) {
 
     badge.textContent = "WAIT";
@@ -2665,16 +2665,6 @@ if(toast){
 
 }
 
-setTimeout(()=>{
-    document.getElementById("loader").style.display = "none";
-},1000);
-
-</script>
-
-<div id="toast" class="toast">
-Signal Generated
-</div>
-
 function updateMarketClock(){
 
     const now = new Date();
@@ -2695,6 +2685,16 @@ function updateMarketClock(){
 updateMarketClock();
 
 setInterval(updateMarketClock, 1000);
+
+setTimeout(()=>{
+    document.getElementById("loader").style.display = "none";
+},1000);
+
+</script>
+
+<div id="toast" class="toast">
+Signal Generated
+</div>
 
 </body>
 </html>
