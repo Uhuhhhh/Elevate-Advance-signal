@@ -229,25 +229,29 @@ let currentFilter="ALL";
 
 // ---------- DATE HELPERS ----------
 
-function isToday(date){
+function isToday(time){
 
-const d=new Date(date);
+const d=new Date(time);
 
 const n=new Date();
 
-return d.toDateString()===n.toDateString();
+return d.getDate()==n.getDate() &&
+d.getMonth()==n.getMonth() &&
+d.getFullYear()==n.getFullYear();
 
 }
 
-function isYesterday(date){
+function isYesterday(time){
 
-const d=new Date(date);
+const d=new Date(time);
 
 const y=new Date();
 
 y.setDate(y.getDate()-1);
 
-return d.toDateString()===y.toDateString();
+return d.getDate()==y.getDate() &&
+d.getMonth()==y.getMonth() &&
+d.getFullYear()==y.getFullYear();
 
 }
 
@@ -319,7 +323,17 @@ ${getPairIcon(item.pair)}
 
 <h3>${item.pair}</h3>
 
-<p>${item.time}</p>
+<p>
+
+${new Date(item.time).toLocaleTimeString([],{
+
+hour:"2-digit",
+
+minute:"2-digit"
+
+})}
+
+</p>
 
 </div>
 
