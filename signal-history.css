@@ -1045,15 +1045,21 @@ font-weight:700;
 
 }
 
-/*==================================================
-HISTORY CARD
-==================================================*/
+/*==========================================
+PREMIUM HISTORY CARD
+==========================================*/
 
 .historyCard{
 
-background:linear-gradient(145deg,#161C2B,#101522);
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-border:1px solid var(--border);
+gap:25px;
+
+background:linear-gradient(135deg,#171C2B,#111522);
+
+border:1px solid #2B3044;
 
 border-radius:24px;
 
@@ -1061,89 +1067,230 @@ padding:22px;
 
 margin-bottom:18px;
 
-transition:.35s;
-
-position:relative;
-
-overflow:hidden;
+transition:.3s;
 
 }
 
 .historyCard:hover{
 
-transform:translateY(-6px);
+transform:translateY(-4px);
 
 border-color:#7C4DFF;
 
-box-shadow:0 20px 40px rgba(124,77,255,.25);
+box-shadow:0 20px 45px rgba(124,77,255,.22);
 
 }
 
-.historyCard::before{
-
-content:"";
-
-position:absolute;
-
-top:-80px;
-
-right:-80px;
-
-width:180px;
-
-height:180px;
-
-border-radius:50%;
-
-background:rgba(124,77,255,.08);
-
-filter:blur(20px);
-
-}
-
-.historyHeader{
+.left{
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
 
-margin-bottom:20px;
+gap:18px;
+
+min-width:240px;
 
 }
 
-.historyPair{
+.pairIcon{
 
-font-size:24px;
+width:68px;
+height:68px;
 
-font-weight:700;
+border-radius:50%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:34px;
+
+background:#1B1F2D;
+
+border:2px solid #7C4DFF;
+
+box-shadow:0 0 18px rgba(124,77,255,.25);
+
+flex-shrink:0;
+
+}
+
+.left h3{
+
+font-size:28px;
+
+margin-bottom:6px;
+
+}
+
+.left p{
+
+font-size:14px;
+
+color:#98A1B3;
+
+}
+
+.middle{
+
+flex:1;
 
 }
 
 .signalBadge{
 
+display:inline-flex;
+
 padding:8px 18px;
 
-border-radius:25px;
-
-font-size:13px;
+border-radius:20px;
 
 font-weight:700;
 
-color:white;
+margin-bottom:14px;
 
 }
 
-.callBadge{
+.confidence{
 
-background:linear-gradient(135deg,#00C853,#00E676);
+margin-top:8px;
 
 }
 
-.putBadge{
+.confidence div{
 
-background:linear-gradient(135deg,#FF5252,#FF1744);
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:8px;
+
+font-size:14px;
+
+}
+
+.confidenceBar{
+
+height:10px;
+
+background:#2B3044;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+.confidenceFill{
+
+height:100%;
+
+background:linear-gradient(90deg,#00E676,#00C853);
+
+border-radius:20px;
+
+}
+
+.right{
+
+display:flex;
+
+align-items:center;
+
+gap:30px;
+
+}
+
+.right label{
+
+display:block;
+
+font-size:12px;
+
+color:#98A1B3;
+
+margin-bottom:6px;
+
+}
+
+.right h4{
+
+font-size:24px;
+
+}
+
+.resultBadge{
+
+min-width:120px;
+
+text-align:center;
+
+padding:14px;
+
+border-radius:18px;
+
+font-weight:700;
+
+font-size:18px;
+
+}
+
+.resultBadge.win{
+
+background:rgba(0,230,118,.15);
+
+color:#00E676;
+
+border:1px solid rgba(0,230,118,.35);
+
+}
+
+.resultBadge.loss{
+
+background:rgba(255,82,82,.15);
+
+color:#FF5252;
+
+border:1px solid rgba(255,82,82,.35);
+
+}
+
+.resultBadge.pending{
+
+background:rgba(255,193,7,.15);
+
+color:#FFC107;
+
+border:1px solid rgba(255,193,7,.35);
+
+}
+
+@media(max-width:900px){
+
+.historyCard{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.left{
+
+min-width:100%;
+
+}
+
+.right{
+
+width:100%;
+
+justify-content:space-between;
+
+margin-top:15px;
+
+}
 
 }
 

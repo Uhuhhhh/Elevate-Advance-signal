@@ -251,52 +251,99 @@ return d.toDateString()===y.toDateString();
 
 }
 
+function getPairIcon(pair){
+
+pair=(pair||"").toUpperCase();
+
+switch(pair){
+
+case "AUDCAD": return "🇦🇺🇨🇦";
+case "AUDCHF": return "🇦🇺🇨🇭";
+case "AUDJPY": return "🇦🇺🇯🇵";
+case "AUDUSD": return "🇦🇺🇺🇸";
+
+case "CADCHF": return "🇨🇦🇨🇭";
+case "CADJPY": return "🇨🇦🇯🇵";
+
+case "CHFJPY": return "🇨🇭🇯🇵";
+
+case "EURAUD": return "🇪🇺🇦🇺";
+case "EURCAD": return "🇪🇺🇨🇦";
+case "EURCHF": return "🇪🇺🇨🇭";
+case "EURGBP": return "🇪🇺🇬🇧";
+case "EURJPY": return "🇪🇺🇯🇵";
+case "EURUSD": return "🇪🇺🇺🇸";
+
+case "GBPAUD": return "🇬🇧🇦🇺";
+case "GBPCAD": return "🇬🇧🇨🇦";
+case "GBPCHF": return "🇬🇧🇨🇭";
+case "GBPJPY": return "🇬🇧🇯🇵";
+case "GBPUSD": return "🇬🇧🇺🇸";
+
+case "USDCAD": return "🇺🇸🇨🇦";
+case "USDCHF": return "🇺🇸🇨🇭";
+case "USDJPY": return "🇺🇸🇯🇵";
+
+default:
+return "💹";
+
+}
+
+}
+
+
 // ---------- CARD ----------
 
 function createCard(item){
 
-const resultClass=
-item.result==="WIN"
-?"win"
-:item.result==="LOSS"
-?"loss"
-:"pending";
+const result=item.result||"Pending";
 
-const resultText=
-item.result||"Pending";
+const resultClass=
+result==="WIN"?"win":
+result==="LOSS"?"loss":"pending";
 
 const signalClass=
-item.signal==="CALL"
-?"callBadge"
-:"putBadge";
+item.signal==="CALL"?"callBadge":"putBadge";
 
 return `
 
 <div class="historyCard">
 
-<div class="historyHeader">
+<div class="left">
 
-<div class="historyPair">
+<div class="pairIcon">
+${getPairIcon(item.pair)}
+</div>
 
-${item.pair}
+<div>
+
+<h3>${item.pair}</h3>
+
+<p>${item.time}</p>
 
 </div>
+
+</div>
+
+<div class="middle">
 
 <div class="signalBadge ${signalClass}">
-
 ${item.signal}
-
 </div>
 
+<div class="confidence">
+
+<div>
+
+Confidence
+
+<span>
+
+${item.confidence}%
+
+</span>
+
 </div>
-
-<div class="infoGrid">
-
-<div class="infoItem">
-
-<label>Confidence</label>
-
-<span>${item.confidence}%</span>
 
 <div class="confidenceBar">
 
@@ -310,35 +357,29 @@ style="width:${item.confidence}%">
 
 </div>
 
-<div class="infoItem">
-
-<label>Result</label>
-
-<span>
-
-<div class="resultBadge ${resultClass}">
-
-${resultText}
-
 </div>
 
-</span>
+<div class="right">
 
-</div>
-
-<div class="infoItem">
+<div>
 
 <label>Entry</label>
 
-<span>${item.entry}</span>
+<h4>${item.entry}</h4>
 
 </div>
 
-<div class="infoItem">
+<div>
 
 <label>Expiry</label>
 
-<span>${item.expiry}</span>
+<h4>${item.expiry}</h4>
+
+</div>
+
+<div class="resultBadge ${resultClass}">
+
+${result}
 
 </div>
 
