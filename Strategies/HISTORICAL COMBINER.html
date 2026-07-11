@@ -765,7 +765,7 @@ display:grid;
 
 grid-template-columns:repeat(4,1fr);
 
-gap:20px;
+gap:18px;
 
 }
 
@@ -775,45 +775,27 @@ background:#1A1E2D;
 
 border:1px solid #2B3044;
 
-border-radius:22px;
+border-radius:20px;
 
-padding:22px;
+padding:20px;
 
 text-align:center;
 
-transition:.3s;
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:180px;
 
 }
 
-.analysisCard:hover{
+/* Tablet + Mobile */
 
-transform:translateY(-4px);
-
-border-color:#7C4DFF;
-
-}
-
-.analysisCard h4{
-
-margin-top:18px;
-
-font-size:14px;
-
-color:#98A1B3;
-
-}
-
-@media(max-width:1000px){
-
-.analysisGrid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
+@media(max-width:900px){
 
 .analysisGrid{
 
@@ -827,23 +809,23 @@ gap:14px;
 
 padding:16px;
 
+min-height:150px;
+
 }
 
 .circle{
 
-width:110px;
+width:100px;
 
-height:110px;
-
-margin:auto;
+height:100px;
 
 }
 
 .circleInner{
 
-width:76px;
+width:70px;
 
-height:76px;
+height:70px;
 
 }
 
@@ -857,9 +839,12 @@ font-size:20px;
 
 font-size:12px;
 
+margin-top:12px;
+
 }
 
 }
+
 
 /*=========================
 CURRENT SIGNAL
