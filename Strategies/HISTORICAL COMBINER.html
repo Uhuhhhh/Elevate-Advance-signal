@@ -1048,153 +1048,43 @@ font-size:26px;
 }
 
 /*=========================
-TODAY'S STATISTICS
+AI DECISION
 =========================*/
 
-.statsRow{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:18px;
-
+.decisionCard{
+    background:#1A1E2D;
+    border:1px solid #2B3044;
+    border-radius:18px;
+    padding:20px;
 }
 
-.statsBox{
-
-background:#1A1E2D;
-
-border:1px solid #2B3044;
-
-border-radius:20px;
-
-padding:20px;
-
-text-align:center;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-min-height:180px;
-
-transition:.3s;
-
+.decisionRow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:16px;
 }
 
-.statsBox:hover{
-
-transform:translateY(-4px);
-
-border-color:#7C4DFF;
-
+.decisionRow:last-child{
+    border-bottom:none;
 }
 
-.statsTop{
-
-width:58px;
-
-height:58px;
-
-border-radius:18px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-margin-bottom:14px;
-
-font-size:22px;
-
-color:#fff;
-
+.pass{
+    color:#00E676;
+    font-weight:700;
 }
 
-.statsTop.green{
-
-background:linear-gradient(135deg,#00C853,#00E676);
-
+.fail{
+    color:#FF5252;
+    font-weight:700;
 }
 
-.statsTop.red{
-
-background:linear-gradient(135deg,#FF5252,#D50000);
-
-}
-
-.statsTop.orange{
-
-background:linear-gradient(135deg,#FF9800,#FFC107);
-
-}
-
-.statsBox h2{
-
-font-size:30px;
-
-font-weight:700;
-
-margin-bottom:8px;
-
-}
-
-.statsBox p{
-
-font-size:12px;
-
-color:#98A1B3;
-
-}
-
-/* Tablet + Mobile */
-
-@media(max-width:900px){
-
-.statsRow{
-
-grid-template-columns:repeat(2,1fr);
-
-gap:14px;
-
-}
-
-.statsBox{
-
-padding:16px;
-
-min-height:150px;
-
-}
-
-.statsTop{
-
-width:52px;
-
-height:52px;
-
-font-size:20px;
-
-}
-
-.statsBox h2{
-
-font-size:26px;
-
-}
-
-.statsBox p{
-
-font-size:11px;
-
-}
-
+.score{
+    color:#FFD54F;
+    font-size:24px;
+    font-weight:800;
 }
 
 /*=========================
@@ -2276,75 +2166,40 @@ Waiting for AI analysis...
 </section>
 
 <!-- ===========================
-TODAY'S STATISTICS
+AI DECISION
 =========================== -->
-
 <section class="card">
 
 <div class="sectionTitle">
-
-<i class="fas fa-chart-pie"></i>
-
-<span>TODAY'S STATISTICS</span>
-
+<i class="fas fa-brain"></i>
+<span>AI DECISION</span>
 </div>
 
-<div class="statsRow">
+<div class="decisionCard">
 
-<div class="statsBox">
-
-<div class="statsTop">
-
-<i class="fas fa-signal"></i>
-
+<div class="decisionRow">
+<span>Historical Pattern</span>
+<span id="decisionHistory" class="pass">✔ PASS</span>
 </div>
 
-<h2 id="todaySignals">0</h2>
-
-<p>Total Signals</p>
-
+<div class="decisionRow">
+<span>Market Structure</span>
+<span id="decisionStructure" class="pass">✔ BULLISH</span>
 </div>
 
-<div class="statsBox">
-
-<div class="statsTop green">
-
-<i class="fas fa-trophy"></i>
-
+<div class="decisionRow">
+<span>Liquidity Sweep</span>
+<span id="decisionLiquidity" class="pass">✔ DETECTED</span>
 </div>
 
-<h2 id="todayWins">0</h2>
-
-<p>Wins</p>
-
+<div class="decisionRow">
+<span>Trend Confirmation</span>
+<span id="decisionTrend" class="pass">✔ STRONG</span>
 </div>
 
-<div class="statsBox">
-
-<div class="statsTop red">
-
-<i class="fas fa-xmark"></i>
-
-</div>
-
-<h2 id="todayLosses">0</h2>
-
-<p>Losses</p>
-
-</div>
-
-<div class="statsBox">
-
-<div class="statsTop orange">
-
-<i class="fas fa-percent"></i>
-
-</div>
-
-<h2 id="todayWinRate">0%</h2>
-
-<p>Win Rate</p>
-
+<div class="decisionRow">
+<span>Overall Score</span>
+<span id="overallScore" class="score">82/100</span>
 </div>
 
 </div>
@@ -2460,6 +2315,7 @@ if(generateBtn){
 if(fabBtn){
     fabBtn.addEventListener("click", generateSignal);
 }
+
 
 async function generateSignal(){
 
@@ -2604,6 +2460,22 @@ function displaySignal(data){
     ?.style.setProperty("--percent",
         data.liquiditySweep?.bullish || data.liquiditySweep?.bearish ? 100 : 20
     );
+    
+    document.getElementById("decisionHistory").textContent =
+data.historicalWinRate >= 55 ? "✔ PASS" : "✖ FAIL";
+
+document.getElementById("decisionStructure").textContent =
+data.trend === "UP" ? "✔ BULLISH" : "✔ BEARISH";
+
+document.getElementById("decisionLiquidity").textContent =
+data.liquiditySweep?.bullish ? "✔ BULLISH" :
+data.liquiditySweep?.bearish ? "✔ BEARISH" : "✖ NONE";
+
+document.getElementById("decisionTrend").textContent =
+(data.trendStrength || 0) >= 60 ? "✔ STRONG" : "⚠ WEAK";
+
+document.getElementById("overallScore").textContent =
+data.confidence + "/100";
 
     const badge=document.getElementById("signalBadge");
 
