@@ -1031,11 +1031,49 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
-@media(max-width:600px){
+@media(max-width:768px){
 
 .analysisGrid{
 
-grid-template-columns:1fr;
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+.analysisCard{
+
+padding:16px;
+
+}
+
+.circle{
+
+width:110px;
+
+height:110px;
+
+margin:auto;
+
+}
+
+.circleInner{
+
+width:76px;
+
+height:76px;
+
+}
+
+.circleInner h2{
+
+font-size:20px;
+
+}
+
+.analysisCard h4{
+
+font-size:12px;
 
 }
 
@@ -1673,11 +1711,35 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
-@media(max-width:600px){
+@media(max-width:768px){
 
 .statsRow{
 
-grid-template-columns:1fr;
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+.statsBox{
+
+padding:18px;
+
+}
+
+.statsBox h2{
+
+font-size:28px;
+
+}
+
+.statsTop{
+
+width:54px;
+
+height:54px;
+
+font-size:20px;
 
 }
 
@@ -3201,7 +3263,8 @@ function displaySignal(data){
 
     document.getElementById("historyMatch").textContent=data.historicalWinRate+"%";
 
-    document.getElementById("trendStrength").textContent=data.trendStrength+"%";
+    document.getElementById("trendStrength").innerHTML =
+(data.trendStrength ?? data.confidence) + "%";
 
     document.getElementById("liquidityText").textContent=
     data.liquiditySweep?.bullish ? "BULL" :
