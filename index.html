@@ -10,6 +10,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
 
 .topRight{
@@ -1261,6 +1264,490 @@ font-size:13px;
 margin-top:6px;
 }
 
+/* ===========================
+PREMIUM LOGIN
+=========================== */
+
+.loginOverlay{
+position:fixed;
+inset:0;
+background:#090B13;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:auto;
+padding:30px 15px;
+z-index:99999;
+}
+
+.bgGlow{
+position:fixed;
+width:380px;
+height:380px;
+border-radius:50%;
+filter:blur(120px);
+opacity:.22;
+pointer-events:none;
+}
+
+.glow1{
+background:#7C4DFF;
+top:-180px;
+left:-180px;
+}
+
+.glow2{
+background:#C04DFF;
+right:-180px;
+bottom:-180px;
+}
+
+.loginWrapper{
+width:100%;
+max-width:470px;
+position:relative;
+z-index:5;
+}
+
+.logoArea{
+text-align:center;
+margin-bottom:35px;
+}
+
+.logoCircle{
+width:140px;
+height:140px;
+margin:auto;
+border-radius:42px;
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:70px;
+font-weight:800;
+color:white;
+box-shadow:0 20px 55px rgba(124,77,255,.45);
+}
+
+.logoArea h1{
+margin-top:25px;
+font-size:48px;
+font-weight:800;
+letter-spacing:2px;
+}
+
+.logoArea span{
+color:#B04DFF;
+}
+
+.logoArea p{
+margin-top:10px;
+font-size:17px;
+color:#98A1B3;
+}
+
+.loginCard{
+margin-top:35px;
+background:rgba(18,22,34,.92);
+border:1px solid rgba(124,77,255,.20);
+border-radius:30px;
+padding:35px;
+backdrop-filter:blur(25px);
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.lockCircle{
+width:90px;
+height:90px;
+margin:auto;
+border-radius:50%;
+background:rgba(124,77,255,.15);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+color:#B04DFF;
+margin-bottom:20px;
+}
+
+.loginCard h2{
+text-align:center;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.loginCard h2 span{
+color:#B04DFF;
+}
+
+.loginCard p{
+text-align:center;
+color:#98A1B3;
+margin-bottom:25px;
+}
+
+.inputBox{
+position:relative;
+margin-bottom:20px;
+}
+
+.inputBox input{
+width:100%;
+height:62px;
+padding:0 55px;
+background:#171C29;
+border:1px solid #2D3348;
+border-radius:18px;
+font-size:17px;
+color:white;
+outline:none;
+}
+
+.inputBox i:first-child{
+position:absolute;
+left:20px;
+top:50%;
+transform:translateY(-50%);
+color:#B04DFF;
+}
+
+.eyeBtn{
+position:absolute;
+right:8px;
+top:8px;
+width:46px;
+height:46px;
+border:none;
+background:none;
+color:#999;
+cursor:pointer;
+font-size:18px;
+}
+
+.loginOptions{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+font-size:14px;
+}
+
+.loginOptions label{
+color:#ddd;
+}
+
+.loginOptions a{
+color:#B04DFF;
+text-decoration:none;
+}
+
+.loginBtn{
+width:100%;
+height:65px;
+border:none;
+border-radius:18px;
+background:linear-gradient(90deg,#7C4DFF,#C04DFF);
+color:white;
+font-size:20px;
+font-weight:700;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+cursor:pointer;
+box-shadow:0 18px 45px rgba(124,77,255,.45);
+transition:.3s;
+}
+
+.loginBtn:hover{
+transform:translateY(-3px);
+}
+
+.divider{
+margin:30px 0;
+display:flex;
+align-items:center;
+gap:15px;
+color:#777;
+}
+
+.divider::before,
+.divider::after{
+content:"";
+flex:1;
+height:1px;
+background:#2D3348;
+}
+
+.deviceCard{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#171C29;
+border:1px solid #2D3348;
+padding:20px;
+border-radius:18px;
+cursor:pointer;
+margin-bottom:20px;
+}
+
+.deviceIcon{
+width:55px;
+height:55px;
+border-radius:15px;
+background:rgba(124,77,255,.15);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+color:#B04DFF;
+margin-right:15px;
+}
+
+.deviceCard h3{
+font-size:18px;
+margin-bottom:5px;
+}
+
+.deviceCard p{
+margin:0;
+text-align:left;
+font-size:14px;
+}
+
+#deviceInfo{
+margin-bottom:20px;
+}
+
+#deviceId{
+width:100%;
+height:55px;
+padding:15px;
+background:#171C29;
+border:1px solid #2D3348;
+border-radius:15px;
+color:white;
+margin-bottom:10px;
+}
+
+#copyDeviceBtn{
+width:100%;
+height:52px;
+border:none;
+border-radius:15px;
+background:#2A3045;
+color:white;
+cursor:pointer;
+}
+
+.contactAdmin{
+text-align:center;
+margin-top:15px;
+color:#999;
+}
+
+.contactAdmin a{
+color:#B04DFF;
+text-decoration:none;
+}
+
+#loginError{
+margin-top:20px;
+text-align:center;
+color:#ff5c75;
+font-weight:600;
+}
+
+.securityCard{
+margin-top:30px;
+background:#141824;
+border:1px solid rgba(124,77,255,.18);
+border-radius:24px;
+padding:22px;
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.securityCard .shield{
+width:65px;
+height:65px;
+border-radius:18px;
+background:rgba(124,77,255,.15);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:#B04DFF;
+}
+
+.securityCard h3{
+margin-bottom:6px;
+}
+
+.securityCard p{
+margin:0;
+text-align:left;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.logoCircle{
+width:110px;
+height:110px;
+font-size:55px;
+}
+
+.logoArea h1{
+font-size:36px;
+}
+
+.loginCard{
+padding:25px;
+}
+
+.loginCard h2{
+font-size:34px;
+}
+
+.securityCard{
+padding:18px;
+}
+
+}
+
+/* ===========================
+LOGIN ANIMATIONS
+=========================== */
+
+.logoCircle{
+animation:floatLogo 4s ease-in-out infinite;
+}
+
+.loginCard{
+animation:cardFade .8s ease;
+}
+
+.securityCard{
+animation:cardFade 1.2s ease;
+}
+
+.loginBtn{
+position:relative;
+overflow:hidden;
+}
+
+.loginBtn::after{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-150%;
+
+width:40%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.45),
+transparent
+);
+
+transform:skewX(-25deg);
+
+animation:shine 3s infinite;
+
+}
+
+.inputBox input:focus{
+
+border-color:#7C4DFF;
+
+box-shadow:0 0 20px rgba(124,77,255,.35);
+
+}
+
+.deviceCard:hover{
+
+transform:translateY(-4px);
+
+border-color:#7C4DFF;
+
+transition:.3s;
+
+}
+
+.loginBtn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 20px 45px rgba(124,77,255,.45);
+
+}
+
+@keyframes floatLogo{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes cardFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+@keyframes shine{
+
+0%{
+
+left:-150%;
+
+}
+
+100%{
+
+left:180%;
+
+}
+
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -1268,51 +1755,220 @@ margin-top:6px;
 
 <body id="pageBody">
 
+<!-- ================= LOGIN ================= -->
+
 <div id="loginOverlay" class="loginOverlay">
 
-<div class="loginBox">
+<div class="bgGlow glow1"></div>
+<div class="bgGlow glow2"></div>
 
-<h1>🔐 Login</h1>
+<div class="loginWrapper">
 
-<p>Enter your password</p>
+<!-- LOGO -->
+
+<div class="logoArea">
+
+<div class="logoCircle">
+
+A
+
+</div>
+
+<h1>
+
+ELEVATE
+
+<span>TRADING</span>
+
+</h1>
+
+<p>
+
+AI Powered Trading System
+
+</p>
+
+</div>
+
+<!-- LOGIN CARD -->
+
+<div class="loginCard">
+
+<div class="lockCircle">
+
+<i class="fas fa-lock"></i>
+
+</div>
+
+<h2>
+
+Welcome
+
+<span>Back</span>
+
+</h2>
+
+<p>
+
+Enter your password to continue
+
+</p>
+
+<!-- PASSWORD -->
+
+<div class="inputBox">
+
+<i class="fas fa-lock"></i>
 
 <input
 type="password"
 id="loginPassword"
-placeholder="Password">
+placeholder="Enter your password">
 
-<button id="loginBtn">
+<button
+id="togglePassword"
+class="eyeBtn">
 
-LOGIN
+<i class="fas fa-eye"></i>
 
 </button>
 
-<div class="deviceBox">
+</div>
 
-    <p class="contactAdmin">
-        Don't have access?
-        <a href="https://t.me/YOUR_USERNAME" target="_blank">
-            Contact Admin
-        </a>
-    </p>
+<!-- OPTIONS -->
 
-    <button id="getDeviceBtn" class="deviceBtn">
-        📱 Get Device ID
-    </button>
+<div class="loginOptions">
 
-    <div id="deviceInfo" style="display:none;">
+<label>
 
-        <input id="deviceId" readonly>
+<input type="checkbox">
 
-        <button id="copyDeviceBtn">
-            Copy
-        </button>
+Remember Me
 
-    </div>
+</label>
+
+<a href="#">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<!-- LOGIN -->
+
+<button id="loginBtn" class="loginBtn">
+
+<span>LOGIN</span>
+
+<i class="fas fa-arrow-right"></i>
+
+</button>
+
+<!-- DIVIDER -->
+
+<div class="divider">
+
+<span>
+
+OR
+
+</span>
+
+</div>
+
+<!-- DEVICE -->
+
+<div
+id="getDeviceBtn"
+class="deviceCard">
+
+<div class="deviceIcon">
+
+<i class="fas fa-mobile-screen-button"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Get Device ID
+
+</h3>
+
+<p>
+
+Click to copy your unique device ID
+
+</p>
+
+</div>
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div
+id="deviceInfo"
+style="display:none;">
+
+<input
+id="deviceId"
+readonly>
+
+<button
+id="copyDeviceBtn">
+
+COPY
+
+</button>
+
+</div>
+
+<div class="contactAdmin">
+
+Don't have access?
+
+<a href="#">
+
+Contact Admin
+
+</a>
 
 </div>
 
 <p id="loginError"></p>
+
+</div>
+
+<!-- SECURITY -->
+
+<div class="securityCard">
+
+<div class="shield">
+
+<i class="fas fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Secure & Protected
+
+</h3>
+
+<p>
+
+Your account is protected with advanced security.
+
+</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1893,6 +2549,43 @@ document.getElementById("loginOverlay").style.display="none";
 
 document.getElementById("loginBtn").addEventListener("click",login);
 
+// =============================
+// PASSWORD SHOW / HIDE
+// =============================
+
+const passwordInput=document.getElementById("loginPassword");
+const eyeBtn=document.getElementById("togglePassword");
+
+eyeBtn.onclick=()=>{
+
+if(passwordInput.type==="password"){
+
+passwordInput.type="text";
+
+eyeBtn.innerHTML='<i class="fas fa-eye-slash"></i>';
+
+}else{
+
+passwordInput.type="password";
+
+eyeBtn.innerHTML='<i class="fas fa-eye"></i>';
+
+}
+
+};
+
+// Press Enter to Login
+
+passwordInput.addEventListener("keypress",e=>{
+
+if(e.key==="Enter"){
+
+login();
+
+}
+
+});
+
 async function login(){
 
 const password=document.getElementById("loginPassword").value.trim();
@@ -1945,35 +2638,64 @@ const data=await response.json();
 
 if(data.success){
 
-sessionStorage.setItem("token", data.token);
-sessionStorage.setItem("loginTime", Date.now());
+const btn=document.getElementById("loginBtn");
 
-// Auto logout after 2 minutes
-setTimeout(() => {
+btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging In...';
 
-    sessionStorage.clear();
+btn.disabled=true;
 
-    alert("Session expired. Please login again.");
+sessionStorage.setItem("token",data.token);
 
-    window.location.href = "index.html";
+sessionStorage.setItem("loginTime",Date.now());
 
-}, 2 * 60 * 1000);
+setTimeout(()=>{
 
-document.getElementById("loginOverlay").style.display="none";
+document.getElementById("loginOverlay").style.opacity="0";
+
+setTimeout(()=>{
+
+const overlay=document.getElementById("loginOverlay");
+
+overlay.style.transition=".5s";
+
+overlay.style.opacity="0";
+
+setTimeout(()=>{
+
+overlay.style.display="none";
 
 document.getElementById("mainContent").style.display="block";
 
+document.getElementById("mainContent").style.animation="cardFade .7s ease";
+
+},500);
+
+},500);
+
+},700);
 
 
 }else{
 
-error.innerHTML=data.message||"Login Failed";
+const btn=document.getElementById("loginBtn");
+
+btn.disabled=false;
+
+btn.innerHTML='LOGIN <i class="fas fa-arrow-right"></i>';
+
+error.innerHTML=data.message||"Invalid Password";
 
 }
 
 }catch(e){
 
-error.innerHTML="Server Error";
+const btn=document.getElementById("loginBtn");
+
+btn.disabled=false;
+
+btn.innerHTML='LOGIN <i class="fas fa-arrow-right"></i>';
+
+error.innerHTML="Unable to connect to server.";
 
 }
 
@@ -1999,14 +2721,22 @@ function getDeviceId() {
     return deviceId;
 }
 
-document.getElementById("getDeviceBtn").addEventListener("click", () => {
+const deviceCard = document.getElementById("getDeviceBtn");
 
-    const id = getDeviceId();
+deviceCard.onclick = () => {
 
-    document.getElementById("deviceInfo").style.display = "block";
-    document.getElementById("deviceId").value = id;
+    const box = document.getElementById("deviceInfo");
 
-});
+    if (box.style.display === "block") {
+        box.style.display = "none";
+        return;
+    }
+
+    box.style.display = "block";
+
+    document.getElementById("deviceId").value = getDeviceId();
+
+};
 
 document.getElementById("copyDeviceBtn").addEventListener("click", async () => {
 
