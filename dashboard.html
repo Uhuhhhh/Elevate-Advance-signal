@@ -103,56 +103,69 @@ return;
 
 <div class="container">
 
-<div class="card">
+<!-- HERO -->
+
+<section class="heroCard">
+
+<div class="heroLeft">
+
+<div class="heroIcon">
+💰
+</div>
+
+<div>
 
 <h1>5 Step Martingale Planner</h1>
 
 <p>
-
-Enter your balance to generate a money management plan.
-
+Enter your balance to generate a smart money management plan.
 </p>
 
-<label>
+</div>
 
-Balance
+</div>
 
-</label>
+</section>
+
+<!-- PLANNER -->
+
+<section class="plannerCard">
+
+<label>Balance</label>
+
+<div class="inputBox">
+
+<span>$</span>
 
 <input
-
 type="number"
-
 id="balance"
-
 placeholder="Enter Balance">
 
-<label>
+</div>
 
-Risk Level
-
-</label>
+<label>Risk Level</label>
 
 <div class="riskButtons">
 
-<button class="riskBtn active"
-
+<button
+class="riskBtn active"
 data-risk="0.5">
 
 🟢 Safe
 
 </button>
 
-<button class="riskBtn"
-
+<button
+class="riskBtn"
 data-risk="1">
 
 🟡 Medium
 
 </button>
 
-<button class="riskBtn"
-
+<button
+class="riskBtn"
 data-risk="2">
 
 🔴 Aggressive
@@ -162,17 +175,11 @@ data-risk="2">
 </div>
 
 <input
-
 type="hidden"
-
 id="risk"
-
 value="0.5">
-<label>
 
-Broker Payout %
-
-</label>
+<label>Broker Payout %</label>
 
 <select id="payout">
 
@@ -192,29 +199,37 @@ Broker Payout %
 
 <button id="generate">
 
-Generate Plan
+🚀 Generate Plan
 
 </button>
 
+</section>
+
+<!-- PLAN -->
+
+<section class="planCard">
+
+<div class="cardTitle">
+
+📈 5 Step Plan
+
 </div>
 
-<div class="resultCard">
+<table class="planTable">
 
-<h2>
-
-5 Step Plan
-
-</h2>
-
-<table>
+<thead>
 
 <tr>
 
 <th>Step</th>
 
-<th>Trade</th>
+<th>Trade Amount</th>
 
 </tr>
+
+</thead>
+
+<tbody>
 
 <tr>
 
@@ -256,94 +271,82 @@ Generate Plan
 
 </tr>
 
+</tbody>
+
 </table>
 
-</div>
+</section>
 
-<div class="summary">
+<!-- SUMMARY -->
 
-<div class="box">
+<section class="summaryGrid">
 
-<h3 id="target">
+<div class="summaryBox green">
 
--
+<h4>🎯 Daily Target</h4>
 
-</h3>
+<h2 id="target">-</h2>
 
-<p>
-
-Daily Target
-
-</p>
+<p>Profit Goal</p>
 
 </div>
 
-<div class="box">
+<div class="summaryBox red">
 
-<h3 id="stop">
+<h4>🛑 Stop Loss</h4>
 
--
+<h2 id="stop">-</h2>
 
-</h3>
-
-<p>
-
-Stop Loss
-
-</p>
+<p>Maximum Loss</p>
 
 </div>
 
-<div class="box">
+<div class="summaryBox orange">
 
-<h3 id="riskAmount">
+<h4>⚠ Total Risk</h4>
 
--
+<h2 id="riskAmount">-</h2>
 
-</h3>
-
-<p>
-
-Total Risk
-
-</p>
+<p>Exposure</p>
 
 </div>
 
-<div class="box">
+<div class="summaryBox blue">
 
-<h3 id="remaining">
+<h4>💳 Remaining</h4>
 
--
+<h2 id="remaining">-</h2>
 
-</h3>
-
-<p>
-
-Remaining Balance
-
-</p>
+<p>Balance Left</p>
 
 </div>
 
-</div>
+</section>
 
-</div>
+<!-- RISK -->
 
-<script src="money-management.js"></script>
+<section class="riskCard">
 
-<div class="progressCard">
+<div class="riskTop">
 
 <h2>
 
-Account Risk
+🛡 Account Risk
 
 </h2>
 
+<h2 id="riskPercent">
+
+0%
+
+</h2>
+
+</div>
+
 <div class="progress">
 
-<div id="progressFill"
-
+<div
+id="progressFill"
 class="progressFill">
 
 </div>
@@ -351,12 +354,36 @@ class="progressFill">
 </div>
 
 <p id="progressText">
-
 0%
+</p>
 
-p>
+<div class="riskBottom">
+
+<span id="riskStatus">
+
+LOW RISK
+
+</span>
+
+<span id="riskText">
+
+$0 / $0
+
+</span>
+
+<span id="riskLevel">
+
+GOOD
+
+</span>
 
 </div>
+
+</section>
+
+</div>
+
+<script src="money-management.js"></script>
 
 </body>
 
