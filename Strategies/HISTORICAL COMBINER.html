@@ -2520,7 +2520,7 @@ if(
         expiry: data.expiry,
         entryPrice: data.entryPrice,
         result: "Pending",
-        time: new Date().toLocaleString()
+        time: Date.now()
     });
 
     if(history.length > 500){
