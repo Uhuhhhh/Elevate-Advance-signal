@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Strategy Selection</title>
+<title>Elevate Trading | Strategy Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <link rel="stylesheet" href="strategy.css">
 
@@ -17,50 +24,23 @@
 
 <script>
 
-const token = sessionStorage.getItem("token");
-
-if(!token){
-
-    window.location.replace("index.html");
-
-    throw new Error("Not logged in");
-
-}
-
-</script>
-
-<script>
-
 const token=sessionStorage.getItem("token");
 
 if(!token){
 
 location.replace("index.html");
-
-return;
+throw new Error("Login Required");
 
 }
 
 (async()=>{
-
-const token=sessionStorage.getItem("token");
-
-if(!token){
-
-window.location.replace("index.html");
-
-return;
-
-}
 
 try{
 
 const response=await fetch("/api/verify",{
 
 headers:{
-
 Authorization:"Bearer "+token
-
 }
 
 });
@@ -71,9 +51,7 @@ if(!data.success){
 
 sessionStorage.clear();
 
-window.location.replace("index.html");
-
-return;
+location.replace("index.html");
 
 }
 
@@ -81,9 +59,7 @@ return;
 
 sessionStorage.clear();
 
-window.location.replace("index.html");
-
-return;
+location.replace("index.html");
 
 }
 
@@ -91,95 +67,477 @@ return;
 
 </script>
 
-<!-- ========= TOP BAR ========= -->
+<div class="bgGlow glow1"></div>
+<div class="bgGlow glow2"></div>
+
+<div id="overlay" class="overlay"></div>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside id="sidebar" class="sidebar">
+
+<div class="sidebarTop">
+
+<div class="sidebarLogo">
+A
+</div>
+
+<h2>Elevate</h2>
+
+<p>Premium Trading</p>
+
+</div>
+
+<div class="sidebarMenu">
+
+<a href="dashboard.html" class="sideBtn">
+
+<i class="fas fa-house"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="strategy.html" class="sideBtn active">
+
+<i class="fas fa-brain"></i>
+
+<span>Strategies</span>
+
+</a>
+
+<a href="signal-history.html" class="sideBtn">
+
+<i class="fas fa-clock-rotate-left"></i>
+
+<span>Signal History</span>
+
+</a>
+
+<a href="journal/trading-journal.html" class="sideBtn">
+
+<i class="fas fa-book"></i>
+
+<span>Journal</span>
+
+</a>
+
+<a href="rules.html" class="sideBtn">
+
+<i class="fas fa-shield-halved"></i>
+
+<span>Rules</span>
+
+</a>
+
+<a href="settings.html" class="sideBtn">
+
+<i class="fas fa-gear"></i>
+
+<span>Settings</span>
+
+</a>
+
+<a href="Admin/admin.html" class="sideBtn">
+
+<i class="fas fa-crown"></i>
+
+<span>Admin Panel</span>
+
+</a>
+
+</div>
+
+<div class="sidebarBottom">
+
+<div class="premiumCard">
+
+<h3>
+
+<i class="fas fa-crown"></i>
+
+Go Premium
+
+</h3>
+
+<p>
+
+Unlock every AI strategy and advanced analysis.
+
+</p>
+
+<button>
+
+Upgrade Now
+
+</button>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<div class="mainContent">
 
 <header class="topbar">
 
+<div class="leftArea">
+
+<button id="menuBtn" class="menuBtn">
+
+<i class="fas fa-bars"></i>
+
+</button>
+
 <div class="brand">
 
-<div class="logo">👑</div>
+<div class="brandLogo">
+
+A
+
+</div>
 
 <div>
 
-<h2>Elevate Trading</h2>
+<h1>
 
-<p>Strategy Selection</p>
+Elevate
+
+<span>Trading</span>
+
+</h1>
+
+<p>
+
+Strategy Hub
+
+</p>
 
 </div>
 
 </div>
 
-<div class="menuBtn" onclick="toggleMenu()">
-☰
+</div>
+
+<div class="rightArea">
+
+<div class="statusCard">
+
+<div class="statusDot"></div>
+
+<span>
+
+Server Online
+
+</span>
+
+</div>
+
+<div class="clockCard">
+
+<i class="fas fa-clock"></i>
+
+<span id="clock">
+
+00:00:00
+
+</span>
+
+</div>
+
+<div class="profileCard">
+
+<div class="profileCircle">
+
+TR
+
+</div>
+
+<div>
+
+<h4>
+
+Trader
+
+</h4>
+
+<p>
+
+Premium
+
+</p>
+
+</div>
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
 </div>
 
 </header>
 
-<!-- ========= OVERLAY ========= -->
+<!-- ================= HERO ================= -->
 
-<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<section class="hero">
 
-<!-- ========= SIDEBAR ========= -->
+<div class="heroLeft">
 
-<aside id="sidebar" class="sidebar">
+<div class="heroIcon">
 
-<div class="profile">
-
-<div class="avatar">👑</div>
-
-<h2>Elevate</h2>
-
-<p>Trading Dashboard</p>
+<i class="fas fa-brain"></i>
 
 </div>
 
-<a href="index.html">🏠 Home</a>
+<div>
 
-<a href="dashboard.html">📊 Dashboard</a>
+<h2>
 
-<a href="strategy.html" class="active">🧠 Strategies</a>
+Strategy <span>Hub</span>
 
-<a href="signal-history.html">📜 Signal History</a>
-
-<a href="settings.html">⚙ Settings</a>
-
-<a href="rules.html">⚙ Rules</a>
-
-<a href="journal/trading-journal.html">📉 Journal</a>
-
-<a href="Admin/admin.html">👑 Admin Panel</a>
-
-</aside>
-
-<!-- ========= MAIN ========= -->
-
-<div class="container">
-
-<div class="welcome">
-
-<h1>🧠 Strategy Selection</h1>
+</h2>
 
 <p>
-Choose your preferred trading strategy before generating signals.
+
+Choose your preferred AI strategy before generating signals.
+
 </p>
 
 </div>
 
-<div class="grid">
+</div>
 
-<!-- Historical + Technical -->
+<div class="heroRight">
 
-<div class="card">
+<div class="heroChart">
 
-<div class="icon">🤖</div>
+<div class="chartBars">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= AI RECOMMENDATION ================= -->
+
+<section class="recommendCard">
+
+<div class="recommendLeft">
+
+<div class="recommendIcon">
+
+<i class="fas fa-trophy"></i>
+
+</div>
+
+<div>
+
+<label>
+
+AI Recommendation
+
+</label>
+
+<h2>
+
+Historical + Technical
+
+</h2>
+
+<p>
+
+Best strategy for today's market
+
+</p>
+
+<div class="badges">
+
+<span class="badge purple">
+
+Highest Accuracy
+
+</span>
+
+<span class="badge green">
+
+87%
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="recommendMiddle">
+
+<div class="miniChart">
+
+<div class="line">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="recommendRight">
+
+<h4>
+
+⭐ Why Recommended?
+
+</h4>
+
+<ul>
+
+<li>
+
+<i class="fas fa-check-circle"></i>
+
+High historical match
+
+</li>
+
+<li>
+
+<i class="fas fa-check-circle"></i>
+
+Strong market structure
+
+</li>
+
+<li>
+
+<i class="fas fa-check-circle"></i>
+
+Trend confirmation
+
+</li>
+
+<li>
+
+<i class="fas fa-check-circle"></i>
+
+Low market noise
+
+</li>
+
+</ul>
+
+<button
+class="openStrategyBtn"
+onclick="location.href='Strategies/HISTORICAL COMBINER.html'">
+
+Open Strategy
+
+<i class="fas fa-arrow-right"></i>
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= STRATEGIES TITLE ================= -->
+
+<div class="sectionHeader">
+
+<div>
+
+<h2>
+
+Available Strategies
+
+</h2>
+
+<p>
+
+Choose your preferred trading engine
+
+</p>
+
+</div>
+
+<div class="strategyCount">
+
+5 Strategies
+
+</div>
+
+</div>
+
+<!-- ================= STRATEGY GRID ================= -->
+
+<div class="strategyGrid">
+
+<!-- ===== Historical + Technical ===== -->
+
+<div class="strategyCard premium">
+
+<div class="topRow">
+
+<div class="iconBox purple">
+<i class="fas fa-brain"></i>
+</div>
+
+<span class="proBadge">
+PRO
+</span>
+
+</div>
 
 <h3>Historical + Technical</h3>
 
 <p>
-Combined AI analysis engine. [𝐏𝐀𝐈𝐃]
+AI engine using Historical Pattern, Market Structure,
+Liquidity Sweep and Trend Confirmation.
 </p>
 
-<button onclick="location.href='Strategies/HISTORICAL COMBINER.html'">
+<div class="featureWrap">
+
+<span>Historical</span>
+<span>Trend</span>
+<span>Liquidity</span>
+<span>AI</span>
+
+</div>
+
+<div class="cardBottom">
+
+<div class="rating">
+
+★★★★★
+
+<small>87%</small>
+
+</div>
+
+<button
+onclick="location.href='Strategies/HISTORICAL COMBINER.html'">
 
 SELECT
 
@@ -187,19 +545,52 @@ SELECT
 
 </div>
 
-<!-- Historical -->
+</div>
 
-<div class="card">
+<!-- ===== Historical ===== -->
 
-<div class="icon">📊</div>
+<div class="strategyCard">
+
+<div class="topRow">
+
+<div class="iconBox green">
+<i class="fas fa-chart-line"></i>
+</div>
+
+<span class="freeBadge">
+FREE
+</span>
+
+</div>
 
 <h3>Historical Analysis</h3>
 
 <p>
-Candle pattern [𝐅𝐑𝐄𝐄]
+Uses historical candle patterns and previous market
+behaviour.
+
 </p>
 
-<button onclick="location.href='Strategies/historical.html'">
+<div class="featureWrap">
+
+<span>History</span>
+<span>Candles</span>
+<span>Pattern</span>
+
+</div>
+
+<div class="cardBottom">
+
+<div class="rating">
+
+★★★★☆
+
+<small>74%</small>
+
+</div>
+
+<button
+onclick="location.href='Strategies/historical.html'">
 
 SELECT
 
@@ -207,19 +598,53 @@ SELECT
 
 </div>
 
-<!-- Technical -->
+</div>
 
-<div class="card">
+<!-- ===== Technical ===== -->
 
-<div class="icon">📈</div>
+<div class="strategyCard">
+
+<div class="topRow">
+
+<div class="iconBox blue">
+<i class="fas fa-chart-column"></i>
+</div>
+
+<span class="proBadge">
+PRO
+</span>
+
+</div>
 
 <h3>Technical Analysis</h3>
 
 <p>
-EMA • RSI • ATR • Trend
+
+EMA • RSI • ATR • ADX • Trend Strength
+
 </p>
 
-<button onclick="location.href='Strategies/BEAST-COMBINER (1).html'">
+<div class="featureWrap">
+
+<span>EMA</span>
+<span>RSI</span>
+<span>ATR</span>
+<span>ADX</span>
+
+</div>
+
+<div class="cardBottom">
+
+<div class="rating">
+
+★★★★☆
+
+<small>79%</small>
+
+</div>
+
+<button
+onclick="location.href='Strategies/BEAST-COMBINER (1).html'">
 
 SELECT
 
@@ -227,19 +652,51 @@ SELECT
 
 </div>
 
-<!-- Price Action -->
+</div>
 
-<div class="card">
+<!-- ===== Price Action ===== -->
 
-<div class="icon">⚡</div>
+<div class="strategyCard disabled">
+
+<div class="topRow">
+
+<div class="iconBox orange">
+<i class="fas fa-bolt"></i>
+</div>
+
+<span class="comingBadge">
+
+SOON
+
+</span>
+
+</div>
 
 <h3>Price Action</h3>
 
 <p>
-Candle + Price Action [𝐅𝐑𝐄𝐄]
+
+Pure support/resistance and candlestick trading.
+
 </p>
 
-<button onclick="location.href='Strategies/HISTORICA1L.html'">
+<div class="featureWrap">
+
+<span>PA</span>
+<span>S/R</span>
+<span>Candles</span>
+
+</div>
+
+<div class="cardBottom">
+
+<div class="rating">
+
+Coming Soon
+
+</div>
+
+<button disabled>
 
 COMING SOON
 
@@ -247,19 +704,54 @@ COMING SOON
 
 </div>
 
-<!-- AI Strategy -->
+</div>
 
-<div class="card">
+<!-- ===== AI Strategy ===== -->
 
-<div class="icon">🚀</div>
+<div class="strategyCard premium">
+
+<div class="topRow">
+
+<div class="iconBox pink">
+<i class="fas fa-robot"></i>
+</div>
+
+<span class="proBadge">
+
+PRO
+
+</span>
+
+</div>
 
 <h3>AI Strategy</h3>
 
 <p>
-Next Generation AI Engine
+
+Next generation AI engine with adaptive learning.
+
 </p>
 
-<button onclick="location.href='../ai-analysis/ai-signal.html'">
+<div class="featureWrap">
+
+<span>AI</span>
+<span>Learning</span>
+<span>Prediction</span>
+
+</div>
+
+<div class="cardBottom">
+
+<div class="rating">
+
+★★★★★
+
+<small>91%</small>
+
+</div>
+
+<button
+onclick="location.href='../ai-analysis/ai-signal.html'">
 
 SELECT
 
@@ -270,6 +762,221 @@ SELECT
 </div>
 
 </div>
+
+<!-- ================= PERFORMANCE ================= -->
+
+<section class="performanceSection">
+
+<div class="performanceCard">
+
+<div class="performanceLeft">
+
+<h2>
+
+AI Performance
+
+</h2>
+
+<p>
+
+Current recommendation is based on historical analysis,
+trend confirmation and liquidity detection.
+
+</p>
+
+</div>
+
+<div class="performanceRight">
+
+<div class="progressItem">
+
+<div class="progressTitle">
+
+<span>Historical Accuracy</span>
+
+<span>87%</span>
+
+</div>
+
+<div class="progressBar">
+
+<div class="progressFill" style="width:87%"></div>
+
+</div>
+
+</div>
+
+<div class="progressItem">
+
+<div class="progressTitle">
+
+<span>Trend Detection</span>
+
+<span>92%</span>
+
+</div>
+
+<div class="progressBar">
+
+<div class="progressFill purple" style="width:92%"></div>
+
+</div>
+
+</div>
+
+<div class="progressItem">
+
+<div class="progressTitle">
+
+<span>Liquidity Detection</span>
+
+<span>84%</span>
+
+</div>
+
+<div class="progressBar">
+
+<div class="progressFill pink" style="width:84%"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= TRADING TIPS ================= -->
+
+<section class="tipsSection">
+
+<h2>
+
+<i class="fas fa-lightbulb"></i>
+
+Trading Tips
+
+</h2>
+
+<div class="tipsGrid">
+
+<div class="tipCard">
+
+<i class="fas fa-circle-check"></i>
+
+<h3>
+
+High Confidence Only
+
+</h3>
+
+<p>
+
+Prefer signals above 75% confidence.
+
+</p>
+
+</div>
+
+<div class="tipCard">
+
+<i class="fas fa-newspaper"></i>
+
+<h3>
+
+Avoid News Time
+
+</h3>
+
+<p>
+
+Major news events increase volatility.
+
+</p>
+
+</div>
+
+<div class="tipCard">
+
+<i class="fas fa-clock"></i>
+
+<h3>
+
+Best Timeframe
+
+</h3>
+
+<p>
+
+1 Minute performs best with AI strategy.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+<div>
+
+© 2026 Elevate Trading
+
+</div>
+
+<div>
+
+AI Strategy Hub
+
+</div>
+
+</footer>
+
+</div>
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottomNav">
+
+<a href="dashboard.html">
+
+<i class="fas fa-house"></i>
+
+<span>Home</span>
+
+</a>
+
+<a href="strategy.html" class="active">
+
+<i class="fas fa-brain"></i>
+
+<span>Strategy</span>
+
+</a>
+
+<a href="signal-history.html">
+
+<i class="fas fa-chart-line"></i>
+
+<span>Signals</span>
+
+</a>
+
+<a href="settings.html">
+
+<i class="fas fa-gear"></i>
+
+<span>Settings</span>
+
+</a>
+
+</nav>
 
 <script src="strategy.js"></script>
 

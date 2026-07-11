@@ -1,69 +1,299 @@
-// ===== SIDEBAR =====
+// ======================================
+// ELEVATE STRATEGY HUB
+// ======================================
 
-function toggleMenu(){
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const menuBtn = document.getElementById("menuBtn");
+const clock = document.getElementById("clock");
 
-const sidebar=document.getElementById("sidebar");
-const overlay=document.getElementById("overlay");
+// =========================
+// Sidebar
+// =========================
 
-if(sidebar.style.left==="0px"){
+function openSidebar(){
 
-sidebar.style.left="-280px";
-overlay.style.display="none";
+    sidebar.classList.add("show");
+    overlay.classList.add("show");
 
-}else{
+}
 
-sidebar.style.left="0px";
-overlay.style.display="block";
+function closeSidebar(){
+
+    sidebar.classList.remove("show");
+    overlay.classList.remove("show");
 
 }
 
-}
+if(menuBtn){
 
-// ===== CLOSE MENU WITH ESC =====
-
-document.addEventListener("keydown",function(e){
-
-if(e.key==="Escape"){
-
-document.getElementById("sidebar").style.left="-280px";
-document.getElementById("overlay").style.display="none";
+    menuBtn.onclick = openSidebar;
 
 }
+
+if(overlay){
+
+    overlay.onclick = closeSidebar;
+
+}
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+
+        closeSidebar();
+
+    }
 
 });
 
-// ===== CARD ANIMATION =====
+// =========================
+// Live Clock
+// =========================
 
-const cards=document.querySelectorAll(".card");
+function updateClock(){
 
-cards.forEach((card,index)=>{
+    const now = new Date();
 
-card.style.opacity="0";
-card.style.transform="translateY(40px)";
+    clock.textContent = now.toLocaleTimeString("en-IN",{
 
-setTimeout(()=>{
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit",
+        hour12:false,
+        timeZone:"Asia/Kolkata"
 
-card.style.transition=".5s";
-card.style.opacity="1";
-card.style.transform="translateY(0px)";
+    });
 
-},index*120);
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+// =========================
+// Card Animation
+// =========================
+
+const observer = new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("showCard");
+
+        }
+
+    });
+
+},{
+    threshold:.15
+});
+
+document.querySelectorAll(
+
+".strategyCard,.tipCard,.performanceCard,.recommendCard,.hero"
+
+).forEach(card=>{
+
+    observer.observe(card);
 
 });
 
-// ===== BUTTON EFFECT =====
+// =========================
+// Ripple Effect
+// =========================
 
-document.querySelectorAll(".card button").forEach(btn=>{
+document.querySelectorAll("button").forEach(btn=>{
 
-btn.addEventListener("click",function(){
+    btn.addEventListener("click",function(e){
 
-this.style.transform="scale(.95)";
+        const ripple = document.createElement("span");
+
+        const size = Math.max(
+
+            this.clientWidth,
+            this.clientHeight
+
+        );
+
+        ripple.style.width=size+"px";
+        ripple.style.height=size+"px";
+
+        ripple.style.left=
+        e.offsetX-size/2+"px";
+
+        ripple.style.top=
+        e.offsetY-size/2+"px";
+
+        ripple.className="ripple";
+
+        this.appendChild(ripple);
+
+        setTimeout(()=>{
+
+            ripple.remove();
+
+        },600);
+
+    });
+
+});
+
+// =========================
+// Floating Hero Icon
+// =========================
+
+const heroIcon=document.querySelector(".heroIcon");
+
+if(heroIcon){
+
+let up=true;
+
+setInterval(()=>{
+
+heroIcon.style.transform=
+
+up?
+
+"translateY(-6px)"
+
+:
+
+"translateY(0px)";
+
+up=!up;
+
+},900);
+
+}
+
+// =========================
+// Glow on Hover
+// =========================
+
+document.querySelectorAll(".strategyCard").forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.boxShadow=
+
+"0 25px 60px rgba(124,77,255,.45)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.boxShadow="";
+
+});
+
+});
+
+// =========================
+// Recommendation Pulse
+// =========================
+
+const recommend=document.querySelector(".recommendIcon");
+
+if(recommend){
+
+setInterval(()=>{
+
+recommend.animate([
+
+{
+
+transform:"scale(1)"
+
+},
+
+{
+
+transform:"scale(1.08)"
+
+},
+
+{
+
+transform:"scale(1)"
+
+}
+
+],{
+
+duration:1200
+
+});
+
+},2500);
+
+}
+
+// =========================
+// Button Hover
+// =========================
+
+document.querySelectorAll(
+
+".strategyCard button,.openStrategyBtn"
+
+).forEach(btn=>{
+
+btn.addEventListener("mouseenter",()=>{
+
+btn.style.transform="translateY(-3px) scale(1.02)";
+
+});
+
+btn.addEventListener("mouseleave",()=>{
+
+btn.style.transform="";
+
+});
+
+});
+
+// =========================
+// Progress Animation
+// =========================
+
+window.addEventListener("load",()=>{
+
+document.querySelectorAll(".progressFill")
+
+.forEach(bar=>{
+
+const width=bar.style.width;
+
+bar.style.width="0";
 
 setTimeout(()=>{
 
-this.style.transform="scale(1)";
+bar.style.width=width;
 
-},150);
+},300);
+
+});
+
+});
+
+// =========================
+// Sidebar Active
+// =========================
+
+document.querySelectorAll(".sideBtn")
+
+.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+document.querySelectorAll(".sideBtn")
+
+.forEach(x=>x.classList.remove("active"));
+
+btn.classList.add("active");
 
 });
 
