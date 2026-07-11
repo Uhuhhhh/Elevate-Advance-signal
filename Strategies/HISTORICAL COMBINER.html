@@ -2499,6 +2499,42 @@ ring.style.setProperty("--progress", data.confidence);
 
         "<br><b>Confidence:</b> "+data.confidenceLabel;
         const toast=document.getElementById("toast");
+        
+        const history =
+JSON.parse(localStorage.getItem("signalHistory")) || [];
+
+const last = history[0];
+
+if(
+    !last ||
+    last.pair !== data.pair ||
+    last.entry !== data.entry ||
+    last.signal !== data.signal
+){
+
+    history.unshift({
+        pair: data.pair,
+        signal: data.signal,
+        confidence: data.confidence,
+        entry: data.entry,
+        expiry: data.expiry,
+        entryPrice: data.entryPrice,
+        result: "Pending",
+        time: new Date().toLocaleString()
+    });
+
+    if(history.length > 500){
+
+        history.pop();
+
+    }
+
+    localStorage.setItem(
+        "signalHistory",
+        JSON.stringify(history)
+    );
+
+}
 
 if(toast){
 
