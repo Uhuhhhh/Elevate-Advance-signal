@@ -2547,7 +2547,24 @@ function displaySignal(data){
 
     if(!data.success){
 
-        document.getElementById("analysisText").innerHTML=data.message;
+        if(data.signal !== "WAIT" && data.confidence >= 40){
+
+    document.getElementById("analysisText").innerHTML =
+
+    "<b>Trend:</b> " + data.trend +
+
+    "<br><b>Historical Matches:</b> " + data.matches +
+
+    "<br><b>Win Rate:</b> " + data.historicalWinRate + "%" +
+
+    "<br><b>Confidence:</b> " + data.confidenceLabel;
+
+}else{
+
+    document.getElementById("analysisText").innerHTML =
+    data.message || "AI confidence too low. Waiting for a better opportunity.";
+
+}
 
         return;
 
@@ -2594,16 +2611,36 @@ function displaySignal(data){
         data.liquiditySweep?.bullish || data.liquiditySweep?.bearish ? 100 : 20
     );
 
-    const badge=document.getElementById("signalBadge");
+    const badge = document.getElementById("signalBadge");
 
-    badge.textContent=data.signal;
+if (
+    !data.signal ||
+    data.signal === "WAIT" ||
+    data.confidence < 60
+) {
 
-    badge.style.background=
-        data.signal==="CALL"
-        ?"linear-gradient(135deg,#00C853,#00E676)"
-        :"linear-gradient(135deg,#FF5252,#D50000)";
+    badge.textContent = "WAIT";
 
-    document.getElementById("analysisText").innerHTML=
+    badge.style.background = "#2B3044";
+
+    document.getElementById("analysisText").innerHTML =
+        "AI confidence too low. Waiting for a better opportunity.";
+
+} else if (data.signal === "CALL") {
+
+    badge.textContent = "CALL";
+
+    badge.style.background =
+        "linear-gradient(135deg,#00C853,#00E676)";
+
+} else if (data.signal === "PUT") {
+
+    badge.textContent = "PUT";
+
+    badge.style.background =
+        "linear-gradient(135deg,#FF5252,#D50000)";
+
+}
 
         "<b>Trend:</b> "+data.trend+
 
@@ -2637,6 +2674,27 @@ setTimeout(()=>{
 <div id="toast" class="toast">
 Signal Generated
 </div>
+
+function updateMarketClock(){
+
+    const now = new Date();
+
+    const options = {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    };
+
+    document.getElementById("marketClock").textContent =
+        now.toLocaleTimeString("en-IN", options);
+
+}
+
+updateMarketClock();
+
+setInterval(updateMarketClock, 1000);
 
 </body>
 </html>
