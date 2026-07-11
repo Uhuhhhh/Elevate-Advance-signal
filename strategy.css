@@ -2286,3 +2286,18 @@ body{
 animation:fadeUp .6s ease;
 
 }
+
+.appLogo{
+    width:70%;
+    height:70%;
+    object-fit:contain;
+    display:block;
+}
+
+.sidebarLogo,
+.brandLogo{
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
