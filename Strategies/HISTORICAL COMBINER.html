@@ -321,6 +321,100 @@ height:48px;
 
 }
 
+.statusCards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:16px;
+
+margin-bottom:20px;
+
+}
+
+.statusBox{
+
+background:#141824;
+
+border:1px solid #292E42;
+
+border-radius:20px;
+
+padding:18px;
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.statusIcon{
+
+width:42px;
+
+height:42px;
+
+border-radius:14px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:18px;
+
+}
+
+.statusIcon.green{
+
+background:rgba(0,230,118,.15);
+
+color:#00E676;
+
+}
+
+.statusIcon.purple{
+
+background:rgba(124,77,255,.15);
+
+color:#C04DFF;
+
+}
+
+.statusBox h5{
+
+font-size:11px;
+
+color:#98A1B3;
+
+margin-bottom:4px;
+
+font-weight:600;
+
+}
+
+.statusBox h2{
+
+font-size:18px;
+
+font-weight:700;
+
+}
+
+@media(max-width:768px){
+
+.statusCards{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
 /*=========================
 TRADING CONTROL
 =========================*/
@@ -443,6 +537,120 @@ grid-column:1;
 
 }
 
+.tradingCard{
+
+padding:25px;
+
+}
+
+.controlItem{
+
+height:64px;
+
+display:flex;
+
+align-items:center;
+
+background:#1A1E2D;
+
+border:1px solid #2B3044;
+
+border-radius:18px;
+
+margin-bottom:18px;
+
+overflow:hidden;
+
+}
+
+.controlIcon{
+
+width:72px;
+
+height:100%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:#161A28;
+
+border-right:1px solid #2B3044;
+
+font-size:20px;
+
+color:#B44DFF;
+
+}
+
+.controlItem select{
+
+flex:1;
+
+height:100%;
+
+background:none;
+
+border:none;
+
+outline:none;
+
+color:white;
+
+padding:0 18px;
+
+font-size:17px;
+
+appearance:none;
+
+}
+
+.mainGenerateBtn{
+
+width:100%;
+
+height:66px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(
+90deg,
+#5B45FF,
+#E84DFF
+);
+
+font-size:20px;
+
+font-weight:700;
+
+color:white;
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:12px;
+
+box-shadow:0 18px 40px rgba(124,77,255,.45);
+
+transition:.3s;
+
+}
+
+.mainGenerateBtn:hover{
+
+transform:translateY(-2px);
+
+}
+
 /*=========================
 MARKET OVERVIEW
 =========================*/
@@ -538,6 +746,104 @@ grid-template-columns:repeat(2,1fr);
 @media(max-width:650px){
 
 .marketGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.overviewGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:18px;
+
+}
+
+.overviewCard{
+
+background:#1A1E2D;
+
+border:1px solid #2B3044;
+
+border-radius:20px;
+
+padding:22px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.overviewCard:hover{
+
+transform:translateY(-4px);
+
+border-color:#7C4DFF;
+
+}
+
+.overviewIcon{
+
+width:58px;
+
+height:58px;
+
+margin:auto;
+
+margin-bottom:14px;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+color:white;
+
+}
+
+.overviewCard h5{
+
+font-size:12px;
+
+color:#98A1B3;
+
+margin-bottom:8px;
+
+}
+
+.overviewCard h2{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+@media(max-width:900px){
+
+.overviewGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.overviewGrid{
 
 grid-template-columns:1fr;
 
@@ -664,6 +970,70 @@ grid-template-columns:repeat(2,1fr);
 @media(max-width:650px){
 
 .aiGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.analysisGrid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.analysisCard{
+
+background:#1A1E2D;
+
+border:1px solid #2B3044;
+
+border-radius:22px;
+
+padding:22px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.analysisCard:hover{
+
+transform:translateY(-4px);
+
+border-color:#7C4DFF;
+
+}
+
+.analysisCard h4{
+
+margin-top:18px;
+
+font-size:14px;
+
+color:#98A1B3;
+
+}
+
+@media(max-width:1000px){
+
+.analysisGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.analysisGrid{
 
 grid-template-columns:1fr;
 
@@ -891,6 +1261,190 @@ grid-template-columns:1fr;
 
 }
 
+.signalCard{
+
+padding:30px;
+
+}
+
+.signalLayout{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:40px;
+
+}
+
+.signalLeft{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.signalRing{
+
+width:230px;
+
+height:230px;
+
+border-radius:50%;
+
+background:
+
+conic-gradient(
+
+#7C4DFF 0deg,
+
+#C04DFF 180deg,
+
+#252B3D 180deg,
+
+#252B3D 360deg
+
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+box-shadow:0 25px 50px rgba(124,77,255,.30);
+
+}
+
+.signalCenter{
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+background:#111522;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:32px;
+
+font-weight:800;
+
+color:white;
+
+}
+
+.signalRight{
+
+flex:1;
+
+}
+
+.signalRight h2{
+
+font-size:34px;
+
+margin-bottom:12px;
+
+}
+
+.signalRight p{
+
+color:#98A1B3;
+
+line-height:28px;
+
+margin-bottom:25px;
+
+}
+
+.signalDetails{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+
+}
+
+.signalDetails div{
+
+background:#1A1E2D;
+
+border-radius:18px;
+
+padding:18px;
+
+text-align:center;
+
+}
+
+.signalDetails label{
+
+display:block;
+
+font-size:12px;
+
+color:#98A1B3;
+
+margin-bottom:8px;
+
+}
+
+.signalDetails h3{
+
+font-size:22px;
+
+}
+
+@media(max-width:900px){
+
+.signalLayout{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.signalDetails{
+
+grid-template-columns:1fr;
+
+}
+
+.signalRing{
+
+width:190px;
+
+height:190px;
+
+}
+
+.signalCenter{
+
+width:125px;
+
+height:125px;
+
+font-size:26px;
+
+}
+
+}
+
 /*=========================
 TODAY'S STATISTICS
 =========================*/
@@ -1004,6 +1558,124 @@ grid-template-columns:repeat(2,1fr);
 @media(max-width:650px){
 
 .statsGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.statsRow{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.statsBox{
+
+background:#1A1E2D;
+
+border:1px solid #2B3044;
+
+border-radius:20px;
+
+padding:24px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.statsBox:hover{
+
+transform:translateY(-5px);
+
+border-color:#7C4DFF;
+
+box-shadow:0 18px 40px rgba(124,77,255,.25);
+
+}
+
+.statsTop{
+
+width:62px;
+
+height:62px;
+
+margin:auto;
+
+margin-bottom:18px;
+
+border-radius:18px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:linear-gradient(135deg,#7C4DFF,#C04DFF);
+
+font-size:24px;
+
+color:white;
+
+}
+
+.statsTop.green{
+
+background:linear-gradient(135deg,#00C853,#00E676);
+
+}
+
+.statsTop.red{
+
+background:linear-gradient(135deg,#FF5252,#D50000);
+
+}
+
+.statsTop.orange{
+
+background:linear-gradient(135deg,#FF9800,#FFC107);
+
+}
+
+.statsBox h2{
+
+font-size:32px;
+
+font-weight:800;
+
+margin-bottom:8px;
+
+}
+
+.statsBox p{
+
+color:#98A1B3;
+
+font-size:13px;
+
+}
+
+@media(max-width:1000px){
+
+.statsRow{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.statsRow{
 
 grid-template-columns:1fr;
 
@@ -1661,27 +2333,27 @@ Logout
 HEADER
 =========================== -->
 
+<!-- ===========================
+HEADER
+=========================== -->
+
 <header class="topHeader">
 
 <div class="menuButton">
-
 <i class="fas fa-bars"></i>
-
 </div>
 
 <div class="brand">
 
 <div class="brandLogo">
-
-<i class="fas fa-chart-line"></i>
-
+A
 </div>
 
 <div>
 
-<h1>Elevate</h1>
+<h1>ELEVATE</h1>
 
-<p>TRADING AI</p>
+<p>TRADING</p>
 
 </div>
 
@@ -1690,8 +2362,7 @@ HEADER
 <div class="profile">
 
 <img
-src="https://ui-avatars.com/api/?name=Trader&background=7C4DFF&color=fff"
-alt="User">
+src="https://ui-avatars.com/api/?name=TR&background=7C4DFF&color=fff">
 
 <div class="onlineDot"></div>
 
@@ -1703,57 +2374,69 @@ alt="User">
 STATUS CARDS
 =========================== -->
 
-<section class="statusGrid">
+<section class="statusCards">
 
-<div class="statusCard">
+<div class="statusBox">
 
-<div class="statusIcon server">
+<div class="statusIcon green">
 
-<i class="fas fa-server"></i>
-
-</div>
-
-<div class="statusContent">
-
-<p>LIVE SERVER</p>
-
-<h2 id="serverStatus">CONNECTED</h2>
+<i class="fas fa-circle"></i>
 
 </div>
 
+<div>
+
+<h5>LIVE SERVER</h5>
+
+<h2 id="serverStatus">
+
+Connected
+
+</h2>
+
 </div>
 
-<div class="statusCard">
+</div>
 
-<div class="statusIcon clock">
+<div class="statusBox">
+
+<div class="statusIcon purple">
 
 <i class="fas fa-clock"></i>
 
 </div>
 
-<div class="statusContent">
+<div>
 
-<p>MARKET TIME</p>
+<h5>MARKET TIME</h5>
 
-<h2 id="marketClock">00:00:00</h2>
+<h2 id="marketClock">
 
-</div>
+00:00:00
 
-</div>
-
-<div class="statusCard">
-
-<div class="statusIcon market">
-
-<i class="fas fa-signal"></i>
+</h2>
 
 </div>
 
-<div class="statusContent">
+</div>
 
-<p>MARKET STATUS</p>
+<div class="statusBox">
 
-<h2 id="marketStatus">OPEN</h2>
+<div class="statusIcon green">
+
+<i class="fas fa-wifi"></i>
+
+</div>
+
+<div>
+
+<h5>MARKET STATUS</h5>
+
+<h2 id="marketStatus">
+
+Open
+
+</h2>
 
 </div>
 
@@ -1765,21 +2448,27 @@ STATUS CARDS
 TRADING CONTROL
 =========================== -->
 
-<section class="card">
+<!-- ===========================
+TRADING CONTROL
+=========================== -->
+
+<section class="card tradingCard">
 
 <div class="sectionTitle">
 
 <i class="fas fa-sliders-h"></i>
 
-<span>Trading Control</span>
+<span>TRADING CONTROL</span>
 
 </div>
 
-<div class="formGrid">
+<div class="controlItem">
 
-<div class="inputBox">
+<div class="controlIcon">
 
-<label>Broker</label>
+<i class="fas fa-building-columns"></i>
+
+</div>
 
 <select id="broker">
 
@@ -1793,12 +2482,17 @@ TRADING CONTROL
 
 </div>
 
-<div class="inputBox">
+<div class="controlItem">
 
-<label>Market</label>
+<div class="controlIcon">
+
+<i class="fas fa-chart-column"></i>
+
+</div>
 
 <select id="market">
-            <option>AUDCAD</option>
+
+<option>AUDCAD</option>
 <option>AUDCHF</option>
 <option>AUDJPY</option>
 <option>AUDUSD</option>
@@ -1825,13 +2519,17 @@ TRADING CONTROL
 <option>USDCHF</option>
 <option>USDJPY</option>
 
-        </select>
+</select>
 
 </div>
 
-<div class="inputBox">
+<div class="controlItem">
 
-<label>Timeframe</label>
+<div class="controlIcon">
+
+<i class="fas fa-clock"></i>
+
+</div>
 
 <select id="timeframe">
 
@@ -1847,15 +2545,15 @@ TRADING CONTROL
 
 </div>
 
-<button id="generateBtn" class="generateBtn">
+<button
+id="generateBtn"
+class="mainGenerateBtn">
 
 <i class="fas fa-bolt"></i>
 
-Generate Signal
+GENERATE SIGNAL
 
 </button>
-
-</div>
 
 </section>
 
@@ -1867,65 +2565,65 @@ MARKET OVERVIEW
 
 <div class="sectionTitle">
 
-<i class="fas fa-chart-area"></i>
+<i class="fas fa-chart-line"></i>
 
-<span>Market Overview</span>
+<span>MARKET OVERVIEW</span>
 
 </div>
 
-<div class="marketGrid">
+<div class="overviewGrid">
 
-<div class="marketCard">
+<div class="overviewCard">
 
-<div class="marketIcon">
+<div class="overviewIcon">
 
 <i class="fas fa-dollar-sign"></i>
 
 </div>
 
-<h4>Current Price</h4>
+<h5>LIVE PRICE</h5>
 
 <h2 id="livePrice">0.00000</h2>
 
 </div>
 
-<div class="marketCard">
+<div class="overviewCard">
 
-<div class="marketIcon">
+<div class="overviewIcon">
 
 <i class="fas fa-arrow-trend-up"></i>
 
 </div>
 
-<h4>Trend</h4>
+<h5>TREND</h5>
 
 <h2 id="marketTrend">WAIT</h2>
 
 </div>
 
-<div class="marketCard">
+<div class="overviewCard">
 
-<div class="marketIcon">
+<div class="overviewIcon">
 
 <i class="fas fa-wave-square"></i>
 
 </div>
 
-<h4>Volatility</h4>
+<h5>VOLATILITY</h5>
 
 <h2 id="marketVolatility">LOW</h2>
 
 </div>
 
-<div class="marketCard">
+<div class="overviewCard">
 
-<div class="marketIcon">
+<div class="overviewIcon">
 
 <i class="fas fa-brain"></i>
 
 </div>
 
-<h4>Historical Match</h4>
+<h5>HISTORICAL</h5>
 
 <h2 id="historyRate">0%</h2>
 
@@ -1945,18 +2643,16 @@ AI ANALYSIS
 
 <i class="fas fa-brain"></i>
 
-<span>AI Analysis</span>
+<span>AI ANALYSIS</span>
 
 </div>
 
-<div class="aiGrid">
+<div class="analysisGrid">
 
-<div class="circleCard">
+<div class="analysisCard">
 
 <div class="circle"
-
 style="--percent:0"
-
 id="confidenceCircle">
 
 <div class="circleInner">
@@ -1971,12 +2667,10 @@ id="confidenceCircle">
 
 </div>
 
-<div class="circleCard">
+<div class="analysisCard">
 
 <div class="circle"
-
 style="--percent:0"
-
 id="historyCircle">
 
 <div class="circleInner">
@@ -1991,12 +2685,10 @@ id="historyCircle">
 
 </div>
 
-<div class="circleCard">
+<div class="analysisCard">
 
 <div class="circle"
-
 style="--percent:0"
-
 id="trendCircle">
 
 <div class="circleInner">
@@ -2011,17 +2703,15 @@ id="trendCircle">
 
 </div>
 
-<div class="circleCard">
+<div class="analysisCard">
 
 <div class="circle"
-
 style="--percent:0"
-
 id="liquidityCircle">
 
 <div class="circleInner">
 
-<h2 id="liquidityText">0%</h2>
+<h2 id="liquidityText">NONE</h2>
 
 </div>
 
@@ -2039,25 +2729,33 @@ id="liquidityCircle">
 CURRENT SIGNAL
 =========================== -->
 
-<section class="card">
+<section class="card signalCard">
 
 <div class="sectionTitle">
 
 <i class="fas fa-crosshairs"></i>
 
-<span>Current Signal</span>
+<span>CURRENT SIGNAL</span>
 
 </div>
 
-<div class="heroSignal">
+<div class="signalLayout">
 
-<div class="signalGlow"></div>
+<div class="signalLeft">
 
-<div id="signalBadge" class="signalBadge">
+<div class="signalRing">
+
+<div id="signalBadge" class="signalCenter">
 
 WAIT
 
 </div>
+
+</div>
+
+</div>
+
+<div class="signalRight">
 
 <h2 id="pairText">
 
@@ -2071,11 +2769,11 @@ Waiting for AI analysis...
 
 </p>
 
-<div class="signalInfo">
+<div class="signalDetails">
 
 <div>
 
-<span>Entry</span>
+<label>Entry</label>
 
 <h3 id="entryText">--</h3>
 
@@ -2083,7 +2781,7 @@ Waiting for AI analysis...
 
 <div>
 
-<span>Expiry</span>
+<label>Expiry</label>
 
 <h3 id="expiryText">--</h3>
 
@@ -2091,7 +2789,7 @@ Waiting for AI analysis...
 
 <div>
 
-<span>Confidence</span>
+<label>Confidence</label>
 
 <h3 id="confidenceSignal">0%</h3>
 
@@ -2099,15 +2797,7 @@ Waiting for AI analysis...
 
 </div>
 
-<button id="heroGenerateBtn"
-
-class="heroButton">
-
-<i class="fas fa-bolt"></i>
-
-GENERATE SIGNAL
-
-</button>
+</div>
 
 </div>
 
@@ -2123,79 +2813,63 @@ TODAY'S STATISTICS
 
 <i class="fas fa-chart-pie"></i>
 
-<span>Today's Statistics</span>
+<span>TODAY'S STATISTICS</span>
 
 </div>
 
-<div class="statsGrid">
+<div class="statsRow">
 
-<div class="statCard">
+<div class="statsBox">
 
-<div class="statIcon">
+<div class="statsTop">
 
 <i class="fas fa-signal"></i>
 
 </div>
 
-<h2 id="todaySignals">
-
-0
-
-</h2>
+<h2 id="todaySignals">0</h2>
 
 <p>Total Signals</p>
 
 </div>
 
-<div class="statCard">
+<div class="statsBox">
 
-<div class="statIcon win">
+<div class="statsTop green">
 
-<i class="fas fa-arrow-trend-up"></i>
+<i class="fas fa-trophy"></i>
 
 </div>
 
-<h2 id="todayWins">
-
-0
-
-</h2>
+<h2 id="todayWins">0</h2>
 
 <p>Wins</p>
 
 </div>
 
-<div class="statCard">
+<div class="statsBox">
 
-<div class="statIcon loss">
+<div class="statsTop red">
 
-<i class="fas fa-arrow-trend-down"></i>
+<i class="fas fa-xmark"></i>
 
 </div>
 
-<h2 id="todayLosses">
-
-0
-
-</h2>
+<h2 id="todayLosses">0</h2>
 
 <p>Losses</p>
 
 </div>
 
-<div class="statCard">
+<div class="statsBox">
 
-<div class="statIcon rate">
+<div class="statsTop orange">
 
 <i class="fas fa-percent"></i>
 
 </div>
 
-<h2 id="todayWinRate">
-
-0%
-
-</h2>
+<h2 id="todayWinRate">0%</h2>
 
 <p>Win Rate</p>
 
