@@ -908,19 +908,35 @@ align-items:center;
 }
 
 .signalRing{
-    --progress: 0;
-    width:230px;
-    height:230px;
-    border-radius:50%;
-    background:conic-gradient(
-        #7C4DFF calc(var(--progress) * 1%),
-        #252B3D 0
-    );
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 25px 50px rgba(124,77,255,.30);
-    transition:background .5s ease;
+
+width:230px;
+
+height:230px;
+
+border-radius:50%;
+
+background:
+
+conic-gradient(
+
+#7C4DFF 0deg,
+
+#C04DFF 180deg,
+
+#252B3D 180deg,
+
+#252B3D 360deg
+
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+box-shadow:0 25px 50px rgba(124,77,255,.30);
+
 }
 
 .signalCenter{
