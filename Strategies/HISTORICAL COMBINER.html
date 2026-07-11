@@ -1842,6 +1842,122 @@ font-size:20px;
 }
 
 /*=========================
+BOTTOM NAVIGATION V2
+=========================*/
+
+.bottomNavigation{
+
+position:fixed;
+
+left:50%;
+
+transform:translateX(-50%);
+
+bottom:15px;
+
+width:min(95%,850px);
+
+height:78px;
+
+background:rgba(18,22,34,.96);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:24px;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+z-index:9999;
+
+box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+}
+
+.navButton{
+
+background:none;
+
+border:none;
+
+color:#98A1B3;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:6px;
+
+cursor:pointer;
+
+transition:.25s;
+
+font-size:12px;
+
+width:20%;
+
+}
+
+.navButton i{
+
+font-size:22px;
+
+}
+
+.navButton.active{
+
+color:#C04DFF;
+
+}
+
+.navButton:hover{
+
+color:#fff;
+
+transform:translateY(-3px);
+
+}
+
+body{
+
+padding-bottom:120px;
+
+}
+
+@media(max-width:768px){
+
+.bottomNavigation{
+
+height:72px;
+
+border-radius:20px;
+
+}
+
+.navButton i{
+
+font-size:20px;
+
+}
+
+.navButton span{
+
+font-size:11px;
+
+}
+
+}
+
+/*=========================
 SIDEBAR
 =========================*/
 
@@ -2883,9 +2999,9 @@ TODAY'S STATISTICS
 BOTTOM NAVIGATION
 =========================== -->
 
-<nav class="bottomNav">
+<nav class="bottomNavigation">
 
-<button class="navItem active">
+<button class="navButton active">
 
 <i class="fas fa-house"></i>
 
@@ -2893,7 +3009,7 @@ BOTTOM NAVIGATION
 
 </button>
 
-<button class="navItem">
+<button class="navButton">
 
 <i class="fas fa-chart-line"></i>
 
@@ -2901,15 +3017,7 @@ BOTTOM NAVIGATION
 
 </button>
 
-<button id="fabSignal"
-
-class="fabButton">
-
-<i class="fas fa-bolt"></i>
-
-</button>
-
-<button class="navItem">
+<button class="navButton">
 
 <i class="fas fa-clock-rotate-left"></i>
 
@@ -2917,7 +3025,15 @@ class="fabButton">
 
 </button>
 
-<button class="navItem">
+<button class="navButton">
+
+<i class="fas fa-user"></i>
+
+<span>Profile</span>
+
+</button>
+
+<button class="navButton">
 
 <i class="fas fa-gear"></i>
 
