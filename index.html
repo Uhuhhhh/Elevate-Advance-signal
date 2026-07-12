@@ -2513,14 +2513,13 @@ overlay.style.display="block";
 
 <script>
 
-const SESSION_TIME = 1 * 60 * 1000; // 5 minutes
+const SESSION_TIME = 1 * 60 * 1000;
 
 const loginTime = Number(localStorage.getItem("loginTime"));
 
 if (loginTime && (Date.now() - loginTime) > SESSION_TIME) {
-
-    localStorage.clear();
-
+    localStorage.removeItem("token");
+    localStorage.removeItem("loginTime");
 }
 
 let redirectPage="dashboard.html";
@@ -2636,8 +2635,8 @@ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging In...';
 
 btn.disabled=true;
 
-localStorage.setItem("token",data.token);
-localStorage.setItem("loginTime",Date.now());
+localStorage.setItem("token", data.token);
+localStorage.setItem("loginTime", Date.now());
 
 setTimeout(()=>{
 
@@ -2747,9 +2746,9 @@ document.getElementById("copyDeviceBtn").addEventListener("click", async () => {
 function goPage(page){
 
     const token = localStorage.getItem("token");
-    const loginTime = Number(localStorage.getItem("loginTime"));
+const loginTime = Number(localStorage.getItem("loginTime"));
 
-    const SESSION_TIME = 1 * 60 * 1000;
+const SESSION_TIME = 1 * 60 * 1000;
 
     if(!token || !loginTime){
 
@@ -2760,7 +2759,8 @@ function goPage(page){
 
     if(Date.now() - loginTime > SESSION_TIME){
 
-        localStorage.clear();
+        localStorage.removeItem("token");
+localStorage.removeItem("loginTime");
 
         openLogin(page);
 
@@ -2873,49 +2873,6 @@ async function loadNews() {
 loadNews();
 
 setInterval(loadNews,300000);
-
-
-async function verifySession(){
-
-    const token=localStorage.getItem("token");
-
-    if(!token){
-
-        logout();
-
-        return;
-
-    }
-
-    const response=await fetch("/api/verify",{
-
-        headers:{
-            Authorization:"Bearer "+token
-        }
-
-    });
-
-    const data=await response.json();
-
-    if(!data.success){
-
-        logout();
-
-    }
-
-}
-
-function logout(){
-
-    localStorage.clear();
-
-    location.reload();
-
-}
-
-verifySession();
-
-setInterval(verifySession,30000);
 
 </script>
 </div>
