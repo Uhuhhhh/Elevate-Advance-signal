@@ -121,17 +121,38 @@ const trade={
     trades.unshift(trade);
 
     localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(trades)
+);
 
-        STORAGE_KEY,
+loadTrades();
 
-        JSON.stringify(trades)
+document.querySelector(".journalForm").reset();
 
-    );
+// Set today's date again
+document.getElementById("tradeDate").value =
+new Date().toISOString().split("T")[0];
 
-    loadTrades();
-    
+// Animation
+document.querySelector(".journalCard").animate(
+[
+    { transform: "scale(0.98)" },
+    { transform: "scale(1.02)" },
+    { transform: "scale(1)" }
+],
+{
+    duration: 300
+});
 
-    document.querySelector(".journalForm").reset();
+const btn=document.querySelector(".saveBtn");
+
+btn.innerHTML="✅ Saved";
+
+setTimeout(()=>{
+
+btn.innerHTML="💾 Save Trade";
+
+},1000);
 
 }
 
@@ -148,7 +169,24 @@ function loadTrades(){
 .value
 .toUpperCase();
 
-    list.innerHTML="";
+    if(!trades.length){
+
+list.innerHTML = `
+
+<tr>
+
+<td colspan="5"
+style="padding:50px;text-align:center;color:#888;">
+
+📭 No trades found
+
+</td>
+
+</tr>
+
+`;
+
+}
     
     let lastDate="";
 
@@ -248,11 +286,10 @@ list.innerHTML+=`
 
 <td>${trade.signal}</td>
 
-<td class="${trade.result.toLowerCase()}">
-
-${trade.result==="WIN"?"🟢":
-trade.result==="LOSS"?"🔴":"🟡"}
-
+<td>
+<span class="resultBadge ${trade.result.toLowerCase()}">
+${trade.result}
+</span>
 </td>
 
 <td class="${trade.result.toLowerCase()}">
@@ -297,9 +334,13 @@ onclick="deleteTrade(${index})">
 
     :"0%";
 
-    document.getElementById("netProfit").innerHTML=
+    const profitEl = document.getElementById("netProfit");
 
-    "₹"+totalProfit;
+profitEl.innerHTML =
+(totalProfit >= 0 ? "+₹" : "-₹") + Math.abs(totalProfit);
+
+profitEl.style.color =
+totalProfit >= 0 ? "#00ff84" : "#ff4d6d";
 
 
 
@@ -330,6 +371,23 @@ document.getElementById("bestPair").innerHTML=bestPair;
 drawChart(trades);
 
 drawCalendar();
+
+document.querySelectorAll(".statCard").forEach(card=>{
+
+card.animate(
+
+[
+{transform:"translateY(8px)",opacity:.6},
+{transform:"translateY(0)",opacity:1}
+],
+
+{
+duration:350
+}
+
+);
+
+});
 
 }
 
@@ -417,17 +475,15 @@ data:{
 labels:labels,
 
 datasets:[{
-
 label:"Net Profit",
-
 data:values,
-
-borderWidth:3,
-
-fill:false,
-
-tension:.3
-
+borderColor:"#8B5CF6",
+backgroundColor:"rgba(139,92,246,.2)",
+fill:true,
+tension:.45,
+borderWidth:4,
+pointRadius:4,
+pointHoverRadius:7
 }]
 
 },
@@ -437,13 +493,27 @@ options:{
 responsive:true,
 
 plugins:{
-
 legend:{
-
 display:false
-
 }
-
+},
+scales:{
+x:{
+ticks:{
+color:"#bdbddd"
+},
+grid:{
+color:"rgba(255,255,255,.05)"
+}
+},
+y:{
+ticks:{
+color:"#bdbddd"
+},
+grid:{
+color:"rgba(255,255,255,.05)"
+}
+}
 }
 
 }

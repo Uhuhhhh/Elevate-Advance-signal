@@ -111,271 +111,261 @@ LOGIN
 
 <div class="container">
 
-<div class="dashboardLayout">
+<div id="mainApp" style="display:none;">
 
-<div class="leftPanel">
+<div class="container">
 
-<h1>📒 Trading Journal</h1>
+    <!-- Header -->
+    <div class="pageHeader">
+        <div>
+            <h1>📒 Trading Journal</h1>
+            <p>Track every trade and improve your performance.</p>
+        </div>
 
-<form class="journalForm" onsubmit="return false;">
+        <div class="headerBadge">
+            <span class="liveDot"></span>
+            Journal
+        </div>
+    </div>
 
-<div class="row">
+    <!-- Form -->
+    <div class="journalCard">
 
-<div>
+        <div class="grid4">
 
-<label>Select Date</label>
+            <div class="field">
+                <label>Date</label>
+                <input type="date" id="tradeDate">
+            </div>
 
-<input
-type="date"
-id="tradeDate">
+            <div class="field">
+                <label>Pair</label>
+                <select id="pair">
+                    <option>EURUSD</option>
+                    <option>GBPUSD</option>
+                    <option>USDJPY</option>
+                    <option>GBPJPY</option>
+                    <option>AUDUSD</option>
+                </select>
+            </div>
 
-</div>
+            <div class="field">
+                <label>Signal</label>
+                <select id="signal">
+                    <option>CALL</option>
+                    <option>PUT</option>
+                </select>
+            </div>
 
-<div>
+            <div class="field">
+                <label>Result</label>
+                <select id="result">
+                    <option>WIN</option>
+                    <option>LOSS</option>
+                    <option>DRAW</option>
+                </select>
+            </div>
 
-<label>Pair</label>
+            <div class="field">
+                <label>Amount</label>
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Trade Amount">
+            </div>
 
-<select id="pair">
+            <div class="field">
+                <label>Profit / Loss</label>
+                <input
+                    type="number"
+                    id="profit"
+                    placeholder="Profit">
+            </div>
 
-<option>EURUSD</option>
-<option>GBPUSD</option>
-<option>USDJPY</option>
-<option>GBPJPY</option>
-<option>AUDUSD</option>
+        </div>
 
-</select>
+        <div class="field">
+            <label>Notes</label>
+            <textarea
+                id="notes"
+                placeholder="Write notes..."></textarea>
+        </div>
 
-</div>
+        <button
+class="saveBtn"
+type="button"
+onclick="saveTrade()">
 
-</div>
+💾 SAVE TRADE
 
-<div class="row">
-
-<div>
-
-<label>Signal</label>
-
-<select id="signal">
-
-<option>CALL</option>
-<option>PUT</option>
-
-</select>
-
-</div>
-
-<div>
-
-<label>Result</label>
-
-<select id="result">
-
-<option>WIN</option>
-<option>LOSS</option>
-<option>DRAW</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="row">
-
-<div>
-
-<label>Amount</label>
-
-<input
-type="number"
-id="amount"
-placeholder="Amount">
-
-</div>
-
-<div>
-
-<label>Profit / Loss</label>
-
-<input
-type="number"
-id="profit"
-placeholder="Profit / Loss">
-
-</div>
-
-</div>
-
-<textarea
-id="notes"
-placeholder="Notes"></textarea>
-
-<button type="button" onclick="saveTrade()">
-SAVE TRADE
 </button>
 
-</form>
+    </div>
 
-</div>
+    <!-- Stats -->
+    <div class="statsGrid">
 
-<div class="rightPanel">
+        <div class="statCard">
+            <span>📊</span>
+            <h2 id="totalTrades">0</h2>
+            <p>Total Trades</p>
+        </div>
 
-<div class="summary">
+        <div class="statCard">
+            <span>🎯</span>
+            <h2 id="winRate">0%</h2>
+            <p>Win Rate</p>
+        </div>
 
-<div class="card">
+        <div class="statCard">
+            <span>💰</span>
+            <h2 id="netProfit">₹0</h2>
+            <p>Net Profit</p>
+        </div>
 
-<h2 id="totalTrades">0</h2>
+        <div class="statCard">
+            <span>📅</span>
+            <h2 id="todayTrades">0</h2>
+            <p>Today</p>
+        </div>
 
-<p>Total Trades</p>
+        <div class="statCard">
+            <span>🔥</span>
+            <h2 id="bestStreak">0</h2>
+            <p>Best Streak</p>
+        </div>
 
-</div>
+        <div class="statCard">
+            <span>⚡</span>
+            <h2 id="currentStreak">0</h2>
+            <p>Current</p>
+        </div>
 
-<div class="card">
+        <div class="statCard">
+            <span>🏆</span>
+            <h2 id="bestPair">--</h2>
+            <p>Best Pair</p>
+        </div>
 
-<h2 id="winRate">0%</h2>
+    </div>
 
-<p>Win Rate</p>
+    <!-- Charts -->
+    <div class="dashboardGrid">
 
-</div>
+        <div class="panel">
 
-<div class="card">
+            <h2>📈 Profit Trend</h2>
 
-<h2 id="netProfit">₹0</h2>
+            <canvas id="profitChart"></canvas>
 
-<p>Net Profit</p>
+        </div>
 
-</div>
+        <div class="panel">
 
-</div>
+            <h2>📅 Trading Calendar</h2>
 
-<div class="analytics">
+            <div class="calendarHeader">
 
-<div class="card">
-<h2 id="todayTrades">0</h2>
-<p>Today's Trades</p>
-</div>
+                <button onclick="changeMonth(-1)">❮</button>
 
-<div class="card">
-<h2 id="bestStreak">0</h2>
-<p>Best Win Streak</p>
-</div>
+                <h3 id="calendarTitle"></h3>
 
-<div class="card">
-<h2 id="currentStreak">0</h2>
-<p>Current Streak</p>
-</div>
+                <button onclick="changeMonth(1)">❯</button>
 
-<div class="card">
-<h2 id="bestPair">--</h2>
-<p>Best Pair</p>
-</div>
+            </div>
 
-</div>
+            <div class="weekNames">
 
-<div class="chartCard">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
 
-<h2>📈 Profit Trend</h2>
+            </div>
 
-<canvas id="profitChart"></canvas>
+            <div
+                id="calendarGrid"
+                class="calendarGrid">
 
-<hr>
+            </div>
 
-<h2>📅 Trading Calendar</h2>
+        </div>
 
-<div class="calendarHeader">
+    </div>
 
-<button onclick="changeMonth(-1)">◀</button>
+    <!-- Search -->
 
-<h3 id="calendarTitle"></h3>
+    <div class="searchRow">
 
-<button onclick="changeMonth(1)">▶</button>
+        <input
+            id="searchTrade"
+            type="text"
+            placeholder="🔍 Search Pair..."
+            onkeyup="loadTrades()">
 
-</div>
+        <select
+            id="monthFilter"
+            onchange="loadTrades()">
 
-<div class="weekNames">
+            <option value="all">All Months</option>
 
-<div>Sun</div>
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
 
-<div>Mon</div>
+        </select>
 
-<div>Tue</div>
+    </div>
 
-<div>Wed</div>
+    <!-- History -->
 
-<div>Thu</div>
+    <div class="historyCard">
 
-<div>Fri</div>
+        <h2>📜 Trade History</h2>
 
-<div>Sat</div>
+        <div class="tableWrap">
 
-</div>
+            <table class="tradeTable">
 
-<div id="calendarGrid" class="calendarGrid"></div>
+                <thead>
 
-</div>
+                    <tr>
 
-<input
-type="text"
-id="searchTrade"
-placeholder="🔍 Search Pair..."
-onkeyup="loadTrades()">
+                        <th>Pair</th>
 
-<div class="filterBar">
+                        <th>Signal</th>
 
-<select id="monthFilter" onchange="loadTrades()">
+                        <th>Result</th>
 
-<option value="all">All Months</option>
+                        <th>P/L</th>
 
-<option value="0">January</option>
-<option value="1">February</option>
-<option value="2">March</option>
-<option value="3">April</option>
-<option value="4">May</option>
-<option value="5">June</option>
-<option value="6">July</option>
-<option value="7">August</option>
-<option value="8">September</option>
-<option value="9">October</option>
-<option value="10">November</option>
-<option value="11">December</option>
+                        <th>Action</th>
 
-</select>
+                    </tr>
 
-</div>
+                </thead>
 
-<h2 style="color:#FFD700;margin:20px 0 15px;">
+                <tbody id="tradeList">
 
-📜 Trade History
+                </tbody>
 
-</h2>
+            </table>
 
-<div class="tableWrap">
+        </div>
 
-<table class="tradeTable">
-
-<thead>
-
-<tr>
-
-<th>Pair</th>
-
-<th>Sig</th>
-
-<th>Result</th>
-
-<th>P/L</th>
-
-<th></th>
-
-</tr>
-
-</thead>
-
-<tbody id="tradeList">
-
-</tbody>
-
-</table>
+    </div>
 
 </div>
 
