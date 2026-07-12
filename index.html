@@ -2519,7 +2519,7 @@ const loginTime = Number(localStorage.getItem("loginTime"));
 
 if (loginTime && (Date.now() - loginTime) > SESSION_TIME) {
 
-    sessionStorage.clear();
+    localStorage.clear();
 
 }
 
@@ -2636,8 +2636,8 @@ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging In...';
 
 btn.disabled=true;
 
-localStorage.setItem("token", data.token);
-localStorage.setItem("loginTime", Date.now());+
+localStorage.setItem("token",data.token);
+localStorage.setItem("loginTime",Date.now());
 
 setTimeout(()=>{
 
@@ -2760,7 +2760,7 @@ function goPage(page){
 
     if(Date.now() - loginTime > SESSION_TIME){
 
-        sessionStorage.clear();
+        localStorage.clear();
 
         openLogin(page);
 
@@ -2875,47 +2875,47 @@ loadNews();
 setInterval(loadNews,300000);
 
 
-async function verifyLogin(){
+async function verifySession(){
 
-    const token = localStorage.getItem("token");
+    const token=localStorage.getItem("token");
 
     if(!token){
-        location.reload();
+
+        logout();
+
         return;
+
     }
 
-    try{
+    const response=await fetch("/api/verify",{
 
-        const res = await fetch("/api/verify",{
-
-            headers:{
-                Authorization:"Bearer " + token
-            }
-
-        });
-
-        const data = await res.json();
-
-        if(!data.success){
-
-            localStorage.removeItem("token");
-            localStorage.removeItem("loginTime");
-
-            location.reload();
-
+        headers:{
+            Authorization:"Bearer "+token
         }
 
-    }catch(e){
+    });
 
-        console.log(e);
+    const data=await response.json();
+
+    if(!data.success){
+
+        logout();
 
     }
 
 }
 
-verifyLogin();
+function logout(){
 
-setInterval(verifyLogin,1000);
+    localStorage.clear();
+
+    location.reload();
+
+}
+
+verifySession();
+
+setInterval(verifySession,30000);
 
 </script>
 </div>
