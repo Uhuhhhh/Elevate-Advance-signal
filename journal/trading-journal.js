@@ -1,63 +1,3 @@
-document.getElementById("unlockBtn").addEventListener("click", async () => {
-
-    const password =
-    document.getElementById("passwordInput").value;
-
-    const deviceId =
-    localStorage.getItem("deviceId");
-
-    try{
-
-        const response = await fetch("/api/login",{
-
-            method:"POST",
-
-            headers:{
-
-                "Content-Type":"application/json"
-
-            },
-
-            body:JSON.stringify({
-
-                password,
-
-                deviceId
-
-            })
-
-        });
-
-        const data = await response.json();
-
-        if(data.success){
-
-            localStorage.setItem(
-                "token",
-                data.token
-            );
-
-            document.getElementById("lockScreen").style.display="none";
-
-            document.getElementById("mainApp").style.display="block";
-
-        }else{
-
-            document.getElementById("errorMsg").innerHTML=
-
-            data.message || "Login Failed";
-
-        }
-
-    }catch(err){
-
-        document.getElementById("errorMsg").innerHTML=
-
-        "Server Error";
-
-    }
-
-});
 
 
 let pieChart=null;
@@ -121,38 +61,17 @@ const trade={
     trades.unshift(trade);
 
     localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(trades)
-);
 
-loadTrades();
+        STORAGE_KEY,
 
-document.querySelector(".journalForm").reset();
+        JSON.stringify(trades)
 
-// Set today's date again
-document.getElementById("tradeDate").value =
-new Date().toISOString().split("T")[0];
+    );
 
-// Animation
-document.querySelector(".journalCard").animate(
-[
-    { transform: "scale(0.98)" },
-    { transform: "scale(1.02)" },
-    { transform: "scale(1)" }
-],
-{
-    duration: 300
-});
+    loadTrades();
+    
 
-const btn=document.querySelector(".saveBtn");
-
-btn.innerHTML="✅ Saved";
-
-setTimeout(()=>{
-
-btn.innerHTML="💾 Save Trade";
-
-},1000);
+    document.querySelector(".journalForm").reset();
 
 }
 
@@ -169,24 +88,7 @@ function loadTrades(){
 .value
 .toUpperCase();
 
-    if(!trades.length){
-
-list.innerHTML = `
-
-<tr>
-
-<td colspan="5"
-style="padding:50px;text-align:center;color:#888;">
-
-📭 No trades found
-
-</td>
-
-</tr>
-
-`;
-
-}
+    list.innerHTML="";
     
     let lastDate="";
 
@@ -286,10 +188,11 @@ list.innerHTML+=`
 
 <td>${trade.signal}</td>
 
-<td>
-<span class="resultBadge ${trade.result.toLowerCase()}">
-${trade.result}
-</span>
+<td class="${trade.result.toLowerCase()}">
+
+${trade.result==="WIN"?"🟢":
+trade.result==="LOSS"?"🔴":"🟡"}
+
 </td>
 
 <td class="${trade.result.toLowerCase()}">
@@ -334,13 +237,9 @@ onclick="deleteTrade(${index})">
 
     :"0%";
 
-    const profitEl = document.getElementById("netProfit");
+    document.getElementById("netProfit").innerHTML=
 
-profitEl.innerHTML =
-(totalProfit >= 0 ? "+₹" : "-₹") + Math.abs(totalProfit);
-
-profitEl.style.color =
-totalProfit >= 0 ? "#00ff84" : "#ff4d6d";
+    "₹"+totalProfit;
 
 
 
@@ -371,23 +270,6 @@ document.getElementById("bestPair").innerHTML=bestPair;
 drawChart(trades);
 
 drawCalendar();
-
-document.querySelectorAll(".statCard").forEach(card=>{
-
-card.animate(
-
-[
-{transform:"translateY(8px)",opacity:.6},
-{transform:"translateY(0)",opacity:1}
-],
-
-{
-duration:350
-}
-
-);
-
-});
 
 }
 
@@ -475,15 +357,17 @@ data:{
 labels:labels,
 
 datasets:[{
+
 label:"Net Profit",
+
 data:values,
-borderColor:"#8B5CF6",
-backgroundColor:"rgba(139,92,246,.2)",
-fill:true,
-tension:.45,
-borderWidth:4,
-pointRadius:4,
-pointHoverRadius:7
+
+borderWidth:3,
+
+fill:false,
+
+tension:.3
+
 }]
 
 },
@@ -493,27 +377,13 @@ options:{
 responsive:true,
 
 plugins:{
+
 legend:{
+
 display:false
+
 }
-},
-scales:{
-x:{
-ticks:{
-color:"#bdbddd"
-},
-grid:{
-color:"rgba(255,255,255,.05)"
-}
-},
-y:{
-ticks:{
-color:"#bdbddd"
-},
-grid:{
-color:"rgba(255,255,255,.05)"
-}
-}
+
 }
 
 }
