@@ -1047,19 +1047,34 @@ font-size:13px;
 }
 
 .calendarGrid{
-    gap:12px;
+    display:grid;
+    grid-template-columns:repeat(7, minmax(45px,1fr));
+    gap:10px;
+    width:100%;
 }
 
-@media(min-width:1024px){
-
 .calendarDay{
-    min-height:95px;
-    font-size:20px;
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#222;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.2s;
+}
+
+.weekNames{
+    display:grid;
+    grid-template-columns:repeat(7, minmax(45px,1fr));
+    gap:10px;
+    margin-bottom:10px;
 }
 
 .weekNames div{
-    font-size:15px;
-}
+    text-align:center;
+    color:#999;
 }
 
 .calendarDay{
