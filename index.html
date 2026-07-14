@@ -2515,11 +2515,11 @@ overlay.style.display="block";
 
 const SESSION_TIME = 1 * 60 * 1000;
 
-const loginTime = Number(localStorage.getItem("loginTime"));
+const loginTime = Number(sessionStorage.getItem("loginTime"));
 
 if (loginTime && (Date.now() - loginTime) > SESSION_TIME) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loginTime");
+    sessionStorage.setItem("token",data.token);
+sessionStorage.setItem("loginTime",Date.now());
 }
 
 let redirectPage="dashboard.html";
@@ -2593,7 +2593,7 @@ return;
 
 }
 
-let deviceId=localStorage.getItem("deviceId");
+let deviceId=sessionStorage.getItem("deviceId");
 
 if(!deviceId){
 
@@ -2635,7 +2635,7 @@ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging In...';
 
 btn.disabled=true;
 
-localStorage.setItem("token", data.token);
+SessionStorage.setItem("token", data.token);
 localStorage.setItem("loginTime", Date.now());
 
 setTimeout(()=>{
@@ -2693,7 +2693,7 @@ error.innerHTML="Unable to connect to server.";
 
 function getDeviceId() {
 
-    let deviceId = localStorage.getItem("deviceId");
+    let deviceId = sessionStorage.getItem("deviceId");
 
     if (!deviceId) {
 
@@ -2745,8 +2745,8 @@ document.getElementById("copyDeviceBtn").addEventListener("click", async () => {
 
 function goPage(page){
 
-    const token = localStorage.getItem("token");
-const loginTime = Number(localStorage.getItem("loginTime"));
+    const token = sessionStorage.getItem("token");
+const loginTime = Number(sessionStorage.getItem("loginTime"));
 
 const SESSION_TIME = 1 * 60 * 1000;
 
