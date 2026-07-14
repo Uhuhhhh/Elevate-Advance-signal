@@ -2513,6 +2513,16 @@ overlay.style.display="block";
 
 <script>
 
+const SESSION_TIME = 5 * 60 * 1000; // 5 minutes
+
+const loginTime = Number(sessionStorage.getItem("loginTime"));
+
+if (loginTime && (Date.now() - loginTime) > SESSION_TIME) {
+
+    sessionStorage.clear();
+
+}
+
 let redirectPage="dashboard.html";
 
 function openLogin(page){
@@ -2627,43 +2637,28 @@ btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Logging In...';
 btn.disabled=true;
 
 sessionStorage.setItem("token", data.token);
+sessionStorage.setItem("loginTime", Date.now());
 
-setTimeout(()=>{
+// Auto logout after 2 minutes
+setTimeout(() => {
 
-document.getElementById("loginOverlay").style.opacity="0";
+    sessionStorage.clear();
 
-setTimeout(()=>{
+    alert("Session expired. Please login again.");
 
-const overlay=document.getElementById("loginOverlay");
+    window.location.href = "index.html";
 
-overlay.style.transition=".5s";
+}, 2 * 60 * 1000);
 
-overlay.style.opacity="0";
-
-setTimeout(()=>{
-
-overlay.style.display="none";
+document.getElementById("loginOverlay").style.display="none";
 
 document.getElementById("mainContent").style.display="block";
 
-document.getElementById("mainContent").style.animation="cardFade .7s ease";
-
-},500);
-
-},500);
-
-},700);
 
 
 }else{
 
-const btn=document.getElementById("loginBtn");
-
-btn.disabled=false;
-
-btn.innerHTML='LOGIN <i class="fas fa-arrow-right"></i>';
-
-error.innerHTML=data.message||"Invalid Password";
+error.innerHTML=data.message||"Login Failed";
 
 }
 
@@ -2736,10 +2731,29 @@ document.getElementById("copyDeviceBtn").addEventListener("click", async () => {
 function goPage(page){
 
     const token = sessionStorage.getItem("token");
+    const loginTime = Number(sessionStorage.getItem("loginTime"));
 
-if(!token){
-    openLogin(page);
-    return;
+    const SESSION_TIME = 2 * 60 * 1000;
+
+    if(!token || !loginTime){
+
+        openLogin(page);
+        return;
+
+    }
+
+    if(Date.now() - loginTime > SESSION_TIME){
+
+        sessionStorage.clear();
+
+        openLogin(page);
+
+        return;
+
+    }
+
+    window.location.href = page;
+
 }
 
 // Live Clock
