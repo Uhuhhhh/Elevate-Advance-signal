@@ -5,6 +5,112 @@
 const history =
 JSON.parse(localStorage.getItem("signalHistory")) || [];
 
+async function checkPendingSignals() {
+
+    const token =
+        sessionStorage.getItem("token") ||
+        localStorage.getItem("token");
+
+    if (!token) return;
+
+    let changed = false;
+
+    for (const trade of history) {
+
+        // Already completed
+        if (trade.result !== "Pending") {
+            continue;
+        }
+
+        // Old signals created before our timestamp fix
+        if (!trade.expiryTimestamp) {
+            continue;
+        }
+
+        // Trade hasn't expired
+        if (Date.now() < Number(trade.expiryTimestamp)) {
+            continue;
+        }
+
+        try {
+
+            const response = await fetch(
+                "/api/check-result",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization":
+                            "Bearer " + token
+                    },
+
+                    body: JSON.stringify({
+
+                        pair: trade.pair,
+
+                        signal: trade.signal,
+
+                        timeframe:
+                            Number(trade.timeframe),
+
+                        entryPrice:
+                            Number(trade.entryPrice),
+
+                        expiryTimestamp:
+                            Number(trade.expiryTimestamp)
+
+                    })
+                }
+            );
+
+            const data =
+                await response.json();
+
+            if (
+                data.success &&
+                data.result
+            ) {
+
+                trade.result =
+                    data.result;
+
+                if (
+                    data.expiryPrice !== undefined
+                ) {
+
+                    trade.expiryPrice =
+                        data.expiryPrice;
+
+                }
+
+                trade.resultCheckedAt =
+                    Date.now();
+
+                changed = true;
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Result check failed:",
+                error
+            );
+
+        }
+    }
+
+    if (changed) {
+
+        localStorage.setItem(
+            "signalHistory",
+            JSON.stringify(history)
+        );
+
+        renderHistory();
+    }
+}
+
 // ---------- DOM ----------
 
 const totalSignals =
@@ -745,5 +851,12 @@ item.result="Pending";
 }
 
 });
+
+checkPendingSignals();
+
+setInterval(
+    checkPendingSignals,
+    10000
+);
 
 saveHistory();
