@@ -11,23 +11,58 @@
 <div class="grid"><article class="panel metric"><span>Entry price</span><b id="entry">—</b><small id="timing">Entry timing: —</small></article><article class="panel metric"><span>Take profit (TP)</span><b id="tp">—</b><small>Target reward:risk 2:1</small></article><article class="panel metric"><span>Stop loss (SL)</span><b id="sl">—</b><small>ATR-based risk level</small></article><article class="panel metric"><span>Trend</span><b id="trend">—</b><small id="pairtf">—</small></article></div>
 <div class="grid indicators"><article class="panel"><h3>Indicators & levels</h3><dl id="indicators"></dl></article><article class="panel"><h3>Analysis notes</h3><ul id="reasons"></ul></article></div><p class="disclaimer">Educational analysis, not a guaranteed prediction. Forex is risky; confirm spreads and upcoming high-impact news. A WAIT result means no trade setup currently meets the rules.</p></section>
 </main><script>
+// WARNING: A browser-side API key is visible to anyone who can view this page.
+// For a public deployment, rotate this key and move it to a server-side API route.
+const TWELVE_DATA_API_KEY = '9919ff3cc4754cddb87006b0a42bf30f';
 const $ = id => document.getElementById(id);
 const button = $('analyze');
-function token(){ return sessionStorage.getItem('token') || localStorage.getItem('token') || localStorage.getItem('elevateToken') || sessionStorage.getItem('elevateToken') || ''; }
-function fmtTime(iso){ if(!iso)return '—'; return new Date(iso).toLocaleString('en-IN',{timeZone:'Asia/Kolkata',dateStyle:'medium',timeStyle:'short'} )+' IST'; }
+const INTERVAL_MS = {'1min':60000,'5min':300000,'15min':900000,'30min':1800000,'1h':3600000,'4h':14400000,'1day':86400000};
+function fmtTime(iso){ if(!iso)return '—'; return new Date(iso).toLocaleString('en-IN',{timeZone:'Asia/Kolkata',dateStyle:'medium',timeStyle:'short'})+' IST'; }
 function addLine(dl,label,value){const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd);}
+function n(v){return Number(v)}
+function price(v, decimals){return Number(v).toFixed(decimals)}
+function ema(values, period){let k=2/(period+1), out=Array(values.length).fill(null);if(values.length<period)return out;let e=values.slice(0,period).reduce((a,b)=>a+b,0)/period;out[period-1]=e;for(let i=period;i<values.length;i++){e=values[i]*k+e*(1-k);out[i]=e;}return out;}
+function rsi(values, period=14){if(values.length<=period)return null;let gains=0,losses=0;for(let i=1;i<=period;i++){let d=values[i]-values[i-1];if(d>0)gains+=d;else losses-=d;}let ag=gains/period,al=losses/period;for(let i=period+1;i<values.length;i++){let d=values[i]-values[i-1];ag=(ag*(period-1)+Math.max(d,0))/period;al=(al*(period-1)+Math.max(-d,0))/period;}if(al===0)return 100;return 100-(100/(1+ag/al));}
+function atr(candles, period=14){if(candles.length<=period)return null;const tr=[];for(let i=1;i<candles.length;i++){const c=candles[i],p=candles[i-1];tr.push(Math.max(c.high-c.low,Math.abs(c.high-p.close),Math.abs(c.low-p.close)));}return tr.slice(-period).reduce((a,b)=>a+b,0)/Math.min(period,tr.length);}
+function analyze(candles, interval, pair){
+  // Twelve Data returns newest candles first; calculations use oldest to newest.
+  const cs=[...candles].reverse();const closes=cs.map(c=>c.close), highs=cs.map(c=>c.high), lows=cs.map(c=>c.low);
+  const e20=ema(closes,20),e50=ema(closes,50), last=cs[cs.length-1], prev=cs[cs.length-2];
+  const v20=e20[e20.length-1],v50=e50[e50.length-1],rv=rsi(closes,14),av=atr(cs,14);
+  const recent=cs.slice(-30,-1);const support=Math.min(...recent.map(c=>c.low)), resistance=Math.max(...recent.map(c=>c.high));
+  const up=v20>v50 && last.close>v20, down=v20<v50 && last.close<v20;
+  const bullish=last.close>last.open && last.close>prev.close, bearish=last.close<last.open && last.close<prev.close;
+  const buy=up && rv>=50 && rv<=68 && bullish && last.close<resistance;
+  const sell=down && rv<=50 && rv>=32 && bearish && last.close>support;
+  let signal='WAIT', confidence=0, note='No setup meets the trend, momentum and candle-confirmation rules. Wait for a clearer setup.';
+  if(buy){signal='BUY';confidence=Math.min(90,60+(rv>=53&&rv<=63?10:0)+(last.close>prev.high?8:0)+(v20>v50?7:0));note='Bullish trend and momentum align. Consider entry only if price confirms at the next candle open.';}
+  if(sell){signal='SELL';confidence=Math.min(90,60+(rv>=37&&rv<=47?10:0)+(last.close<prev.low?8:0)+(v20<v50?7:0));note='Bearish trend and momentum align. Consider entry only if price confirms at the next candle open.';}
+  const decimals=pair.includes('JPY')?3:5;const entry=(signal==='WAIT'||!av)?null:last.close;let sl=null,tp=null;
+  if(entry!==null){const risk=Math.max(av*1.5,Math.abs(entry)*0.0003);sl=signal==='BUY'?entry-risk:entry+risk;tp=signal==='BUY'?entry+2*risk:entry-2*risk;}
+  const lastTime=new Date(last.datetime.replace(' ','T')+'Z');const next=new Date(Math.max(Date.now(),lastTime.getTime()+INTERVAL_MS[interval]));
+  return {signal,confidence,note,entry,sl,tp,decimals,rv,av,v20,v50,support,resistance,trend:up?'Bullish':down?'Bearish':'Sideways / mixed',next,last,lastTime,entryAllowed:signal!=='WAIT'};
+}
 button.addEventListener('click', async()=>{
-  $('status').className=''; $('status').textContent='Fetching live candles and calculating indicators…'; $('result').classList.add('hidden');button.disabled=true;
+  $('status').className='';$('status').textContent='Fetching live Forex candles from Twelve Data…';$('result').classList.add('hidden');button.disabled=true;
   try{
-    const headers={'Content-Type':'application/json'};const t=token();if(t)headers.Authorization=`Bearer ${t}`;
-    const response=await fetch('/api/forex-analysis',{method:'POST',headers,body:JSON.stringify({market:$('market').value,timeframe:$('timeframe').value})});
-    const data=await response.json();if(!response.ok||!data.success)throw new Error(data.message||'Analysis failed');
-    $('signal').textContent=data.signal;$('signal').className=data.signal.toLowerCase();$('subtitle').textContent=data.note;$('confidence').textContent=`${data.confidence}%`;$('entry').textContent=data.entryPrice ?? '—';$('timing').textContent=`Next candle: ${fmtTime(data.entryTiming)}`;$('tp').textContent=data.takeProfit ?? 'Not set — WAIT';$('sl').textContent=data.stopLoss ?? 'Not set — WAIT';$('trend').textContent=data.trend;$('pairtf').textContent=`${data.pair} · ${data.timeframe}`;
-    const dl=$('indicators');dl.replaceChildren();[['EMA 20',data.indicators.ema20],['EMA 50',data.indicators.ema50],['RSI (14)',data.indicators.rsi14],['ATR (14)',data.indicators.atr14],['Support',data.indicators.support],['Resistance',data.indicators.resistance]].forEach(([k,v])=>addLine(dl,k,String(v)));
-    const list=$('reasons');list.replaceChildren();data.reasons.forEach(reason=>{const li=document.createElement('li');li.textContent=reason;list.appendChild(li)});
-    $('result').classList.remove('hidden');$('status').textContent=`Updated ${new Date().toLocaleTimeString('en-IN')}`;
+    if(!TWELVE_DATA_API_KEY || TWELVE_DATA_API_KEY==='YOUR_API_KEY')throw new Error('Add your Twelve Data API key in the HTML script.');
+    const pair=$('market').value.replace('/','');const interval=$('timeframe').value;
+    const url=new URL('https://api.twelvedata.com/time_series');url.searchParams.set('symbol',pair);url.searchParams.set('interval',interval);url.searchParams.set('outputsize','120');url.searchParams.set('timezone','UTC');url.searchParams.set('apikey',TWELVE_DATA_API_KEY);
+    const response=await fetch(url.toString());const data=await response.json();
+    if(!response.ok || data.status==='error' || !Array.isArray(data.values))throw new Error(data.message||data.code||'Twelve Data did not return candles. Check API key, quota, pair and interval.');
+    const candles=data.values.map(x=>({datetime:x.datetime,open:n(x.open),high:n(x.high),low:n(x.low),close:n(x.close)})).filter(c=>Object.values(c).slice(1).every(Number.isFinite));
+    if(candles.length<55)throw new Error(`Not enough candles returned (${candles.length}). Try another timeframe or pair.`);
+    const a=analyze(candles,interval,pair);const fmt=x=>x===null?'Not set — WAIT':price(x,a.decimals);
+    $('signal').textContent=a.signal;$('signal').className=a.signal.toLowerCase();$('subtitle').textContent=a.note;$('confidence').textContent=a.signal==='WAIT'?'—':`${a.confidence}%`;
+    $('entry').textContent=fmt(a.entry);$('timing').textContent=a.signal==='WAIT'?'Entry timing: wait for confirmation':`Potential entry: next candle around ${fmtTime(a.next.toISOString())}`;
+    $('tp').textContent=fmt(a.tp);$('sl').textContent=fmt(a.sl);$('trend').textContent=a.trend;$('pairtf').textContent=`${$('market').value} · ${$('timeframe').selectedOptions[0].text}`;
+    const dl=$('indicators');dl.replaceChildren();[['EMA 20',price(a.v20,a.decimals)],['EMA 50',price(a.v50,a.decimals)],['RSI (14)',a.rv.toFixed(2)],['ATR (14)',a.av?price(a.av,a.decimals):'—'],['Support',price(a.support,a.decimals)],['Resistance',price(a.resistance,a.decimals)],['Last candle close',price(a.last.close,a.decimals)],['Candle timestamp',fmtTime(a.lastTime.toISOString())]].forEach(([k,v])=>addLine(dl,k,String(v)));
+    const reasons=[];
+    reasons.push(`Trend: ${a.trend} based on EMA 20 and EMA 50.`);reasons.push(`RSI(14): ${a.rv.toFixed(2)}; entry rules avoid chasing overbought/oversold momentum.`);reasons.push(`ATR(14): ${price(a.av,a.decimals)}; stop distance uses at least 1.5 × ATR, with a 2:1 target risk/reward.`);reasons.push(`Support ${price(a.support,a.decimals)} · Resistance ${price(a.resistance,a.decimals)}.`);
+    if(a.signal==='WAIT')reasons.push('No entry, TP or SL is recommended until the setup qualifies.');else{reasons.push('Plan is based on the most recent returned candle; wait for next-candle confirmation and account for spread/slippage.');reasons.push('This is a rules-based technical signal, not a guarantee or personalized financial advice.');}
+    const list=$('reasons');list.replaceChildren();reasons.forEach(reason=>{const li=document.createElement('li');li.textContent=reason;list.appendChild(li)});
+    $('result').classList.remove('hidden');$('status').textContent=`Live candles loaded · ${candles.length} candles · updated ${new Date().toLocaleTimeString('en-IN')}`;
   }catch(e){$('status').className='error';$('status').textContent=e.message;}
   finally{button.disabled=false;}
 });
-
 </script></body></html>
