@@ -46,7 +46,7 @@ button.addEventListener('click', async()=>{
   $('status').className='';$('status').textContent='Fetching live Forex candles from Twelve Data…';$('result').classList.add('hidden');button.disabled=true;
   try{
     if(!TWELVE_DATA_API_KEY || TWELVE_DATA_API_KEY==='YOUR_API_KEY')throw new Error('Add your Twelve Data API key in the HTML script.');
-    const pair=$('market').value.replace('/','');const interval=$('timeframe').value;
+    const pair=$('market').value.trim();const interval=$('timeframe').value;
     const url=new URL('https://api.twelvedata.com/time_series');url.searchParams.set('symbol',pair);url.searchParams.set('interval',interval);url.searchParams.set('outputsize','120');url.searchParams.set('timezone','UTC');url.searchParams.set('apikey',TWELVE_DATA_API_KEY);
     const response=await fetch(url.toString());const data=await response.json();
     if(!response.ok || data.status==='error' || !Array.isArray(data.values))throw new Error(data.message||data.code||'Twelve Data did not return candles. Check API key, quota, pair and interval.');
